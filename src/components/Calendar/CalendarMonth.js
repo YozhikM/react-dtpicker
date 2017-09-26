@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import { setMonth, setYear, addYears } from 'date-fns';
+import { setMonth, setYear, addYears, getYear, format } from 'date-fns';
 import TableSelect from '../TableSelect/TableSelect';
 import CalendarMonthGrid from './CalendarMonthGrid';
 import SvgIcon from '../SvgIcon';
@@ -16,23 +16,8 @@ export type Props = {
 type State = {
   show: 'calendar' | 'mm' | 'yy' | 'yy10',
   date: Date,
-  yearsOptions: Array<any>
+  monthsOptions: Array<any>
 };
-
-const monthsOptions = [
-  { value: 0, name: 'Январь' },
-  { value: 1, name: 'Февраль' },
-  { value: 2, name: 'Март' },
-  { value: 3, name: 'Апрель' },
-  { value: 4, name: 'Май' },
-  { value: 5, name: 'Июнь' },
-  { value: 6, name: 'Июль' },
-  { value: 7, name: 'Август' },
-  { value: 8, name: 'Сентябрь' },
-  { value: 9, name: 'Октябрь' },
-  { value: 10, name: 'Ноябрь' },
-  { value: 11, name: 'Декабрь' }
-];
 
 class CalendarMonth extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -40,14 +25,45 @@ class CalendarMonth extends React.Component<Props, State> {
     this.state = {
       show: 'calendar',
       date: this.props.date,
-      yearsOptions: [{ value: 2017, name: '2017' }]
+      monthsOptions: this.getMonthOptions()
     };
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (this.props.date !== nextProps.date) {
-      this.setState({ date: nextProps.date });
+      this.setState({
+        date: nextProps.date
+      });
     }
+  }
+
+  getMonthOptions() {
+    return [...Array(12)].map((v, i) => ({
+      value: i,
+      name: format(new Date(2000, i, 1), 'MMMM')
+    }));
+  }
+
+  getYearOptions(date: Date) {
+    const tmp = date.getFullYear();
+    const startYear = tmp - tmp % 10;
+    return [...Array(10)].map((v, i) => ({
+      value: startYear + i,
+      name: `${startYear + i}`
+    }));
+  }
+
+  getYearDecadeOptions(date: Date, cnt: number = 5) {
+    const tmp = date.getFullYear();
+    const middleYear = tmp - tmp % 10;
+    const startYear = middleYear - Math.ceil(cnt / 2) * 10;
+    return [...Array(cnt)].map((v, i) => {
+      const year = startYear + i * 10;
+      return {
+        value: year,
+        name: `${year} - ${year + 9}`
+      };
+    });
   }
 
   showMonthTable = () => {
@@ -70,42 +86,40 @@ class CalendarMonth extends React.Component<Props, State> {
     });
   };
 
+  onChangeDecade = (value: number) => {
+    const newDate = setYear(this.state.date, value);
+    this.setState({ show: 'yy', date: newDate }, () => {
+      const { onChangeDate } = this.props;
+      if (onChangeDate) onChangeDate(newDate);
+    });
+  };
+
   showYearTable = () => {
     this.setState({ show: 'yy' });
   };
 
-  decrementYear = () => {
-    const { date } = this.state;
-    const newDate = addYears(date, -1);
-    this.setState(
-      {
-        date: newDate,
-        yearsOptions: [{ value: newDate.getFullYear(), name: newDate.getFullYear() }]
-      },
-      () => {
-        const { onChangeDate } = this.props;
-        if (onChangeDate) onChangeDate(newDate);
-      }
-    );
+  showDecadeTable = () => {
+    this.setState({ show: 'yy10' });
   };
 
-  incrementYear = () => {
-    const { date } = this.state;
-    const newDate = addYears(date, 1);
-    this.setState(
-      {
-        date: newDate,
-        yearsOptions: [{ value: newDate.getFullYear(), name: newDate.getFullYear() }]
-      },
-      () => {
-        const { onChangeDate } = this.props;
-        if (onChangeDate) onChangeDate(newDate);
-      }
-    );
+  decrement10Years = () => {
+    const newDate = addYears(this.state.date, -10);
+    this.setState({ date: newDate }, () => {
+      const { onChangeDate } = this.props;
+      if (onChangeDate) onChangeDate(newDate);
+    });
+  };
+
+  increment10Years = () => {
+    const newDate = addYears(this.state.date, 10);
+    this.setState({ date: newDate }, () => {
+      const { onChangeDate } = this.props;
+      if (onChangeDate) onChangeDate(newDate);
+    });
   };
 
   render() {
-    const { show, date, yearsOptions } = this.state;
+    const { show, date, monthsOptions } = this.state;
     const style = {
       backgroundColor: 'transparent',
       border: 'none',
@@ -115,21 +129,32 @@ class CalendarMonth extends React.Component<Props, State> {
     };
 
     if (show === 'yy10') {
+      return (
+        <div>
+          <TableSelect
+            options={this.getYearDecadeOptions(date, 6)}
+            cols={3}
+            value={getYear(date)}
+            onChange={this.onChangeDecade}
+          />
+        </div>
+      );
     }
 
     if (show === 'yy') {
       return (
         <div>
-          <button onClick={this.decrementYear}>
+          <span onClick={this.showDecadeTable}>Decade</span>
+          <button onClick={this.decrement10Years}>
             <SvgIcon file="arrow-left" />
           </button>
           <TableSelect
-            options={yearsOptions}
-            cols={1}
-            value={date.getFullYear()}
+            options={this.getYearOptions(date)}
+            cols={4}
+            value={getYear(date)}
             onChange={this.onChangeYear}
           />
-          <button onClick={this.incrementYear}>
+          <button onClick={this.increment10Years}>
             <SvgIcon file="arrow-right" />
           </button>
         </div>
@@ -140,7 +165,7 @@ class CalendarMonth extends React.Component<Props, State> {
       return (
         <div>
           <button style={style} onClick={this.showYearTable}>
-            {date.getFullYear()}
+            {getYear(date)}
           </button>
           <TableSelect
             options={monthsOptions}

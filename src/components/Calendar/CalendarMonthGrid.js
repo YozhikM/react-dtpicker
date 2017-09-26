@@ -83,7 +83,7 @@ class CalendarMonthGrid extends React.Component<Props, State> {
 
     return (
       <div className={s.root}>
-        <span onClick={this.onClickMonth}>{format(date, 'MMMM YY')}</span>
+        <span onClick={this.onClickMonth}>{format(date, 'MMMM YYYY')}</span>
         <table>
           <thead>
             <tr>
