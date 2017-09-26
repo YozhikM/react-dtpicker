@@ -4,6 +4,7 @@ import React from 'react';
 import { addMonths } from 'date-fns';
 import SvgIcon from '../SvgIcon';
 import CalendarMonth from './CalendarMonth';
+import s from './Calendar.scss';
 
 type Props = {
   date: Date,
@@ -43,19 +44,18 @@ class Calendar extends React.Component<Props, State> {
 
   render() {
     const { date } = this.state;
-
     return (
-      <div className="button_container">
-        <div>
-          <button className="left" onClick={this.decrementMonth}>
+      <div>
+        <div className={s.button_container}>
+          <button onClick={this.decrementMonth}>
             <SvgIcon file="arrow-left" />
           </button>
-          <button className="right" onClick={this.incrementMonth}>
+          <button onClick={this.incrementMonth}>
             <SvgIcon file="arrow-right" />
           </button>
         </div>
 
-        <div>
+        <div className={s.calendar_container}>
           <CalendarMonth {...this.props} date={date} />
           <CalendarMonth
             {...this.props}

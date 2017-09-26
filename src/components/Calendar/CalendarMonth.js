@@ -5,6 +5,7 @@ import { setMonth, setYear, addYears, getYear, format } from 'date-fns';
 import TableSelect from '../TableSelect/TableSelect';
 import CalendarMonthGrid from './CalendarMonthGrid';
 import SvgIcon from '../SvgIcon';
+import s from './Calendar.scss'
 
 export type Props = {
   date: Date,
@@ -120,13 +121,6 @@ class CalendarMonth extends React.Component<Props, State> {
 
   render() {
     const { show, date, monthsOptions } = this.state;
-    const style = {
-      backgroundColor: 'transparent',
-      border: 'none',
-      color: '#3c3f40',
-      fontSize: '18px',
-      display: 'block'
-    };
 
     if (show === 'yy10') {
       return (
@@ -144,27 +138,29 @@ class CalendarMonth extends React.Component<Props, State> {
     if (show === 'yy') {
       return (
         <div>
-          <span onClick={this.showDecadeTable}>Decade</span>
-          <button onClick={this.decrement10Years}>
-            <SvgIcon file="arrow-left" />
+          <button onClick={this.showDecadeTable}>Decade</button>
+          <div className={s.c_button_container}>
+            <button onClick={this.decrement10Years}>
+              <SvgIcon file="arrow-left" />
+            </button>
+            <button onClick={this.increment10Years}>
+              <SvgIcon file="arrow-right" />
           </button>
+        </div>
           <TableSelect
             options={this.getYearOptions(date)}
             cols={4}
             value={getYear(date)}
             onChange={this.onChangeYear}
           />
-          <button onClick={this.increment10Years}>
-            <SvgIcon file="arrow-right" />
-          </button>
         </div>
       );
     }
 
     if (show === 'mm') {
       return (
-        <div>
-          <button style={style} onClick={this.showYearTable}>
+        <div className={s.table}>
+          <button onClick={this.showYearTable}>
             {getYear(date)}
           </button>
           <TableSelect

@@ -47,8 +47,8 @@ class TableSelect extends React.Component<Props, State> {
       <div className={s.root}>
         <ul
           style={{
-            width: `${cols * 60}px`,
-            height: `${options.length / cols * 60}px`
+            width: `${cols * 74}px`,
+            height: `${options.length / cols * 74}px`
           }}
         >
           {options.map((options, i) => {

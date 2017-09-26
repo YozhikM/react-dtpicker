@@ -1,23 +1,6 @@
 .root {
    display: inline-block;
-   width: 50%;
-
-   .button_container {
-     position: relative;
-   }
-   button {
-     border: none;
-     position: absolute;
-   }
-   .left, .right {
-     top: 5px;
-   }
-   .left {
-     left: 5px;
-   }
-   .right {
-     right: 25px;
-   }
+   width: 300px;
    table {
      border-collapse: collapse;
    }
@@ -47,4 +30,47 @@
     cursor: pointer;
     outline: none;
    }
+}
+
+.button_container {
+  display: flex;
+  width: 600px;
+  justify-content: space-around;
+  button {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+  }
+}
+.calendar_container {
+  display: flex;
+  button {
+    display: block;
+    margin: 5px auto;
+    outline: none;
+    cursor: pointer;
+  }
+}
+.table {
+  width: 300px;
+  display: inline-block;
+  button {
+    display: block;
+    margin: 5px auto;
+    outline: none;
+    cursor: pointer;
+  }
+}
+.c_button_container {
+  display: flex;
+  width: 300px;
+  justify-content: space-around;
+  padding: 1% 0;
+  button {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+  }
 }
