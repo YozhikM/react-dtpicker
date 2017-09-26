@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react';
-import TableSelect from './components/TableSelect/TableSelect';
 import TimeSelect from './components/DateTimePicker/TimeSelect';
 import Calendar from './components/Calendar/Calendar';
 

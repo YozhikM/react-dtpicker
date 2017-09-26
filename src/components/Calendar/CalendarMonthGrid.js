@@ -63,10 +63,6 @@ class CalendarMonthGrid extends React.Component<Props, State> {
     );
   }
 
-  // addActiveDates = (day: Date) => {
-  //   this.setState({ activeDates: day })
-  // };
-
   onClickDay = (date: Date) => {
     const { onClickDay } = this.props;
     if (onClickDay) {

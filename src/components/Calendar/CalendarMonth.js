@@ -1,9 +1,10 @@
 /* @flow */
 
 import React from 'react';
-import { setMonth, setYear } from 'date-fns';
+import { setMonth, setYear, addYears } from 'date-fns';
 import TableSelect from '../TableSelect/TableSelect';
 import CalendarMonthGrid from './CalendarMonthGrid';
+import SvgIcon from '../SvgIcon';
 
 export type Props = {
   date: Date,
@@ -14,7 +15,8 @@ export type Props = {
 
 type State = {
   show: 'calendar' | 'mm' | 'yy' | 'yy10',
-  date: Date
+  date: Date,
+  yearsOptions: Array<any>
 };
 
 const monthsOptions = [
@@ -32,15 +34,13 @@ const monthsOptions = [
   { value: 11, name: 'Декабрь' }
 ];
 
-const yearsOptions = [{value: 2016, name: '2016'}, {value: 2017, name: '2017'}, {value: 2018, name: '2018'}, {value: 2019, name: '2019'}, {value: 2020, name: '2020'}, {value: 2021, name: '2021'}, {value: 2022, name: '2022'}, {value: 2023, name: '2023'}, {value: 2024, name: '2024'}, {value: 2025, name:
-2025}];
-
 class CalendarMonth extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
       show: 'calendar',
-      date: this.props.date
+      date: this.props.date,
+      yearsOptions: [{ value: 2017, name: '2017' }]
     };
   }
 
@@ -74,15 +74,45 @@ class CalendarMonth extends React.Component<Props, State> {
     this.setState({ show: 'yy' });
   };
 
+  decrementYear = () => {
+    const { date } = this.state;
+    const newDate = addYears(date, -1);
+    this.setState(
+      {
+        date: newDate,
+        yearsOptions: [{ value: newDate.getFullYear(), name: newDate.getFullYear() }]
+      },
+      () => {
+        const { onChangeDate } = this.props;
+        if (onChangeDate) onChangeDate(newDate);
+      }
+    );
+  };
+
+  incrementYear = () => {
+    const { date } = this.state;
+    const newDate = addYears(date, 1);
+    this.setState(
+      {
+        date: newDate,
+        yearsOptions: [{ value: newDate.getFullYear(), name: newDate.getFullYear() }]
+      },
+      () => {
+        const { onChangeDate } = this.props;
+        if (onChangeDate) onChangeDate(newDate);
+      }
+    );
+  };
+
   render() {
-    const { show, date } = this.state;
+    const { show, date, yearsOptions } = this.state;
     const style = {
       backgroundColor: 'transparent',
       border: 'none',
       color: '#3c3f40',
       fontSize: '18px',
       display: 'block'
-    }
+    };
 
     if (show === 'yy10') {
     }
@@ -90,7 +120,18 @@ class CalendarMonth extends React.Component<Props, State> {
     if (show === 'yy') {
       return (
         <div>
-          <TableSelect options={yearsOptions} cols={12} value={date.getFullYear()} onChange={this.onChangeYear} />
+          <button onClick={this.decrementYear}>
+            <SvgIcon file="arrow-left" />
+          </button>
+          <TableSelect
+            options={yearsOptions}
+            cols={1}
+            value={date.getFullYear()}
+            onChange={this.onChangeYear}
+          />
+          <button onClick={this.incrementYear}>
+            <SvgIcon file="arrow-right" />
+          </button>
         </div>
       );
     }
@@ -98,7 +139,9 @@ class CalendarMonth extends React.Component<Props, State> {
     if (show === 'mm') {
       return (
         <div>
-          <button style={style} onClick={this.showYearTable}>{date.getFullYear()}</button>
+          <button style={style} onClick={this.showYearTable}>
+            {date.getFullYear()}
+          </button>
           <TableSelect
             options={monthsOptions}
             cols={4}
