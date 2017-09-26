@@ -28,7 +28,8 @@ class App extends React.Component<Props, State> {
 
     return (
       <div className="container">
-        <TimeSelect showSeconds={false} value={new Date()} />
+        <TimeSelect showSeconds={false} value={new Date()} />;
+
         <Calendar
           date={date}
           activeDates={activeDates}

@@ -3,6 +3,7 @@
 import React from 'react';
 import { getDate } from 'date-fns';
 
+
 type Props = {
   date: Date,
   isActive: boolean,

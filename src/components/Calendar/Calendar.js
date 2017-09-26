@@ -9,19 +9,19 @@ type Props = {
   date: Date,
   activeDates: Date,
   onClickDay?: (date: Date) => void,
-  onChangeDate?: (date: Date) => void,
+  onChangeDate?: (date: Date) => void
 };
 
 type State = {
-  date: Date,
-}
+  date: Date
+};
 
 class Calendar extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      date: this.props.date,
+      date: this.props.date
     };
   }
 
@@ -57,10 +57,14 @@ class Calendar extends React.Component<Props, State> {
 
         <div>
           <CalendarMonth {...this.props} date={date} />
-          <CalendarMonth {...this.props} date={addMonths(date, 1)} onChangeDate={(date) => {
-            const { onChangeDate } = this.props;
-            if (onChangeDate) onChangeDate(addMonths(date, -1));
-          }} />
+          <CalendarMonth
+            {...this.props}
+            date={addMonths(date, 1)}
+            onChangeDate={date => {
+              const { onChangeDate } = this.props;
+              if (onChangeDate) onChangeDate(addMonths(date, -1));
+            }}
+          />
         </div>
       </div>
     );
