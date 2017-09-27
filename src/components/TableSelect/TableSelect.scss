@@ -1,4 +1,7 @@
 .root {
+  width: 300px;
+  padding-top: 10px;
+
   ul {
     list-style: none;
     display: flex;
@@ -12,10 +15,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 74px;
-    height: 74px;
+    text-align: center;
+    width: 60px;
+    height: 60px;
     cursor: pointer;
-    font-size: .65rem;
     border: 1px solid rgb(228, 231, 231);
     box-sizing: border-box;
   }

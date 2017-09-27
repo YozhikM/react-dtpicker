@@ -1,9 +1,11 @@
 .root {
    display: inline-block;
    width: 300px;
+   
    table {
      border-collapse: collapse;
    }
+
    span {
      width: 273px;
      display: block;
@@ -14,12 +16,15 @@
      font-weight: bold;
      cursor: pointer;
    }
+
    tr {
      display: flex;
    }
+
    tr:nth-of-type(1) {
      justify-content: flex-end;
    }
+
   td, th {
     width: 39px;
     height: 39px;
@@ -36,29 +41,47 @@
   display: flex;
   width: 600px;
   justify-content: space-around;
+
   button {
+    width: 273px;
+    display: block;
+    text-align: center;
+    margin: 3% 0 3% 0;
+    color: #3c3f40;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
     border: none;
     background-color: transparent;
     outline: none;
-    cursor: pointer;
   }
 }
 .calendar_container {
   display: flex;
-  button {
+
+  span {
+    width: 273px;
     display: block;
-    margin: 5px auto;
-    outline: none;
+    text-align: center;
+    margin: 3% 0 3% 0;
+    color: #3c3f40;
+    font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
   }
 }
 .table {
   width: 300px;
   display: inline-block;
-  button {
+
+  span {
+    width: 273px;
     display: block;
-    margin: 5px auto;
-    outline: none;
+    text-align: center;
+    margin: 3% 0 3% 0;
+    color: #3c3f40;
+    font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
   }
 }
@@ -67,10 +90,31 @@
   width: 300px;
   justify-content: space-around;
   padding: 1% 0;
+
   button {
+    width: 273px;
+    display: block;
+    text-align: center;
+    margin: 3% 0 3% 0;
+    color: #3c3f40;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
     border: none;
     background-color: transparent;
     outline: none;
-    cursor: pointer;
   }
 }
+
+  .time_picker {
+    width: 600px;
+    text-align: center;
+    padding-top: 10px;
+
+    button {
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+      outline: none;
+    }
+  }

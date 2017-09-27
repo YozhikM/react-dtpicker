@@ -1,3 +1,22 @@
 .hs {
   display: flex;
+  width: 600px;
+  justify-content: center;
+  padding-top: 10px;
+
+  button {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+  }
+
+  p {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 5%;
+    border: 2px solid rgb(0, 166, 153);
+    cursor: pointer;
+  }
 }

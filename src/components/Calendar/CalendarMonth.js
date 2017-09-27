@@ -41,7 +41,7 @@ class CalendarMonth extends React.Component<Props, State> {
   getMonthOptions() {
     return [...Array(12)].map((v, i) => ({
       value: i,
-      name: format(new Date(2000, i, 1), 'MMMM')
+      name: format(new Date(2000, i, 1), 'MMM')
     }));
   }
 
@@ -127,7 +127,7 @@ class CalendarMonth extends React.Component<Props, State> {
         <div>
           <TableSelect
             options={this.getYearDecadeOptions(date, 6)}
-            cols={3}
+            cols={4}
             value={getYear(date)}
             onChange={this.onChangeDecade}
           />
@@ -138,7 +138,7 @@ class CalendarMonth extends React.Component<Props, State> {
     if (show === 'yy') {
       return (
         <div>
-          <button onClick={this.showDecadeTable}>Decade</button>
+          <span onClick={this.showDecadeTable}>Decade</span>
           <div className={s.c_button_container}>
             <button onClick={this.decrement10Years}>
               <SvgIcon file="arrow-left" />
@@ -160,9 +160,9 @@ class CalendarMonth extends React.Component<Props, State> {
     if (show === 'mm') {
       return (
         <div className={s.table}>
-          <button onClick={this.showYearTable}>
+          <span onClick={this.showYearTable}>
             {getYear(date)}
-          </button>
+          </span>
           <TableSelect
             options={monthsOptions}
             cols={4}

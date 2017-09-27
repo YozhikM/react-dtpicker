@@ -4,6 +4,7 @@ import React from 'react';
 import { addMonths } from 'date-fns';
 import SvgIcon from '../SvgIcon';
 import CalendarMonth from './CalendarMonth';
+import CalendarTimePicker from './CalendarTimePicker';
 import s from './Calendar.scss';
 
 type Props = {
@@ -42,6 +43,11 @@ class Calendar extends React.Component<Props, State> {
     this.setState({ date });
   };
 
+  onChangeDate = () => {
+    const { onChangeDate } = this.props;
+    if (onChangeDate) onChangeDate(this.state.date);
+  };
+
   render() {
     const { date } = this.state;
     return (
@@ -66,6 +72,8 @@ class Calendar extends React.Component<Props, State> {
             }}
           />
         </div>
+
+        <CalendarTimePicker {...this.props} date={date} />
       </div>
     );
   }

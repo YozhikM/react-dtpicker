@@ -16,7 +16,7 @@ type HHMMSS = {
 type Props = {
   value?: Value,
   onChange?: (value: Value) => void,
-  onSubmit?: (value: Value) => void,
+  onSubmit?: () => void,
   showSeconds?: boolean
 };
 
@@ -48,6 +48,7 @@ class TimeSelect extends React.Component<Props, State> {
     }
   }
 
+
   parseTime(value: ?Date): HHMMSS {
     if (!value) return { hh: 0, mm: 0, ss: 0 };
     return { hh: value.getHours(), mm: value.getMinutes(), ss: value.getSeconds() };
@@ -72,9 +73,9 @@ class TimeSelect extends React.Component<Props, State> {
   onSubmit = () => {
     const { onSubmit } = this.props;
     if (onSubmit) {
-      onSubmit(this.getValue());
+      onSubmit();
     }
-  };
+  }
 
   onChangeHH = (hh: number) => {
     this.setState({ hh }, this.onChange);
@@ -119,7 +120,7 @@ class TimeSelect extends React.Component<Props, State> {
       return (
         <TableSelect
           options={genTableOpts(0, 59, 5)}
-          cols={6}
+          cols={4}
           value={mm}
           onChange={value => {
             this.setState({ mm: value, show: 'main' }, this.onChange);

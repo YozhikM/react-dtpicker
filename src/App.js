@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react';
-import TimeSelect from './components/DateTimePicker/TimeSelect';
 import Calendar from './components/Calendar/Calendar';
 
 type Props = void;
@@ -27,8 +26,6 @@ class App extends React.Component<Props, State> {
 
     return (
       <div className="container">
-        <TimeSelect showSeconds={false} value={new Date()} />;
-
         <Calendar
           date={date}
           activeDates={activeDates}
@@ -39,15 +36,6 @@ class App extends React.Component<Props, State> {
             this.setState({ date });
           }}
         />
-
-        {/* <TableSelect
-          options={monthInYear}
-          cols={4}
-          value={month}
-          onChange={value => {
-            this.setState({ month: value });
-          }}
-        /> */}
       </div>
     );
   }
