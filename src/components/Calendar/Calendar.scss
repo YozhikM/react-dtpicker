@@ -1,20 +1,15 @@
+body {
+  font-family: 'Rubik';
+}
 .root {
-   display: inline-block;
-   width: 300px;
-   
+  display: inline-block;
+  width: 273px;
+  z-index: 1;
+  position: relative;
+  bottom: 28px;
+
    table {
      border-collapse: collapse;
-   }
-
-   span {
-     width: 273px;
-     display: block;
-     text-align: center;
-     margin: 3% 0 3% 0;
-     color: #3c3f40;
-     font-size: 18px;
-     font-weight: bold;
-     cursor: pointer;
    }
 
    tr {
@@ -56,43 +51,119 @@
     outline: none;
   }
 }
-.calendar_container {
-  display: flex;
 
-  span {
-    width: 273px;
+.button_single_container {
+  position: absolute;
+  width: 273px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 45px;
+  z-index: -1;
+
+  button {
     display: block;
     text-align: center;
-    margin: 3% 0 3% 0;
+    margin: 0;
     color: #3c3f40;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    transform: scale(1);
+    transition: transform .6s ease;
+  }
+  button:hover {
+    transform: scale(.8);
+    transition: transform .6s ease;
+  }
+}
+  .left_arrow {
+    position: relative;
+    display: inline-block !important;
+    left: 0;
+    top: 7.5px;
+    z-index: 2;
+    color: #333 !important;
+    margin: 0 !important;
+    border: none !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+  }
+  .right_arrow {
+    position: relative;
+    left: 220px;
+    display: inline-block !important;
+    top: 7.5px;
+    z-index: 2;
+    color: #333 !important;
+    margin: 0 !important;
+    border: none !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+}
+.calendar_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 273px;
+  margin: 15% auto;
+
+  span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 3% auto;
+    color: #3c3f40;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  button {
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+    cursor: pointer;
+    background-color: #e4e7e7;
+    border: 1px solid #e4e7e7;
+    border-radius: 5px;
+    display: block;
+    margin: 3% auto;
+    padding: 1.5%;
   }
 }
 .table {
-  width: 300px;
+  width: 273px;
   display: inline-block;
+  z-index: 2;
 
   span {
-    width: 273px;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    margin: 3% 0 3% 0;
+    margin: 3% auto;
     color: #3c3f40;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
+    background-color: #fff;
   }
 }
 .c_button_container {
   display: flex;
-  width: 300px;
-  justify-content: space-around;
-  padding: 1% 0;
+  width: 273px;
+  justify-content: space-between;
 
   button {
-    width: 273px;
     display: block;
     text-align: center;
     margin: 3% 0 3% 0;
@@ -103,18 +174,20 @@
     border: none;
     background-color: transparent;
     outline: none;
+    z-index: 1;
   }
 }
 
   .time_picker {
-    width: 600px;
+    width: 273px;
     text-align: center;
-    padding-top: 10px;
 
     button {
       cursor: pointer;
       border: none;
       background-color: transparent;
       outline: none;
+      margin: 0 auto;
+      padding: 0 !important;
     }
   }

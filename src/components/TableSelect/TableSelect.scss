@@ -1,5 +1,5 @@
 .root {
-  width: 300px;
+  width: 273px;
   padding-top: 10px;
 
   ul {
@@ -7,6 +7,7 @@
     display: flex;
     flex-flow: row wrap;
     align-items: center;
+    justify-content: center;
     margin: 0 auto;
     padding: 0;
   }
@@ -16,15 +17,15 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 60px;
-    height: 60px;
+    width: 68.25px;
+    height: 68.25px;
     cursor: pointer;
     border: 1px solid rgb(228, 231, 231);
     box-sizing: border-box;
   }
 
   li:hover {
-    background-color: #333;
+    background-color: lighten(#34495e, 30%);
     color: #fff;
   }
 }

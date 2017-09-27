@@ -1,7 +1,8 @@
 /* @flow */
 
 import React from 'react';
-import Calendar from './components/Calendar/Calendar';
+import CalendarSingle from './components/Calendar/CalendarSingle';
+// import Calendar from './components/Calendar/Calendar';
 
 type Props = void;
 type State = {
@@ -21,12 +22,26 @@ class App extends React.Component<Props, State> {
     };
   }
 
-  render() {
-    const { date, activeDates } = this.state;
+  onClickDay = (activeDates: Date) => {
+    this.setState({ activeDates });
+  };
 
+  onChangeDate = (date: Date) => {
+    this.setState({ date });
+  };
+
+  render() {
     return (
       <div className="container">
-        <Calendar
+        <CalendarSingle
+          {...this.state}
+          onClickDay={this.onClickDay}
+          onChangeDate={this.onChangeDate}
+          leftArrow
+          rightArrow
+          time
+        />
+        {/* <Calendar
           date={date}
           activeDates={activeDates}
           onClickDay={activeDates => {
@@ -35,7 +50,7 @@ class App extends React.Component<Props, State> {
           onChangeDate={date => {
             this.setState({ date });
           }}
-        />
+        /> */}
       </div>
     );
   }
