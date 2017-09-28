@@ -42,13 +42,20 @@ class TimePicker extends React.Component<Props, State> {
   };
 
   onSubmitTime = () => {
-    this.setState({ show: 'button' })
+    this.setState({ show: 'button' });
   };
 
   render() {
     const { show, date } = this.state;
     if (show === 'timePicker') {
-      return <TimeSelect {...this.props} value={date} onSubmit={this.onSubmitTime} onChange={this.onChangeDate} />;
+      return (
+        <TimeSelect
+          {...this.props}
+          value={date}
+          onSubmit={this.onSubmitTime}
+          onChange={this.onChangeDate}
+        />
+      );
     }
     return (
       <div className={s.time_picker}>

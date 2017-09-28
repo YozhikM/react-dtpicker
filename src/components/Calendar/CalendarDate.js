@@ -4,6 +4,7 @@ import React from 'react';
 import { setMonth, setYear, addYears, addMonths, getYear, format } from 'date-fns';
 import TableSelect from '../TableSelect/TableSelect';
 import CalendarMonthGrid from './CalendarMonthGrid';
+import TimePicker from './TimePicker';
 import SvgIcon from '../SvgIcon';
 import s from './Calendar.scss';
 
@@ -13,7 +14,8 @@ export type Props = {
   onClickDay?: (date: Date) => void,
   onChangeDate?: (date: Date) => void,
   leftArrow?: boolean,
-  rightArrow?: boolean
+  rightArrow?: boolean,
+  time?: boolean
 };
 
 type State = {
@@ -39,6 +41,11 @@ class CalendarDate extends React.Component<Props, State> {
       });
     }
   }
+
+  onChangeDate = () => {
+    const { onChangeDate, activeDates } = this.props;
+    if (onChangeDate) onChangeDate(activeDates);
+  };
 
   onChangeMonth = (value: number) => {
     const newDate = setMonth(this.state.date, value);
@@ -157,14 +164,14 @@ class CalendarDate extends React.Component<Props, State> {
 
   render() {
     const { show, date, monthsOptions } = this.state;
+    const { activeDates, time } = this.props;
 
     if (show === 'yy10') {
       const curYear = getYear(date);
       return (
-        <div>
+        <div className={s.calendar_container}>
           <span>
-            &nbsp; <br />
-            <SvgIcon file="calendar" />
+            &nbsp; <br /> &nbsp;
           </span>
           <TableSelect
             options={this.getYearDecadeOptions(date, 8)}
@@ -179,15 +186,12 @@ class CalendarDate extends React.Component<Props, State> {
 
     if (show === 'yy') {
       return (
-        <div>
+        <div className={s.calendar_container}>
           <div className={s.c_button_container}>
             <button onClick={this.decrement10Years}>
               <SvgIcon file="arrow-left" />
             </button>
-            <span onClick={this.showDecadeTable}>
-              <SvgIcon file="calendar" />
-              {this.showDecade()}
-            </span>
+            <span onClick={this.showDecadeTable}>{this.showDecade()}</span>
             <button onClick={this.increment10Years}>
               <SvgIcon file="arrow-right" />
             </button>
@@ -205,38 +209,37 @@ class CalendarDate extends React.Component<Props, State> {
 
     if (show === 'mm') {
       return (
-        <div className={s.table}>
-          <div className={s.c_button_container}>
-            <button onClick={this.decrementYears}>
-              <SvgIcon file="arrow-left" />
-            </button>
-            <span onClick={this.showYearTable}>
-              <SvgIcon file="calendar" />
-              {getYear(date)}
-            </span>
-            <button onClick={this.incrementYears}>
-              <SvgIcon file="arrow-right" />
+        <div className={s.calendar_container}>
+          <div className={s.table}>
+            <div className={s.c_button_container}>
+              <button onClick={this.decrementYears}>
+                <SvgIcon file="arrow-left" />
+              </button>
+              <span onClick={this.showYearTable}>{getYear(date)}</span>
+              <button onClick={this.incrementYears}>
+                <SvgIcon file="arrow-right" />
+              </button>
+            </div>
+            <TableSelect
+              options={monthsOptions}
+              cols={4}
+              value={date.getMonth()}
+              onChange={this.onChangeMonth}
+            />
+            <button
+              onClick={() => {
+                this.setState({ show: 'calendar' });
+              }}
+            >
+              Назад
             </button>
           </div>
-          <TableSelect
-            options={monthsOptions}
-            cols={4}
-            value={date.getMonth()}
-            onChange={this.onChangeMonth}
-          />
-          <button
-            onClick={() => {
-              this.setState({ show: 'calendar' });
-            }}
-          >
-            Назад
-          </button>
         </div>
       );
     }
 
     return (
-      <div>
+      <div className={s.calendar_container}>
         <button
           style={{ opacity: this.props.leftArrow ? 1 : 0 }}
           className={s.left_arrow}
@@ -252,6 +255,9 @@ class CalendarDate extends React.Component<Props, State> {
           <SvgIcon file="arrow-right" />
         </button>
         <CalendarMonthGrid {...this.props} date={date} onClickMonth={this.showMonthTable} />
+        {time && (
+          <TimePicker activeDates={activeDates} date={date} onChangeDate={this.onChangeDate} />
+        )}
       </div>
     );
   }

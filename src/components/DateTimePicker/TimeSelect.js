@@ -2,6 +2,7 @@
 
 import React from 'react';
 import InputUpDown from '../InputUpDown/InputUpDown';
+import SvgIcon from '../SvgIcon';
 import TableSelect, { type Options } from '../TableSelect/TableSelect';
 import s from './TimeSelect.scss';
 
@@ -48,7 +49,6 @@ class TimeSelect extends React.Component<Props, State> {
     }
   }
 
-
   parseTime(value: ?Date): HHMMSS {
     if (!value) return { hh: 0, mm: 0, ss: 0 };
     return { hh: value.getHours(), mm: value.getMinutes(), ss: value.getSeconds() };
@@ -75,7 +75,7 @@ class TimeSelect extends React.Component<Props, State> {
     if (onSubmit) {
       onSubmit();
     }
-  }
+  };
 
   onChangeHH = (hh: number) => {
     this.setState({ hh }, this.onChange);
@@ -168,7 +168,9 @@ class TimeSelect extends React.Component<Props, State> {
             circular
           />
         )}
-        <button onClick={this.onSubmit}>OK</button>
+        <button onClick={this.onSubmit}>
+          <SvgIcon file="check" />
+        </button>
       </div>
     );
   }

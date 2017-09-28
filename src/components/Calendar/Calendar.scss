@@ -83,8 +83,8 @@ body {
   .left_arrow {
     position: relative;
     display: inline-block !important;
-    left: 0;
-    top: 7.5px;
+    right: 120px;
+    top: 36px;
     z-index: 2;
     color: #333 !important;
     margin: 0 !important;
@@ -94,9 +94,9 @@ body {
   }
   .right_arrow {
     position: relative;
-    left: 220px;
+    left: 117px;
     display: inline-block !important;
-    top: 7.5px;
+    top: 8.5px;
     z-index: 2;
     color: #333 !important;
     margin: 0 !important;
@@ -109,7 +109,6 @@ body {
   flex-direction: column;
   align-items: center;
   width: 273px;
-  margin: 15% auto;
 
   span {
     display: flex;

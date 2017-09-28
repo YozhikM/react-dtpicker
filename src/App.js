@@ -2,7 +2,8 @@
 
 import React from 'react';
 import CalendarDate from './components/Calendar/CalendarDate';
-// import Calendar from './components/Calendar/Calendar';
+import s from './App.scss';
+import { format } from 'date-fns';
 
 type Props = void;
 type State = {
@@ -18,7 +19,7 @@ class App extends React.Component<Props, State> {
 
     this.state = {
       activeDates: new Date(),
-      date: new Date(2017, 8, 1)
+      date: new Date()
     };
   }
 
@@ -28,11 +29,13 @@ class App extends React.Component<Props, State> {
 
   onChangeDate = (date: Date) => {
     this.setState({ date });
+    this.setState({ activeDates: date });
   };
 
   render() {
     return (
-      <div className="container">
+      <div className={s.container}>
+        <p>{format(this.state.activeDates, 'hh:mm dd/MM/YY')}</p>
         <CalendarDate
           {...this.state}
           onClickDay={this.onClickDay}
@@ -41,16 +44,6 @@ class App extends React.Component<Props, State> {
           rightArrow
           time
         />
-        {/* <Calendar
-          date={date}
-          activeDates={activeDates}
-          onClickDay={activeDates => {
-            this.setState({ activeDates });
-          }}
-          onChangeDate={date => {
-            this.setState({ date });
-          }}
-        /> */}
       </div>
     );
   }

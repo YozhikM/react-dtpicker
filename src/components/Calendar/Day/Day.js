@@ -3,7 +3,6 @@
 import React from 'react';
 import { getDate } from 'date-fns';
 
-
 type Props = {
   date: Date,
   isActive: boolean,
@@ -16,14 +15,16 @@ class Day extends React.Component<Props, State> {
   onClick = () => {
     const { onClick, date } = this.props;
     if (onClick) {
-      onClick(date)
+      onClick(date);
     }
   };
 
   render() {
     const { date, isActive } = this.props;
     const style = {
-      backgroundColor: isActive ? '#34495e' : null, color: isActive ? 'white' : '#34495e', border: isActive ? '1px solid transparent' : '1px solid #e4e7e7'
+      backgroundColor: isActive ? '#34495e' : null,
+      color: isActive ? 'white' : '#34495e',
+      border: isActive ? '1px solid transparent' : '1px solid #e4e7e7'
     };
     let dayOfMonth = getDate(date);
     return (
