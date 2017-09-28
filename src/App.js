@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import CalendarSingle from './components/Calendar/CalendarSingle';
+import CalendarDate from './components/Calendar/CalendarDate';
 // import Calendar from './components/Calendar/Calendar';
 
 type Props = void;
@@ -33,7 +33,7 @@ class App extends React.Component<Props, State> {
   render() {
     return (
       <div className="container">
-        <CalendarSingle
+        <CalendarDate
           {...this.state}
           onClickDay={this.onClickDay}
           onChangeDate={this.onChangeDate}

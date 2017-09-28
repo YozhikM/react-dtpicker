@@ -1,8 +1,8 @@
 /* @flow */
 
 import React from 'react';
-import CalendarMonth from './CalendarMonth';
-import CalendarTimePicker from './CalendarTimePicker';
+import CalendarDate from './CalendarDate';
+import TimePicker from './TimePicker';
 import s from './Calendar.scss';
 import { format } from 'date-fns';
 
@@ -20,7 +20,7 @@ type State = {
   date: Date
 };
 
-class CalendarSingle extends React.Component<Props, State> {
+class CalendarDateTime extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -45,10 +45,10 @@ class CalendarSingle extends React.Component<Props, State> {
     return (
       <div className={s.calendar_container}>
         <p>{format((this.props.date), 'hh:mm dd/MM/YY')}</p>
-        <CalendarMonth {...this.props} date={date} leftArrow rightArrow />
+        <CalendarDate {...this.props} date={date} leftArrow rightArrow />
 
         {time && (
-          <CalendarTimePicker
+          <TimePicker
             activeDates={activeDates}
             date={date}
             onChangeDate={this.onChangeDate}
@@ -59,4 +59,4 @@ class CalendarSingle extends React.Component<Props, State> {
   }
 }
 
-export default CalendarSingle;
+export default CalendarDateTime;

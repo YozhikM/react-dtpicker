@@ -17,7 +17,7 @@ type State = {
   show: 'button' | 'timePicker'
 };
 
-class CalendarTimePicker extends React.Component<Props, State> {
+class TimePicker extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -60,4 +60,4 @@ class CalendarTimePicker extends React.Component<Props, State> {
   }
 }
 
-export default CalendarTimePicker;
+export default TimePicker;

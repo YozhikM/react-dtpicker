@@ -22,7 +22,7 @@ type State = {
   monthsOptions: Array<any>
 };
 
-class CalendarMonth extends React.Component<Props, State> {
+class CalendarDate extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -257,4 +257,4 @@ class CalendarMonth extends React.Component<Props, State> {
   }
 }
 
-export default CalendarMonth;
+export default CalendarDate;

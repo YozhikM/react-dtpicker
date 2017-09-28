@@ -3,8 +3,8 @@
 import React from 'react';
 import { addMonths } from 'date-fns';
 import SvgIcon from '../SvgIcon';
-import CalendarMonth from './CalendarMonth';
-import CalendarTimePicker from './CalendarTimePicker';
+import CalendarDate from './CalendarDate';
+import TimePicker from './TimePicker';
 import s from './Calendar.scss';
 
 type Props = {
@@ -62,8 +62,8 @@ class Calendar extends React.Component<Props, State> {
         </div>
 
         <div className={s.calendar_container}>
-          <CalendarMonth {...this.props} date={date} />
-          <CalendarMonth
+          <CalendarDate {...this.props} date={date} />
+          <CalendarDate
             {...this.props}
             date={addMonths(date, 1)}
             onChangeDate={date => {
@@ -73,7 +73,7 @@ class Calendar extends React.Component<Props, State> {
           />
         </div>
 
-        <CalendarTimePicker {...this.props} date={date} />
+        <TimePicker {...this.props} date={date} />
       </div>
     );
   }
