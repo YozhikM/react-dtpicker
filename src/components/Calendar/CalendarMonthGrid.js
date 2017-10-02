@@ -77,6 +77,15 @@ class CalendarMonthGrid extends React.Component<Props, State> {
     }
   };
 
+  checkInvalidDate = () => {
+    const { date } = this.props;
+    const validFormat = format(date, 'MMMM YYYY');
+    if (validFormat === 'Invalid Date') {
+      return 'Данные неверны';
+    }
+    else return validFormat;
+  };
+
   render() {
     const { weeks } = this.state;
     const { activeDates, date } = this.props;

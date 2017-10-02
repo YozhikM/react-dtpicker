@@ -1,0 +1,37 @@
+.display_text {
+  outline: none;
+  margin-top: 50px;
+  width: calc(273px - 2% - 24px);
+  padding: 2%;
+  border: 3px solid rgb(52, 73, 94);
+  font-family: 'Rubik';
+  font-size: 1rem;
+  text-align: center;
+}
+.input {
+  position: absolute;
+  outline: none;
+  left: 0;
+  bottom: 0;
+  padding: 2%;
+  opacity: 0;
+  width: calc(273px - 2% - 24px);
+  border: 3px solid rgb(52, 73, 94);
+  font-family: 'Rubik';
+  font-size: 1rem;
+  text-align: center;
+}
+.date_input_wrapper {
+  position: relative;
+  width: 273px;
+}
+.paragraph {
+  position: absolute;
+}
+.icon {
+  position: absolute;
+  right: 24px;
+  bottom: 3px;
+  cursor: pointer;
+  z-index: 2;
+}

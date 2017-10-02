@@ -15,7 +15,8 @@ export type Props = {
   onChangeDate?: (date: Date) => void,
   leftArrow?: boolean,
   rightArrow?: boolean,
-  time?: boolean
+  time?: boolean,
+  calendarIsShown?: boolean
 };
 
 type State = {
@@ -42,9 +43,14 @@ class CalendarDate extends React.Component<Props, State> {
     }
   }
 
+  onClickDay = () => {
+    const { onClickDay, activeDates } = this.props;
+    if (onClickDay) onClickDay(activeDates);
+  };
+
   onChangeDate = () => {
-    const { onChangeDate, activeDates } = this.props;
-    if (onChangeDate) onChangeDate(activeDates);
+    const { onChangeDate, date } = this.props;
+    if (onChangeDate) onChangeDate(date);
   };
 
   onChangeMonth = (value: number) => {
@@ -164,7 +170,11 @@ class CalendarDate extends React.Component<Props, State> {
 
   render() {
     const { show, date, monthsOptions } = this.state;
-    const { activeDates, time } = this.props;
+    const { activeDates, time, calendarIsShown } = this.props;
+
+    const toggleCalendarStyle = {
+      display: 'flex'
+    };
 
     if (show === 'yy10') {
       const curYear = getYear(date);
@@ -239,7 +249,7 @@ class CalendarDate extends React.Component<Props, State> {
     }
 
     return (
-      <div className={s.calendar_container}>
+      <div className={s.calendar_container} style={calendarIsShown ? toggleCalendarStyle : null}>
         <button
           style={{ opacity: this.props.leftArrow ? 1 : 0 }}
           className={s.left_arrow}

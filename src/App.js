@@ -2,13 +2,15 @@
 
 import React from 'react';
 import CalendarDate from './components/Calendar/CalendarDate';
+import DateRangePickerInput from './components/DateRangePickerInput/DateRangePickerInput';
 import s from './App.scss';
-import { format } from 'date-fns';
 
 type Props = void;
 type State = {
   activeDates: Date,
-  date: Date
+  date: Date,
+  time: boolean,
+  calendarIsShown: boolean
 };
 
 class App extends React.Component<Props, State> {
@@ -19,12 +21,15 @@ class App extends React.Component<Props, State> {
 
     this.state = {
       activeDates: new Date(),
-      date: new Date()
+      date: new Date(),
+      time: false,
+      calendarIsShown: false
     };
   }
 
-  onClickDay = (activeDates: Date) => {
+  onChangeDay = (activeDates: Date) => {
     this.setState({ activeDates });
+    this.setState({ date: activeDates });
   };
 
   onChangeDate = (date: Date) => {
@@ -32,17 +37,24 @@ class App extends React.Component<Props, State> {
     this.setState({ activeDates: date });
   };
 
+  calendarIsShown = () => {
+    this.setState({ calendarIsShown: !this.state.calendarIsShown });
+  };
+
   render() {
     return (
       <div className={s.container}>
-        <p>{format(this.state.activeDates, 'hh:mm dd/MM/YY')}</p>
+        <DateRangePickerInput
+          {...this.state}
+          onChangeDay={this.onChangeDay}
+          onCalendarShow={this.calendarIsShown}
+        />
         <CalendarDate
           {...this.state}
-          onClickDay={this.onClickDay}
+          onClickDay={this.onChangeDay}
           onChangeDate={this.onChangeDate}
           leftArrow
           rightArrow
-          time
         />
       </div>
     );
