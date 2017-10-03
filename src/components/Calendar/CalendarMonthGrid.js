@@ -9,18 +9,19 @@ export type Props = {
   date: Date,
   activeDates: Date,
   onClickDay?: (date: Date) => void,
-  onClickMonth?: (date: Date) => void
+  onClickMonth?: (date: Date) => void,
+  range?: Array<Date>
 };
 
 type State = {
-  weeks: Array<any>
+  weeks: Array<any>,
 };
 
 class CalendarMonthGrid extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      weeks: []
+      weeks: [],
     };
   }
 
@@ -82,13 +83,12 @@ class CalendarMonthGrid extends React.Component<Props, State> {
     const validFormat = format(date, 'MMMM YYYY');
     if (validFormat === 'Invalid Date') {
       return 'Данные неверны';
-    }
-    else return validFormat;
+    } else return validFormat;
   };
 
   render() {
     const { weeks } = this.state;
-    const { activeDates, date } = this.props;
+    const { activeDates, date, range } = this.props;
 
     return (
       <div className={s.root}>
@@ -113,6 +113,7 @@ class CalendarMonthGrid extends React.Component<Props, State> {
                     <Day
                       key={dayOfWeek}
                       date={date}
+                      range={range}
                       onClick={this.onClickDay}
                       isActive={this.isSameDate(activeDates, date)}
                     />

@@ -1,31 +1,39 @@
 /* @flow */
 
 import React from 'react';
+import CalendarDate from '../Calendar/CalendarDate';
 import MaskedInput from 'react-text-mask';
-import SvgIcon from '../SvgIcon';
-import s from './DateRangePickerInput.scss';
+import s from './Calendar.scss';
 import { format, isValid } from 'date-fns';
 
 type Props = {
   activeDates: Date,
   date: Date,
-  onChangeDay?: (date: Date) => void,
-  onCalendarShow: any => void,
-  time?: boolean,
+  time: boolean,
+  onChangeCalendarVisibility: any => void,
+  onChangeDay: Date => void,
+  range?: Array<Date>,
+  isCalendarShown?: boolean,
+  onChangeDay?: (date: Date) => void
 };
 type State = {
-  inputValue: string,
-  inputIsShown: boolean,
-  activeDates: Date
+  activeDates: Date,
+  date: Date,
+  time: boolean,
+  isCalendarShown: boolean,
+  inputValue: string
 };
 
-class DateRangePickerInput extends React.Component<Props, State> {
+class CalendarDateTimePicker extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
+
     this.state = {
-      inputValue: '',
-      inputIsShown: false,
-      activeDates: this.props.activeDates
+      activeDates: this.props.activeDates,
+      date: this.props.date,
+      time: this.props.time,
+      isCalendarShown: !!this.props.isCalendarShown,
+      inputValue: ''
     };
   }
 
@@ -42,6 +50,10 @@ class DateRangePickerInput extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.time !== this.state.time) {
+      this.setState({ time: nextProps.time });
+    }
+
     if (nextProps.activeDates !== this.state.activeDates) {
       this.setState({ activeDates: nextProps.activeDates });
     }
@@ -78,27 +90,18 @@ class DateRangePickerInput extends React.Component<Props, State> {
   };
 
   onClickInput = (e: Event) => {
-    const { inputIsShown } = this.state;
-    const { time, onCalendarShow } = this.props;
-    this.setState({
-      inputIsShown: !inputIsShown
-    });
+    const { time } = this.props;
+    const { isCalendarShown } = this.state;
     if (time) {
       this.setState({ inputValue: this.formatWithTime() });
     } else {
       this.setState({ inputValue: this.formatWithoutTime() });
     }
-    if (onCalendarShow) {
-      onCalendarShow();
-    }
+    this.setState({ isCalendarShown: !isCalendarShown });
   };
 
   onBlurInput = () => {
-    const { inputIsShown } = this.state;
     const { time } = this.props;
-    this.setState({
-      inputIsShown: !inputIsShown
-    });
     if (time) {
       this.setState({ inputValue: format(this.state.activeDates, 'DD/MM/YYYY HH:mm') });
     } else {
@@ -106,29 +109,54 @@ class DateRangePickerInput extends React.Component<Props, State> {
     }
   };
 
-  onPressEnter = (e: Event) => {
-    const { onCalendarShow } = this.props;
-    if (e.key === 'Enter') {
-      if (onCalendarShow) {
-        onCalendarShow();
-      }
+  // onPressEnter = (e: Event) => {
+  //   const { onCalendarShow } = this.props;
+  //   if (e.key === 'Enter') {
+  //     if (onCalendarShow) {
+  //       onCalendarShow();
+  //     }
+  //   }
+  // };
+
+  // onClickIcon = () => {
+  //   const { onCalendarShow } = this.props;
+  //   if (onCalendarShow) {
+  //     onCalendarShow();
+  //   }
+  // };
+
+  onChangeDay = (activeDates: Date) => {
+    const { onChangeDay } = this.props;
+    this.setState({ activeDates, date: activeDates, inputValue: this.formatWithTime() });
+    if (onChangeDay) {
+      onChangeDay(activeDates);
     }
   };
 
-  onClickIcon = () => {
-    const { onCalendarShow } = this.props;
-    if (onCalendarShow) {
-      onCalendarShow();
-    }
+  onChangeDate = (date: Date) => {
+    this.setState({ date });
   };
+
+  // onChangeDisplay = (isCalendarShown: boolean) => {
+  //   const { onChangeDisplay } = this.props;
+  //   this.setState({ isCalendarShown: !this.state.isCalendarShown });
+  //   if (onChangeDisplay) {
+  //     onChangeDisplay(this.state.isCalendarShown);
+  //   }
+  // };
+
+  // closeCalendar = (e: Event) => {
+  //   const { onChangeDisplay } = this.props;
+  //   if (onChangeDisplay) {
+  //     onChangeDisplay(false);
+  //   }
+  // };
 
   render() {
-    const { inputValue, inputIsShown } = this.state;
+    const { range } = this.props;
+    const { isCalendarShown } = this.state;
+    const { inputValue } = this.state;
     const { time } = this.props;
-    const style = {
-      zIndex: 1,
-      opacity: 1
-    };
     let mask;
     if (time) {
       mask = [
@@ -152,8 +180,9 @@ class DateRangePickerInput extends React.Component<Props, State> {
     } else {
       mask = [/[0-9]/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
     }
+
     return (
-      <div className={s.date_input_wrapper}>
+      <div className={s.container}>
         <MaskedInput
           mask={mask}
           className={s.input}
@@ -161,18 +190,23 @@ class DateRangePickerInput extends React.Component<Props, State> {
           onChange={this.onChangeInputValue}
           onFocus={this.onClickInput}
           onBlur={this.onBlurInput}
-          onKeyPress={this.onPressEnter}
+          // onKeyPress={this.onPressEnter}
           value={inputValue}
-          style={inputIsShown ? style : null}
           showMask
         />
-        <div className={s.display_text}>{this.displayText()}</div>
-        <div className={s.icon} onClick={this.onClickIcon}>
-          <SvgIcon file="calendar" />
-        </div>
+        {isCalendarShown && (
+          <CalendarDate
+            {...this.state}
+            onClickDay={this.onChangeDay}
+            onChangeDate={this.onChangeDate}
+            range={range}
+            leftArrow
+            rightArrow
+          />
+        )}
       </div>
     );
   }
 }
 
-export default DateRangePickerInput;
+export default CalendarDateTimePicker;

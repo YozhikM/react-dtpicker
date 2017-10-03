@@ -1,16 +1,17 @@
 /* @flow */
 
 import React from 'react';
-import CalendarDate from './components/Calendar/CalendarDate';
-import DateRangePickerInput from './components/DateRangePickerInput/DateRangePickerInput';
+import CalendarDateTimePicker from './components/Calendar/CalendarDateTimePicker';
+import { addMonths, eachDay } from 'date-fns';
 import s from './App.scss';
 
 type Props = void;
 type State = {
-  activeDates: Date,
+  startDate: Date,
+  endDate: Date,
   date: Date,
   time: boolean,
-  calendarIsShown: boolean
+  isCalendarShown: boolean
 };
 
 class App extends React.Component<Props, State> {
@@ -20,41 +21,54 @@ class App extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      activeDates: new Date(),
+      startDate: new Date(),
+      endDate: addMonths(new Date(), 1),
       date: new Date(),
       time: false,
-      calendarIsShown: false
+      isCalendarShown: false
     };
   }
 
-  onChangeDay = (activeDates: Date) => {
-    this.setState({ activeDates });
-    this.setState({ date: activeDates });
+  getRangeDate = () => {
+    return eachDay(this.state.startDate, this.state.endDate);
+  };
+
+  onChangeStartDay = (activeDates: Date) => {
+    this.setState({ startDate: activeDates });
+  };
+
+  onChangeEndDay = (activeDates: Date) => {
+    this.setState({ endDate: activeDates });
   };
 
   onChangeDate = (date: Date) => {
     this.setState({ date });
-    this.setState({ activeDates: date });
   };
 
-  calendarIsShown = () => {
-    this.setState({ calendarIsShown: !this.state.calendarIsShown });
+  onChangeCalendarVisibility = (isCalendarShown: boolean) => {
+    this.setState({ isCalendarShown });
   };
 
   render() {
+    const { startDate, endDate, time, date, isCalendarShown } = this.state;
     return (
       <div className={s.container}>
-        <DateRangePickerInput
-          {...this.state}
-          onChangeDay={this.onChangeDay}
-          onCalendarShow={this.calendarIsShown}
+        <CalendarDateTimePicker
+          date={date}
+          time={time}
+          isCalendarShown={isCalendarShown}
+          onChangeDay={this.onChangeStartDay}
+          activeDates={startDate}
+          onChangeCalendarVisibility={this.onChangeCalendarVisibility}
+          // range={this.getRangeDate()}
         />
-        <CalendarDate
-          {...this.state}
-          onClickDay={this.onChangeDay}
-          onChangeDate={this.onChangeDate}
-          leftArrow
-          rightArrow
+        <CalendarDateTimePicker
+          date={addMonths(date, 1)}
+          time={time}
+          isCalendarShown={isCalendarShown}
+          onChangeDay={this.onChangeEndDay}
+          activeDates={endDate}
+          onChangeCalendarVisibility={this.onChangeCalendarVisibility}
         />
       </div>
     );

@@ -1,6 +1,15 @@
+.container {
+  width: 30%;
+  min-height: 453px;
+  display: flex;
+  margin-top: 25px;
+  flex-direction: column;
+}
+
 body {
   font-family: 'Rubik';
 }
+
 .root {
   display: inline-block;
   width: 273px;
@@ -105,7 +114,7 @@ body {
     padding: 0 !important;
 }
 .calendar_container {
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   width: 273px;
@@ -143,6 +152,7 @@ body {
   width: 273px;
   display: inline-block;
   z-index: 2;
+  margin-top: 24px;
 
   span {
     display: flex;

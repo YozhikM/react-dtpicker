@@ -6,17 +6,24 @@ import { getDate } from 'date-fns';
 type Props = {
   date: Date,
   isActive: boolean,
-  onClick: Function
+  onClick: Function,
+  range?: Array<Date>
 };
 
 type State = void;
 
 class Day extends React.Component<Props, State> {
+
   onClick = () => {
     const { onClick, date } = this.props;
     if (onClick) {
       onClick(date);
     }
+  };
+
+  filterRangeDay = (range: Array<Date>, date: Date) => {
+    let result = range.filter((day) => day === date);
+    return console.log(result);
   };
 
   render() {

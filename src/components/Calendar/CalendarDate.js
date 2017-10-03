@@ -16,7 +16,7 @@ export type Props = {
   leftArrow?: boolean,
   rightArrow?: boolean,
   time?: boolean,
-  calendarIsShown?: boolean
+  range?: Array<Date>
 };
 
 type State = {
@@ -170,11 +170,7 @@ class CalendarDate extends React.Component<Props, State> {
 
   render() {
     const { show, date, monthsOptions } = this.state;
-    const { activeDates, time, calendarIsShown } = this.props;
-
-    const toggleCalendarStyle = {
-      display: 'flex'
-    };
+    const { activeDates, time } = this.props;
 
     if (show === 'yy10') {
       const curYear = getYear(date);
@@ -249,7 +245,7 @@ class CalendarDate extends React.Component<Props, State> {
     }
 
     return (
-      <div className={s.calendar_container} style={calendarIsShown ? toggleCalendarStyle : null}>
+      <div className={s.calendar_container}>
         <button
           style={{ opacity: this.props.leftArrow ? 1 : 0 }}
           className={s.left_arrow}
