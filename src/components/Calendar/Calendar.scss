@@ -1,8 +1,8 @@
 .container {
   width: 273px;
-  min-height: 490px;
+  min-height: 529px;
   display: flex;
-  margin: 25px;
+  margin: 0 2px;
   flex-direction: column;
   position: relative;
 }
@@ -24,8 +24,8 @@
   outline: none;
   left: 0;
   top: 0;
-  padding: 2%;
-  width: 249px;
+  padding: 2% 0;
+  width: 274px;
   border: 3px solid rgb(52, 73, 94);
   font-family: 'Rubik';
   font-size: 1rem;
@@ -69,7 +69,7 @@ body {
 
 .button_container {
   display: flex;
-  width: 600px;
+  width: 273px;
   justify-content: space-around;
 
   button {

@@ -17,7 +17,9 @@ export type Props = {
   rightArrow?: boolean,
   time?: boolean,
   startDate?: Date,
-  endDate?: Date
+  endDate?: Date,
+  watchIncrementMonth?: (date: Date) => void,
+  watchDecrementMonth?: (date: Date) => void
 };
 
 type State = {
@@ -42,6 +44,9 @@ class CalendarDate extends React.Component<Props, State> {
         date: nextProps.date
       });
     }
+    if (this.props.activeDates !== nextProps.activeDates) {
+      this.setState({ date: nextProps.activeDates });
+    }
   }
 
   onClickDay = () => {
@@ -49,13 +54,9 @@ class CalendarDate extends React.Component<Props, State> {
     if (onClickDay) onClickDay(activeDates);
   };
 
-  onChangeDate = () => {
-    const { onChangeDate, date } = this.props;
-    if (onChangeDate) onChangeDate(date);
-  };
-
   onChangeMonth = (value: number) => {
-    const newDate = setMonth(this.state.date, value);
+    const { date } = this.state;
+    const newDate = setMonth(date, value);
     this.setState({ show: 'calendar', date: newDate }, () => {
       const { onChangeDate } = this.props;
       if (onChangeDate) onChangeDate(newDate);
@@ -63,7 +64,8 @@ class CalendarDate extends React.Component<Props, State> {
   };
 
   onChangeYear = (value: number) => {
-    const newDate = setYear(this.state.date, value);
+    const { date } = this.state;
+    const newDate = setYear(date, value);
     this.setState({ show: 'mm', date: newDate }, () => {
       const { onChangeDate } = this.props;
       if (onChangeDate) onChangeDate(newDate);
@@ -71,7 +73,8 @@ class CalendarDate extends React.Component<Props, State> {
   };
 
   onChangeDecade = (value: number) => {
-    const newDate = setYear(this.state.date, value);
+    const { date } = this.state;
+    const newDate = setYear(date, value);
     this.setState({ show: 'yy', date: newDate }, () => {
       const { onChangeDate } = this.props;
       if (onChangeDate) onChangeDate(newDate);
@@ -101,7 +104,8 @@ class CalendarDate extends React.Component<Props, State> {
   };
 
   decrement10Years = () => {
-    const newDate = addYears(this.state.date, -10);
+    const { date } = this.state;
+    const newDate = addYears(date, -10);
     this.setState({ date: newDate }, () => {
       const { onChangeDate } = this.props;
       if (onChangeDate) onChangeDate(newDate);
@@ -109,7 +113,8 @@ class CalendarDate extends React.Component<Props, State> {
   };
 
   decrementYears = () => {
-    const newDate = addYears(this.state.date, -1);
+    const { date } = this.state;
+    const newDate = addYears(date, -1);
     this.setState({ date: newDate }, () => {
       const { onChangeDate } = this.props;
       if (onChangeDate) onChangeDate(newDate);
@@ -117,7 +122,8 @@ class CalendarDate extends React.Component<Props, State> {
   };
 
   incrementYears = () => {
-    const newDate = addYears(this.state.date, 1);
+    const { date } = this.state;
+    const newDate = addYears(date, 1);
     this.setState({ date: newDate }, () => {
       const { onChangeDate } = this.props;
       if (onChangeDate) onChangeDate(newDate);
@@ -125,7 +131,8 @@ class CalendarDate extends React.Component<Props, State> {
   };
 
   increment10Years = () => {
-    const newDate = addYears(this.state.date, 10);
+    const { date } = this.state;
+    const newDate = addYears(date, 10);
     this.setState({ date: newDate }, () => {
       const { onChangeDate } = this.props;
       if (onChangeDate) onChangeDate(newDate);
@@ -172,6 +179,8 @@ class CalendarDate extends React.Component<Props, State> {
   render() {
     const { show, date, monthsOptions } = this.state;
     const { activeDates, time } = this.props;
+    const leftArrowStyle = { visibility: this.props.leftArrow ? 'visible' : 'hidden' };
+    const rightArrowStyle = { visibility: this.props.rightArrow ? 'visible' : 'hidden' };
 
     if (show === 'yy10') {
       const curYear = getYear(date);
@@ -251,23 +260,15 @@ class CalendarDate extends React.Component<Props, State> {
 
     return (
       <div className={s.calendar_container}>
-        <button
-          style={{ opacity: this.props.leftArrow ? 1 : 0 }}
-          className={s.left_arrow}
-          onClick={this.decrementMonth}
-        >
+        <button style={leftArrowStyle} className={s.left_arrow} onClick={this.decrementMonth}>
           <SvgIcon file="arrow-left" />
         </button>
-        <button
-          style={{ opacity: this.props.rightArrow ? 1 : 0 }}
-          className={s.right_arrow}
-          onClick={this.incrementMonth}
-        >
+        <button style={rightArrowStyle} className={s.right_arrow} onClick={this.incrementMonth}>
           <SvgIcon file="arrow-right" />
         </button>
         <CalendarMonthGrid {...this.props} date={date} onClickMonth={this.showMonthTable} />
         {time && (
-          <TimePicker activeDates={activeDates} date={date} onChangeDate={this.onChangeDate} />
+          <TimePicker activeDates={activeDates} date={date} />
         )}
       </div>
     );

@@ -97,13 +97,13 @@ class CalendarMonthGrid extends React.Component<Props, State> {
         <table>
           <thead>
             <tr>
-              <th>ПН</th>
-              <th>ВТ</th>
-              <th>СР</th>
-              <th>ЧТ</th>
-              <th>ПТ</th>
-              <th>СБ</th>
-              <th>ВС</th>
+              <th>Mo</th>
+              <th>Tu</th>
+              <th>We</th>
+              <th>Th</th>
+              <th>Fr</th>
+              <th>Sa</th>
+              <th>Su</th>
             </tr>
           </thead>
           <tbody>

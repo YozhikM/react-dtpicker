@@ -17,7 +17,15 @@ type Props = {
   isCalendarShown?: boolean,
   onChangeDay?: (date: Date) => void,
   startDate?: Date,
-  endDate?: Date
+  endDate?: Date,
+  borderLeft?: boolean,
+  borderRight?: boolean,
+  icon?: boolean,
+  watchIncrementMonth?: (date: Date) => void,
+  watchDecrementMonth?: (date: Date) => void,
+  onChangeDate: (date: Date) => void,
+  leftArrow?: boolean,
+  rightArrow?: boolean
 };
 type State = {
   activeDates: Date,
@@ -67,11 +75,19 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     if (nextProps.activeDates !== this.state.activeDates) {
       this.setState({ activeDates: nextProps.activeDates });
     }
+
+    if (nextProps.date !== this.state.date) {
+      this.setState({ date: nextProps.date })
+    }
+
+    if(nextProps.isCalendarShown !== this.state.isCalendarShown) {
+      this.setState({ isCalendarShown: nextProps.isCalendarShown });
+    }
   }
 
   onChangeInputValue = (e: any) => {
-    const { onChangeDay } = this.props;
-    const { time } = this.state;
+    const { onChangeDay, onChangeCalendarVisibility } = this.props;
+    const { time, isCalendarShown } = this.state;
     const value = e.target.value;
     this.setState({ inputValue: value });
     let userDate;
@@ -89,37 +105,53 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     if (value.length > 0 && onChangeDay && isValid(userDate)) {
       onChangeDay(userDate);
     }
+    this.setState({ isCalendarShown: !isCalendarShown })
+    if (onChangeCalendarVisibility) {
+      onChangeCalendarVisibility(!isCalendarShown);
+    }
   };
 
   onClickInput = (e: Event) => {
     const { isCalendarShown, activeDates, time } = this.state;
+    const { onChangeCalendarVisibility } = this.props;
     if (time) {
       this.setState({ inputValue: this.formatWithTime(activeDates) });
     } else {
       this.setState({ inputValue: this.formatWithoutTime(activeDates) });
     }
-    this.setState({ isCalendarShown: !isCalendarShown });
+    this.setState({ isCalendarShown: !isCalendarShown })
+    if (onChangeCalendarVisibility) {
+      onChangeCalendarVisibility(!isCalendarShown);
+    }
   };
 
   onBlurInput = () => {
-    const { time } = this.state;
+    const { time, activeDates } = this.state;
     if (time) {
-      this.setState({ inputValue: format(this.state.activeDates, 'DD/MM/YYYY HH:mm') });
+      this.setState({ inputValue: format(activeDates, 'DD/MM/YYYY HH:mm') });
     } else {
-      this.setState({ inputValue: format(this.state.activeDates, 'DD/MM/YYYY') });
+      this.setState({ inputValue: format(activeDates, 'DD/MM/YYYY') });
     }
   };
 
   onPressEnter = (e: Event) => {
     const { isCalendarShown } = this.state;
+    const { onChangeCalendarVisibility } = this.props;
     if (e.key === 'Enter') {
       this.setState({ isCalendarShown: !isCalendarShown });
+    }
+    if (onChangeCalendarVisibility) {
+      onChangeCalendarVisibility(!isCalendarShown);
     }
   };
 
   onClickIcon = () => {
     const { isCalendarShown } = this.state;
+    const { onChangeCalendarVisibility } = this.props;
     this.setState({ isCalendarShown: !isCalendarShown });
+    if (onChangeCalendarVisibility) {
+      onChangeCalendarVisibility(!isCalendarShown);
+    }
   };
 
   onChangeDay = (activeDates: Date) => {
@@ -132,11 +164,38 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
 
   onChangeDate = (date: Date) => {
     this.setState({ date, activeDates: date, inputValue: this.formatWithTime(date) });
+    const { onChangeDate } = this.props;
+    if (onChangeDate) {
+      onChangeDate(date);
+    }
   };
 
+  watchIncrementMonth = (date: Date) => {
+    this.setState({ date });
+    const { watchIncrementMonth } = this.props;
+    if (watchIncrementMonth) {
+      watchIncrementMonth(date);
+    }
+  }
+
+  watchDecrementMonth = (date: Date) => {
+    this.setState({ date });
+    const { watchDecrementMonth } = this.props;
+    if (watchDecrementMonth) {
+      watchDecrementMonth(date);
+    }
+  }
+
   render() {
-    const { startDate, endDate } = this.props;
+    const { startDate, endDate, borderLeft, borderRight, icon, leftArrow, rightArrow } = this.props;
     const { isCalendarShown, inputValue, time } = this.state;
+    const iconStyle = {
+      display: icon ? 'flex' : 'none'
+    }
+    const borderStyle = {
+      borderLeft: borderLeft ? '3px solid #34495e' : 0,
+      borderRight: borderRight ? '3px solid #34495e' : 0
+    }
     let mask;
     if (time) {
       mask = [
@@ -166,6 +225,7 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
         <MaskedInput
           mask={mask}
           className={s.input}
+          style={borderStyle}
           type="text"
           onChange={this.onChangeInputValue}
           onFocus={this.onClickInput}
@@ -174,7 +234,7 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
           value={inputValue}
           showMask
         />
-        <div onClick={this.onClickIcon} className={s.icon}>
+        <div onClick={this.onClickIcon} className={s.icon} style={iconStyle}>
           <SvgIcon file="calendar" />
         </div>
         {isCalendarShown && (
@@ -184,8 +244,10 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
             onChangeDate={this.onChangeDate}
             startDate={startDate}
             endDate={endDate}
-            leftArrow
-            rightArrow
+            leftArrow={leftArrow}
+            rightArrow={rightArrow}
+            watchIncrementMonth={this.watchIncrementMonth}
+            watchDecrementMonth={this.watchDecrementMonth}
           />
         )}
       </div>
