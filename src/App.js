@@ -34,7 +34,7 @@ class App extends React.Component<Props, State> {
   };
 
   onChangeStartDay = (activeDates: Date) => {
-    this.setState({ startDate: activeDates });
+    this.setState({ startDate: activeDates, date: activeDates });
   };
 
   onChangeEndDay = (activeDates: Date) => {
@@ -60,7 +60,8 @@ class App extends React.Component<Props, State> {
           onChangeDay={this.onChangeStartDay}
           activeDates={startDate}
           onChangeCalendarVisibility={this.onChangeCalendarVisibility}
-          // range={this.getRangeDate()}
+          startDate={startDate}
+          endDate={endDate}
         />
         <CalendarDateTimePicker
           date={addMonths(date, 1)}
@@ -69,6 +70,8 @@ class App extends React.Component<Props, State> {
           onChangeDay={this.onChangeEndDay}
           activeDates={endDate}
           onChangeCalendarVisibility={this.onChangeCalendarVisibility}
+          startDate={startDate}
+          endDate={endDate}
         />
       </div>
     );

@@ -1,13 +1,14 @@
 /* @flow */
 
 import React from 'react';
-import { getDate } from 'date-fns';
+import { getDate, isWithinRange } from 'date-fns';
 
 type Props = {
   date: Date,
   isActive: boolean,
   onClick: Function,
-  range?: Array<Date>
+  startDate: any,
+  endDate: any
 };
 
 type State = void;
@@ -21,16 +22,17 @@ class Day extends React.Component<Props, State> {
     }
   };
 
-  filterRangeDay = (range: Array<Date>, date: Date) => {
-    let result = range.filter((day) => day === date);
-    return console.log(result);
+  filterRangeDay = (date: Date, startDate: Date, endDate: Date) => {
+    let result = isWithinRange(date, startDate, endDate);
+    return result;
   };
 
   render() {
-    const { date, isActive } = this.props;
+    const { date, isActive, startDate, endDate } = this.props;
+    let inRange = this.filterRangeDay(date, startDate, endDate);
     const style = {
-      backgroundColor: isActive ? '#34495e' : null,
-      color: isActive ? 'white' : '#34495e',
+      backgroundColor: (isActive ? '#34495e' : null) || (inRange ? '#9bb0c5' : null),
+      color: isActive || inRange ? 'white' : '#34495e',
       border: isActive ? '1px solid transparent' : '1px solid #e4e7e7'
     };
     let dayOfMonth = getDate(date);

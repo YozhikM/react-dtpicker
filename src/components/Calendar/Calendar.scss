@@ -1,9 +1,35 @@
 .container {
-  width: 30%;
-  min-height: 453px;
+  width: 273px;
+  min-height: 490px;
   display: flex;
-  margin-top: 25px;
+  margin: 25px;
   flex-direction: column;
+  position: relative;
+}
+
+.icon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 24px;
+  top: 5px;
+  cursor: pointer;
+}
+
+.input {
+  position: absolute;
+  outline: none;
+  left: 0;
+  top: 0;
+  padding: 2%;
+  width: 249px;
+  border: 3px solid rgb(52, 73, 94);
+  font-family: 'Rubik';
+  font-size: 1rem;
+  text-align: center;
 }
 
 body {
@@ -118,6 +144,7 @@ body {
   flex-direction: column;
   align-items: center;
   width: 273px;
+  margin-top: 10px;
 
   span {
     display: flex;

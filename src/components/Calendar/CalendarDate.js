@@ -16,7 +16,8 @@ export type Props = {
   leftArrow?: boolean,
   rightArrow?: boolean,
   time?: boolean,
-  range?: Array<Date>
+  startDate?: Date,
+  endDate?: Date
 };
 
 type State = {
@@ -176,16 +177,18 @@ class CalendarDate extends React.Component<Props, State> {
       const curYear = getYear(date);
       return (
         <div className={s.calendar_container}>
-          <span>
-            &nbsp; <br /> &nbsp;
-          </span>
-          <TableSelect
-            options={this.getYearDecadeOptions(date, 8)}
-            cols={4}
-            value={curYear - curYear % 10}
-            onChange={this.onChangeDecade}
-          />
-          <button onClick={this.showYearTable}>Назад</button>
+          <div className={s.table}>
+            <span>
+              &nbsp; <br /> &nbsp;
+            </span>
+            <TableSelect
+              options={this.getYearDecadeOptions(date, 8)}
+              cols={4}
+              value={curYear - curYear % 10}
+              onChange={this.onChangeDecade}
+            />
+            <button onClick={this.showYearTable}>Назад</button>
+          </div>
         </div>
       );
     }
@@ -193,22 +196,24 @@ class CalendarDate extends React.Component<Props, State> {
     if (show === 'yy') {
       return (
         <div className={s.calendar_container}>
-          <div className={s.c_button_container}>
-            <button onClick={this.decrement10Years}>
-              <SvgIcon file="arrow-left" />
-            </button>
-            <span onClick={this.showDecadeTable}>{this.showDecade()}</span>
-            <button onClick={this.increment10Years}>
-              <SvgIcon file="arrow-right" />
-            </button>
+          <div className={s.table}>
+            <div className={s.c_button_container}>
+              <button onClick={this.decrement10Years}>
+                <SvgIcon file="arrow-left" />
+              </button>
+              <span onClick={this.showDecadeTable}>{this.showDecade()}</span>
+              <button onClick={this.increment10Years}>
+                <SvgIcon file="arrow-right" />
+              </button>
+            </div>
+            <TableSelect
+              options={this.getYearOptions(date)}
+              cols={4}
+              value={getYear(date)}
+              onChange={this.onChangeYear}
+            />
+            <button onClick={this.showMonthTable}>Назад</button>
           </div>
-          <TableSelect
-            options={this.getYearOptions(date)}
-            cols={4}
-            value={getYear(date)}
-            onChange={this.onChangeYear}
-          />
-          <button onClick={this.showMonthTable}>Назад</button>
         </div>
       );
     }

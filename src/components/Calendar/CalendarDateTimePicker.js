@@ -3,6 +3,7 @@
 import React from 'react';
 import CalendarDate from '../Calendar/CalendarDate';
 import MaskedInput from 'react-text-mask';
+import SvgIcon from '../SvgIcon';
 import s from './Calendar.scss';
 import { format, isValid } from 'date-fns';
 
@@ -14,7 +15,9 @@ type Props = {
   onChangeDay: Date => void,
   range?: Array<Date>,
   isCalendarShown?: boolean,
-  onChangeDay?: (date: Date) => void
+  onChangeDay?: (date: Date) => void,
+  startDate?: Date,
+  endDate?: Date
 };
 type State = {
   activeDates: Date,
@@ -37,21 +40,28 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     };
   }
 
-  formatWithTime = () => format(this.state.activeDates, 'DD/MM/YYYY HH:mm');
-  formatWithoutTime = () => format(this.state.activeDates, 'DD/MM/YYYY');
+  formatWithTime = (activeDates: Date) => {
+    return format(activeDates, 'DD/MM/YYYY HH:mm');
+  };
+  formatWithoutTime = (activeDates: Date) => {
+    return format(activeDates, 'DD/MM/YYYY');
+  };
 
   componentWillMount() {
-    const { time } = this.props;
+    const { time } = this.state;
+    const { activeDates } = this.props;
     if (time) {
-      this.setState({ inputValue: this.formatWithTime() });
+      this.setState({ inputValue: this.formatWithTime(activeDates) });
     } else {
-      this.setState({ inputValue: this.formatWithoutTime() });
+      this.setState({ inputValue: this.formatWithoutTime(activeDates) });
     }
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.time !== this.state.time) {
+      const { activeDates } = this.state;
       this.setState({ time: nextProps.time });
+      this.setState({ inputValue: this.formatWithTime(activeDates) })
     }
 
     if (nextProps.activeDates !== this.state.activeDates) {
@@ -59,17 +69,9 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     }
   }
 
-  displayText = () => {
-    const { time } = this.props;
-    if (time) {
-      return this.formatWithTime();
-    } else {
-      return this.formatWithoutTime();
-    }
-  };
-
   onChangeInputValue = (e: any) => {
-    const { onChangeDay, time } = this.props;
+    const { onChangeDay } = this.props;
+    const { time } = this.state;
     const value = e.target.value;
     this.setState({ inputValue: value });
     let userDate;
@@ -83,25 +85,24 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     } else {
       userDate = new Date(YY, MM, DD);
     }
-
+    this.setState({ date: userDate, activeDates: userDate });
     if (value.length > 0 && onChangeDay && isValid(userDate)) {
       onChangeDay(userDate);
     }
   };
 
   onClickInput = (e: Event) => {
-    const { time } = this.props;
-    const { isCalendarShown } = this.state;
+    const { isCalendarShown, activeDates, time } = this.state;
     if (time) {
-      this.setState({ inputValue: this.formatWithTime() });
+      this.setState({ inputValue: this.formatWithTime(activeDates) });
     } else {
-      this.setState({ inputValue: this.formatWithoutTime() });
+      this.setState({ inputValue: this.formatWithoutTime(activeDates) });
     }
     this.setState({ isCalendarShown: !isCalendarShown });
   };
 
   onBlurInput = () => {
-    const { time } = this.props;
+    const { time } = this.state;
     if (time) {
       this.setState({ inputValue: format(this.state.activeDates, 'DD/MM/YYYY HH:mm') });
     } else {
@@ -109,54 +110,33 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     }
   };
 
-  // onPressEnter = (e: Event) => {
-  //   const { onCalendarShow } = this.props;
-  //   if (e.key === 'Enter') {
-  //     if (onCalendarShow) {
-  //       onCalendarShow();
-  //     }
-  //   }
-  // };
+  onPressEnter = (e: Event) => {
+    const { isCalendarShown } = this.state;
+    if (e.key === 'Enter') {
+      this.setState({ isCalendarShown: !isCalendarShown });
+    }
+  };
 
-  // onClickIcon = () => {
-  //   const { onCalendarShow } = this.props;
-  //   if (onCalendarShow) {
-  //     onCalendarShow();
-  //   }
-  // };
+  onClickIcon = () => {
+    const { isCalendarShown } = this.state;
+    this.setState({ isCalendarShown: !isCalendarShown });
+  };
 
   onChangeDay = (activeDates: Date) => {
     const { onChangeDay } = this.props;
-    this.setState({ activeDates, date: activeDates, inputValue: this.formatWithTime() });
+    this.setState({ activeDates, date: activeDates, inputValue: this.formatWithTime(activeDates) });
     if (onChangeDay) {
       onChangeDay(activeDates);
     }
   };
 
   onChangeDate = (date: Date) => {
-    this.setState({ date });
+    this.setState({ date, activeDates: date, inputValue: this.formatWithTime(date) });
   };
 
-  // onChangeDisplay = (isCalendarShown: boolean) => {
-  //   const { onChangeDisplay } = this.props;
-  //   this.setState({ isCalendarShown: !this.state.isCalendarShown });
-  //   if (onChangeDisplay) {
-  //     onChangeDisplay(this.state.isCalendarShown);
-  //   }
-  // };
-
-  // closeCalendar = (e: Event) => {
-  //   const { onChangeDisplay } = this.props;
-  //   if (onChangeDisplay) {
-  //     onChangeDisplay(false);
-  //   }
-  // };
-
   render() {
-    const { range } = this.props;
-    const { isCalendarShown } = this.state;
-    const { inputValue } = this.state;
-    const { time } = this.props;
+    const { startDate, endDate } = this.props;
+    const { isCalendarShown, inputValue, time } = this.state;
     let mask;
     if (time) {
       mask = [
@@ -190,16 +170,20 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
           onChange={this.onChangeInputValue}
           onFocus={this.onClickInput}
           onBlur={this.onBlurInput}
-          // onKeyPress={this.onPressEnter}
+          onKeyPress={this.onPressEnter}
           value={inputValue}
           showMask
         />
+        <div onClick={this.onClickIcon} className={s.icon}>
+          <SvgIcon file="calendar" />
+        </div>
         {isCalendarShown && (
           <CalendarDate
             {...this.state}
             onClickDay={this.onChangeDay}
             onChangeDate={this.onChangeDate}
-            range={range}
+            startDate={startDate}
+            endDate={endDate}
             leftArrow
             rightArrow
           />
