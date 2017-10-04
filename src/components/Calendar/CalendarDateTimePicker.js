@@ -61,7 +61,7 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     if (nextProps.time !== this.state.time) {
       const { activeDates } = this.state;
       this.setState({ time: nextProps.time });
-      this.setState({ inputValue: this.formatWithTime(activeDates) })
+      this.setState({ inputValue: this.formatWithTime(activeDates) });
     }
 
     if (nextProps.activeDates !== this.state.activeDates) {

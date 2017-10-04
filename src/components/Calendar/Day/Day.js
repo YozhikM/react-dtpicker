@@ -14,7 +14,6 @@ type Props = {
 type State = void;
 
 class Day extends React.Component<Props, State> {
-
   onClick = () => {
     const { onClick, date } = this.props;
     if (onClick) {
@@ -23,7 +22,12 @@ class Day extends React.Component<Props, State> {
   };
 
   filterRangeDay = (date: Date, startDate: Date, endDate: Date) => {
-    let result = isWithinRange(date, startDate, endDate);
+    let result;
+    if (startDate < endDate) {
+      result = isWithinRange(date, startDate, endDate);
+    } else {
+      result = isWithinRange(date, endDate, startDate);
+    }
     return result;
   };
 

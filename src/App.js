@@ -2,7 +2,7 @@
 
 import React from 'react';
 import CalendarDateTimePicker from './components/Calendar/CalendarDateTimePicker';
-import { addMonths, eachDay } from 'date-fns';
+import { addMonths } from 'date-fns';
 import s from './App.scss';
 
 type Props = void;
@@ -28,10 +28,6 @@ class App extends React.Component<Props, State> {
       isCalendarShown: false
     };
   }
-
-  getRangeDate = () => {
-    return eachDay(this.state.startDate, this.state.endDate);
-  };
 
   onChangeStartDay = (activeDates: Date) => {
     this.setState({ startDate: activeDates, date: activeDates });
