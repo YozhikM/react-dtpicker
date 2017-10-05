@@ -66,6 +66,7 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
+    const { time } = this.props;
     if (nextProps.time !== this.state.time) {
       const { activeDates } = this.state;
       this.setState({ time: nextProps.time });
@@ -74,13 +75,18 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
 
     if (nextProps.activeDates !== this.state.activeDates) {
       this.setState({ activeDates: nextProps.activeDates });
+      if (time) {
+        this.setState({ inputValue: this.formatWithTime(nextProps.activeDates) });
+      } else {
+        this.setState({ inputValue: this.formatWithoutTime(nextProps.activeDates) });
+      }
     }
 
     if (nextProps.date !== this.state.date) {
-      this.setState({ date: nextProps.date })
+      this.setState({ date: nextProps.date });
     }
 
-    if(nextProps.isCalendarShown !== this.state.isCalendarShown) {
+    if (nextProps.isCalendarShown !== this.state.isCalendarShown) {
       this.setState({ isCalendarShown: nextProps.isCalendarShown });
     }
   }
@@ -101,11 +107,11 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     } else {
       userDate = new Date(YY, MM, DD);
     }
-    this.setState({ date: userDate, activeDates: userDate });
+    this.setState({ date: userDate });
     if (value.length > 0 && onChangeDay && isValid(userDate)) {
       onChangeDay(userDate);
     }
-    this.setState({ isCalendarShown: !isCalendarShown })
+    this.setState({ isCalendarShown: !isCalendarShown });
     if (onChangeCalendarVisibility) {
       onChangeCalendarVisibility(!isCalendarShown);
     }
@@ -119,7 +125,7 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     } else {
       this.setState({ inputValue: this.formatWithoutTime(activeDates) });
     }
-    this.setState({ isCalendarShown: !isCalendarShown })
+    this.setState({ isCalendarShown: !isCalendarShown });
     if (onChangeCalendarVisibility) {
       onChangeCalendarVisibility(!isCalendarShown);
     }
@@ -156,7 +162,7 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
 
   onChangeDay = (activeDates: Date) => {
     const { onChangeDay } = this.props;
-    this.setState({ activeDates, date: activeDates, inputValue: this.formatWithTime(activeDates) });
+    this.setState({ date: activeDates, inputValue: this.formatWithTime(this.state.activeDates) });
     if (onChangeDay) {
       onChangeDay(activeDates);
     }
@@ -176,7 +182,7 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     if (watchIncrementMonth) {
       watchIncrementMonth(date);
     }
-  }
+  };
 
   watchDecrementMonth = (date: Date) => {
     this.setState({ date });
@@ -184,18 +190,18 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     if (watchDecrementMonth) {
       watchDecrementMonth(date);
     }
-  }
+  };
 
   render() {
     const { startDate, endDate, borderLeft, borderRight, icon, leftArrow, rightArrow } = this.props;
     const { isCalendarShown, inputValue, time } = this.state;
     const iconStyle = {
       display: icon ? 'flex' : 'none'
-    }
+    };
     const borderStyle = {
       borderLeft: borderLeft ? '3px solid #34495e' : 0,
       borderRight: borderRight ? '3px solid #34495e' : 0
-    }
+    };
     let mask;
     if (time) {
       mask = [

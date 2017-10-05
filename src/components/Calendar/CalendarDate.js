@@ -44,9 +44,6 @@ class CalendarDate extends React.Component<Props, State> {
         date: nextProps.date
       });
     }
-    if (this.props.activeDates !== nextProps.activeDates) {
-      this.setState({ date: nextProps.activeDates });
-    }
   }
 
   onClickDay = () => {

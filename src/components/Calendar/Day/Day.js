@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import { getDate, isWithinRange } from 'date-fns';
+import { getDate, isWithinRange, isSameDay } from 'date-fns';
 
 type Props = {
   date: Date,
@@ -31,13 +31,24 @@ class Day extends React.Component<Props, State> {
     return result;
   };
 
+  checkStartDate = (date: Date, startDate: Date) => {
+    let result;
+    if (isSameDay(startDate, date)) {
+      result = true;
+    } else {
+      result = false;
+    }
+    return result;
+  };
+
   render() {
     const { date, isActive, startDate, endDate } = this.props;
     let inRange = this.filterRangeDay(date, startDate, endDate);
+    let startDay = this.checkStartDate(date, startDate);
     const style = {
-      backgroundColor: (isActive ? '#34495e' : null) || (inRange ? '#9bb0c5' : null),
-      color: isActive || inRange ? 'white' : '#34495e',
-      border: isActive ? '1px solid transparent' : '1px solid #e4e7e7'
+      backgroundColor: (isActive || startDay ? '#34495e' : null) || (inRange ? '#9bb0c5' : null),
+      color: isActive || inRange || startDay ? 'white' : '#34495e',
+      border: isActive || inRange || startDay ? '1px solid transparent' : '1px solid #e4e7e7'
     };
     let dayOfMonth = getDate(date);
     return (

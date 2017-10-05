@@ -10,8 +10,8 @@ export type Props = {
   activeDates: Date,
   onClickDay?: (date: Date) => void,
   onClickMonth?: (date: Date) => void,
-  startDate: ?Date,
-  endDate: ?Date
+  startDate: Date,
+  endDate: Date
 };
 
 type State = {
@@ -89,7 +89,7 @@ class CalendarMonthGrid extends React.Component<Props, State> {
 
   render() {
     const { weeks } = this.state;
-    const { activeDates, date, startDate, endDate } = this.props;
+    const { date, startDate, endDate } = this.props;
 
     return (
       <div className={s.root}>
@@ -117,7 +117,7 @@ class CalendarMonthGrid extends React.Component<Props, State> {
                       startDate={startDate}
                       endDate={endDate}
                       onClick={this.onClickDay}
-                      isActive={this.isSameDate(activeDates, date)}
+                      isActive={this.isSameDate(endDate, date)}
                     />
                   );
                 })}
