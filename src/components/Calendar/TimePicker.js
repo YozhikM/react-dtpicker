@@ -32,9 +32,9 @@ class TimePicker extends React.Component<Props, State> {
     }
   }
 
-  onChangeDate = () => {
+  onChangeDate = (date: Date) => {
     const { onChangeDate } = this.props;
-    if (onChangeDate) onChangeDate(this.state.date);
+    if (onChangeDate) onChangeDate(date);
   };
 
   onClickClock = () => {

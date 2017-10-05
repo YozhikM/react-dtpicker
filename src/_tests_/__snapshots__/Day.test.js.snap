@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<td
+  onClick={[Function]}
+  style={
+    Object {
+      "backgroundColor": null,
+      "border": "1px solid #e4e7e7",
+      "color": "#34495e",
+    }
+  }
+>
+  5
+</td>
+`;

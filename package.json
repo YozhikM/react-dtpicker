@@ -8,6 +8,7 @@
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
     "babel-loader": "7.1.1",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-react-app": "^3.0.2",
     "babel-runtime": "6.26.0",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
@@ -16,6 +17,8 @@
     "css-loader": "0.28.4",
     "date-fns": "^1.28.5",
     "dotenv": "4.0.0",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.1",
     "eslint": "^4.8.0",
     "eslint-config-react-app": "^2.0.0",
     "eslint-loader": "1.9.0",
@@ -37,6 +40,7 @@
     "react": "^16.0.0",
     "react-dev-utils": "^4.0.1",
     "react-dom": "^16.0.0",
+    "react-test-renderer": "^16.0.0",
     "react-text-mask": "^5.0.2",
     "style-loader": "0.18.2",
     "sw-precache-webpack-plugin": "0.11.4",
@@ -49,8 +53,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
-    "enzyme": "node test/*.*"
+    "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
     "collectCoverageFrom": [
