@@ -264,9 +264,7 @@ class CalendarDate extends React.Component<Props, State> {
           <SvgIcon file="arrow-right" />
         </button>
         <CalendarMonthGrid {...this.props} date={date} onClickMonth={this.showMonthTable} />
-        {time && (
-          <TimePicker activeDates={activeDates} date={date} />
-        )}
+        {time && <TimePicker activeDates={activeDates} date={date} onChangeDate={this.onClickDay}/>}
       </div>
     );
   }
