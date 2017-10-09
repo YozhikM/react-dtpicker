@@ -5,15 +5,15 @@ import { getDate, isWithinRange, isSameDay } from 'date-fns';
 
 type Props = {
   date: Date,
-  isActive: boolean,
-  onClick: Function,
-  startDate: any,
-  endDate: any
+  isActive?: boolean,
+  onClick?: Function,
+  startDate?: any,
+  endDate?: any
 };
 
 type State = void;
 
-class Day extends React.Component<Props, State> {
+class CalendarDay extends React.Component<Props, State> {
   onClick = () => {
     const { onClick, date } = this.props;
     if (onClick) {
@@ -31,20 +31,10 @@ class Day extends React.Component<Props, State> {
     return result;
   };
 
-  checkStartDate = (date: Date, startDate: Date) => {
-    let result;
-    if (isSameDay(startDate, date)) {
-      result = true;
-    } else {
-      result = false;
-    }
-    return result;
-  };
-
   render() {
     const { date, isActive, startDate, endDate } = this.props;
-    let inRange = this.filterRangeDay(date, startDate, endDate);
-    let startDay = this.checkStartDate(date, startDate);
+    let inRange = startDate && endDate && this.filterRangeDay(date, startDate, endDate);
+    let startDay = startDate && isSameDay(startDate, date);
     const style = {
       backgroundColor: (isActive || startDay ? '#34495e' : null) || (inRange ? '#9bb0c5' : null),
       color: isActive || inRange || startDay ? 'white' : '#34495e',
@@ -59,4 +49,4 @@ class Day extends React.Component<Props, State> {
   }
 }
 
-export default Day;
+export default CalendarDay;

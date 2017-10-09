@@ -8,3 +8,14 @@ window.requestAnimationFrame = () => {
 };
 
 module.exports = react;
+
+global.spyMount = (component, ...methodNames) => {
+  const mount = require('enzyme').mount;
+  const wrapper = mount(component);
+  const result = [wrapper];
+  methodNames.forEach(methodName => {
+    result.push(jest.spyOn(wrapper.instance(), methodName));
+  });
+  wrapper.instance().forceUpdate();
+  return result;
+};

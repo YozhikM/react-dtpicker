@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CalendarDay render() 1`] = `
+<td
+  onClick={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#34495e",
+      "border": "1px solid transparent",
+      "color": "white",
+    }
+  }
+>
+  8
+</td>
+`;

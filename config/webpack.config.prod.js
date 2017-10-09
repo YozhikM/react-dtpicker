@@ -90,7 +90,7 @@ module.exports = {
     // for React Native Web.
     extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
-      
+
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -121,7 +121,7 @@ module.exports = {
             options: {
               formatter: eslintFormatter,
               eslintPath: require.resolve('eslint'),
-              
+
             },
             loader: require.resolve('eslint-loader'),
           },
@@ -149,7 +149,7 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
+
               compact: true,
             },
           },
@@ -206,6 +206,54 @@ module.exports = {
               )
             ),
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+          },{
+            test: /\.svg$/,
+            loader: 'svg-inline-loader?classPrefix'
+          },{
+            test: /\.scss$/,
+            // happy: { id: 'scss' },
+            use: [
+              { loader: 'style-loader' },
+              {
+                loader: 'css-loader',
+                options: {
+                  // sourceMap: DEV,  / WARNING: set output.publicPath = "http://localhost:3000"
+                  //                  / otherwise images in styles does not display in Chrome, but works in Safari
+                  minimize: !true,
+                  modules: true,
+                  localIdentName: true ? '[name][local][hash:base64:3]' : '[hash:base64:4]'
+                }
+              },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  sourceMap: true,
+                  plugins: () => {
+                    return [
+                      autoprefixer({
+                        browsers: [
+                          'Android 2.3',
+                          'Android >= 4',
+                          'Chrome >= 35',
+                          'Firefox >= 31',
+                          'Explorer >= 9',
+                          'iOS >= 7',
+                          'Opera >= 12',
+                          'Safari >= 7.1'
+                        ]
+                      })
+                    ];
+                  }
+                }
+              },
+              {
+                loader: 'sass-loader',
+                options: {
+                  sourceMap: true,
+                  includePaths: [path.resolve(__dirname, '../')]
+                }
+              }
+            ]
           },
           // "file" loader makes sure assets end up in the `build` folder.
           // When you `import` an asset, you get its filename.

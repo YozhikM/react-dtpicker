@@ -10,3 +10,4 @@
 module.name_mapper='^.*.scss$' -> '<PROJECT_ROOT>/flow/ObjectStub.js'
 module.name_mapper='^.*.jpg$' -> '<PROJECT_ROOT>/flow/StringStub.js'
 module.name_mapper='^.*.png$' -> '<PROJECT_ROOT>/flow/StringStub.js'
+unsafe.enable_getters_and_setters=true

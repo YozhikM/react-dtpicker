@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputUpDown render() 1`] = `
+<div
+  className={undefined}
+>
+  <button
+    onClick={[Function]}
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchStart={[Function]}
+  >
+    <div
+      className={undefined}
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "chevron-up.svg",
+        }
+      }
+      style={
+        Object {
+          "display": "inline-block",
+          "fill": undefined,
+          "height": "24px",
+          "width": "24px",
+        }
+      }
+    />
+  </button>
+  <p
+    onClick={[Function]}
+  >
+    59
+  </p>
+  <button
+    onClick={[Function]}
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchStart={[Function]}
+  >
+    <div
+      className={undefined}
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "chevron-down.svg",
+        }
+      }
+      style={
+        Object {
+          "display": "inline-block",
+          "fill": undefined,
+          "height": "24px",
+          "width": "24px",
+        }
+      }
+    />
+  </button>
+</div>
+`;

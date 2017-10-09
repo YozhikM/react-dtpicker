@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimePicker render() 1`] = `
+<div
+  className={undefined}
+>
+  <button
+    onClick={[Function]}
+  >
+    <div
+      className={undefined}
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "clock.svg",
+        }
+      }
+      style={
+        Object {
+          "display": "inline-block",
+          "fill": undefined,
+          "height": "24px",
+          "width": "24px",
+        }
+      }
+    />
+  </button>
+</div>
+`;

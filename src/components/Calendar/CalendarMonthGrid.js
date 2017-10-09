@@ -2,7 +2,7 @@
 
 import React from 'react';
 import s from './Calendar.scss';
-import Day from './Day/Day';
+import Day from './CalendarDay';
 import { startOfMonth, endOfMonth, eachDay, getDay, format } from 'date-fns';
 
 export type Props = {

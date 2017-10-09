@@ -14,7 +14,7 @@ type Props = {
 
 type State = {
   date: Date,
-  show: 'button' | 'timePicker'
+  show: 'button' | 'timeSelect'
 };
 
 class TimePicker extends React.Component<Props, State> {
@@ -38,7 +38,7 @@ class TimePicker extends React.Component<Props, State> {
   };
 
   onClickClock = () => {
-    this.setState({ show: 'timePicker' });
+    this.setState({ show: 'timeSelect' });
   };
 
   onSubmitTime = () => {
@@ -47,7 +47,7 @@ class TimePicker extends React.Component<Props, State> {
 
   render() {
     const { show, date } = this.state;
-    if (show === 'timePicker') {
+    if (show === 'timeSelect') {
       return (
         <TimeSelect
           {...this.props}
