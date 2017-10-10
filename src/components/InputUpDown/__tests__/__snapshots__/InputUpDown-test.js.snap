@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`InputUpDown render() 1`] = `
+exports[`InputUpDown render() from props 1`] = `
 <div
   className={undefined}
 >
@@ -32,6 +32,66 @@ exports[`InputUpDown render() 1`] = `
     onClick={[Function]}
   >
     59
+  </p>
+  <button
+    onClick={[Function]}
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchStart={[Function]}
+  >
+    <div
+      className={undefined}
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "chevron-down.svg",
+        }
+      }
+      style={
+        Object {
+          "display": "inline-block",
+          "fill": undefined,
+          "height": "24px",
+          "width": "24px",
+        }
+      }
+    />
+  </button>
+</div>
+`;
+
+exports[`InputUpDown render() from state 1`] = `
+<div
+  className={undefined}
+>
+  <button
+    onClick={[Function]}
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchStart={[Function]}
+  >
+    <div
+      className={undefined}
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "chevron-up.svg",
+        }
+      }
+      style={
+        Object {
+          "display": "inline-block",
+          "fill": undefined,
+          "height": "24px",
+          "width": "24px",
+        }
+      }
+    />
+  </button>
+  <p
+    onClick={[Function]}
+  >
+    13
   </p>
   <button
     onClick={[Function]}

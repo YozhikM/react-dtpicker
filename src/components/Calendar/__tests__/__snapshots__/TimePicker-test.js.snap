@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TimePicker render() 1`] = `
+exports[`TimePicker render() from state 1`] = `
 <div
   className={undefined}
 >

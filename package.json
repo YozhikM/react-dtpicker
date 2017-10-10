@@ -69,8 +69,10 @@
       "<rootDir>/src/**/*.{js,jsx}"
     ],
     "setupFiles": [
-      "<rootDir>/config/polyfills.js"
+      "<rootDir>/config/polyfills.js",
+      "<rootDir>/config/jestsetup.js"
     ],
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "testEnvironment": "node",
     "testURL": "http://localhost",
     "transform": {
@@ -93,10 +95,14 @@
   "eslintConfig": {
     "extends": "react-app",
     "globals": {
-      "spyMount": true
+      "spyMount": true,
+      "mount": true,
+      "shallow": true,
+      "render": true
     }
   },
   "devDependencies": {
+    "enzyme-to-json": "^3.1.2",
     "flow-bin": "^0.55.0",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",

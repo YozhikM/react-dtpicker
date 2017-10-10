@@ -25,14 +25,6 @@ type State = HHMMSS & {
   show: string
 };
 
-function genTableOpts(from: number, till: number, step: number = 1): Options {
-  const res: Options = [];
-  for (let i = from; i <= till; i = i + step) {
-    res.push({ value: i, name: i < 10 ? `0${i}` : `${i}` });
-  }
-  return res;
-}
-
 class TimeSelect extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -49,12 +41,21 @@ class TimeSelect extends React.Component<Props, State> {
     }
   }
 
+  genTableOpts = (from: number, till: number, step: number = 1): Options => {
+    const res: Options = [];
+    for (let i = from; i <= till; i = i + step) {
+      res.push({ value: i, name: i < 10 ? `0${i}` : `${i}` });
+    }
+    return res;
+  };
+
   parseTime(value: ?Date): HHMMSS {
     if (!value) return { hh: 0, mm: 0, ss: 0 };
     return { hh: value.getHours(), mm: value.getMinutes(), ss: value.getSeconds() };
   }
 
   getValue(): Value {
+    // TODO MUST BE immutable date
     const { hh, mm, ss } = this.state;
     const value = this.props.value || new Date();
     value.setHours(hh);
@@ -108,7 +109,7 @@ class TimeSelect extends React.Component<Props, State> {
     if (show === 'hh') {
       return (
         <TableSelect
-          options={genTableOpts(0, 23)}
+          options={this.genTableOpts(0, 23)}
           cols={6}
           value={hh}
           onChange={value => {
@@ -119,7 +120,7 @@ class TimeSelect extends React.Component<Props, State> {
     } else if (show === 'mm') {
       return (
         <TableSelect
-          options={genTableOpts(0, 59, 5)}
+          options={this.genTableOpts(0, 59, 5)}
           cols={4}
           value={mm}
           onChange={value => {
@@ -130,7 +131,7 @@ class TimeSelect extends React.Component<Props, State> {
     } else if (show === 'ss') {
       return (
         <TableSelect
-          options={genTableOpts(0, 59, 5)}
+          options={this.genTableOpts(0, 59, 5)}
           cols={6}
           value={ss}
           onChange={value => {

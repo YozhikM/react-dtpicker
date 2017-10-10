@@ -2,56 +2,57 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import TimePicker from '../TimePicker';
 
-Enzyme.configure({ adapter: new Adapter() });
+function findBtn(wrapper) {
+  return wrapper.find('button');
+}
+
+function findTimeSelect(wrapper) {
+  return wrapper.find('TimeSelect');
+}
 
 describe('TimePicker', () => {
-  const onChangeDate = jest.fn();
-  let timePicker;
-  let button;
-  beforeEach(() => {
-    timePicker = shallow(
+  describe('render()', () => {
+    let element = (
       <TimePicker
-        onChangeDate={onChangeDate}
-        activeDates={new Date(2017, 20, 8)}
-        date={new Date(2017, 20, 8)}
+        onSubmit={() => {}}
+        oncChangeDate={() => {}}
+        activeDates={new Date(2010, 10, 10)}
+        date={new Date(2010, 10, 9)}
       />
     );
-    button = timePicker.find('button');
-  });
 
-  it('render()', () => {
-    const tree = renderer.create(timePicker).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
+    it('from props', () => {
+      expect(renderer.create(element));
+    });
 
-  // describe('button', () => {
-  //   it('on click change state', () => {
-  //     button.simulate('click');
-  //     expect(timePicker.state('show')).toEqual('timeSelect');
-  //   });
-  // });
-
-  describe('if timeSelect', () => {
-    // it('on submit change state', () => {
-    //   button.simulate('click');
-    //   timePicker.find('TimeSelect').simulate('submit');
-    //   expect(timePicker.state('show')).toEqual('button');
-    // });
-
-    it('on change invoke cb', () => {
-      button.simulate('click');
-      timePicker.find('TimeSelect').simulate('change');
-      expect(onChangeDate).toBeCalled();
+    it('from state', () => {
+      const wrapper = shallow(element);
+      wrapper.setState({ date: new Date(2017, 8, 9) });
+      expect(renderer.create(wrapper)).toMatchSnapshot();
     });
   });
-  describe('if nextProps', () => {
-    it('change state', () => {
-      timePicker.setProps({ date: new Date(2017, 8, 10) });
-      expect(timePicker.state('date')).toEqual(new Date(2017, 8, 10));
+
+  it('componentWillReceiveProps()', () => {
+    let newDate = new Date(2010, 10, 11);
+    const wrapper = shallow(<TimePicker date={new Date(2010, 10, 10)} />);
+    wrapper.setProps({ date: newDate });
+    expect(wrapper.state('date')).toBe(newDate);
+  });
+
+  describe('user interactions', () => {
+    it('click on clock', () => {
+      const wrapper = shallow(<TimePicker />);
+      findBtn(wrapper).simulate('click');
+      expect(wrapper.state('show')).toBe('timeSelect');
+    });
+
+    it('close timeSelect', () => {
+      const wrapper = shallow(<TimePicker />);
+      wrapper.setState({ show: 'timeSelect' });
+      findTimeSelect(wrapper).simulate('submit');
+      expect(wrapper.state('show')).toBe('button');
     });
   });
 });
