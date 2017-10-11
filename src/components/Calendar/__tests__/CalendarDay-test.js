@@ -1,7 +1,6 @@
 /* @flow */
 
 import React from 'react';
-import renderer from 'react-test-renderer';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import CalendarDay from '../CalendarDay';
@@ -18,10 +17,10 @@ describe('CalendarDay', () => {
     td = calendarDay.find('td');
   });
 
-  it('render()', () => {
-    const tree = renderer.create(calendarDay).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
+  // it.skip('render()', () => {
+  //   const tree = renderer.create(calendarDay).toJSON();
+  //   expect(tree).toMatchSnapshot();
+  // });
 
   describe('on click', () => {
     it('invoke cb', () => {

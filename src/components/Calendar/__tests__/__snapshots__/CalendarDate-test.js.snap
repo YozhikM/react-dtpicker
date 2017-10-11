@@ -1,0 +1,380 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CalendarDate render basic 1`] = `
+<div>
+  <button
+    onClick={[Function]}
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
+  >
+    <SvgIcon
+      file="arrow-left"
+    />
+  </button>
+  <button
+    onClick={[Function]}
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
+  >
+    <SvgIcon
+      file="arrow-right"
+    />
+  </button>
+  <CalendarMonthGrid
+    activeDates={2010-11-09T18:00:00.000Z}
+    date={2010-11-09T18:00:00.000Z}
+    onClickDay={[Function]}
+    onClickMonth={[Function]}
+    show="calendar"
+  />
+</div>
+`;
+
+exports[`CalendarDate render if decade table 1`] = `
+<div>
+  <div>
+    <span>
+        
+      <br />
+        
+    </span>
+    <TableSelect
+      cols={4}
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "name": "1970 1979",
+            "value": 1970,
+          },
+          Object {
+            "name": "1980 1989",
+            "value": 1980,
+          },
+          Object {
+            "name": "1990 1999",
+            "value": 1990,
+          },
+          Object {
+            "name": "2000 2009",
+            "value": 2000,
+          },
+          Object {
+            "name": "2010 2019",
+            "value": 2010,
+          },
+          Object {
+            "name": "2020 2029",
+            "value": 2020,
+          },
+          Object {
+            "name": "2030 2039",
+            "value": 2030,
+          },
+          Object {
+            "name": "2040 2049",
+            "value": 2040,
+          },
+        ]
+      }
+      value={2010}
+    />
+    <button
+      onClick={[Function]}
+    >
+      Назад
+    </button>
+  </div>
+</div>
+`;
+
+exports[`CalendarDate render if leftArrow 1`] = `
+<div>
+  <button
+    onClick={[Function]}
+    style={
+      Object {
+        "visibility": "visible",
+      }
+    }
+  >
+    <SvgIcon
+      file="arrow-left"
+    />
+  </button>
+  <button
+    onClick={[Function]}
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
+  >
+    <SvgIcon
+      file="arrow-right"
+    />
+  </button>
+  <CalendarMonthGrid
+    activeDates={2010-11-09T18:00:00.000Z}
+    date={2010-11-09T18:00:00.000Z}
+    leftArrow={true}
+    onClickDay={[Function]}
+    onClickMonth={[Function]}
+  />
+</div>
+`;
+
+exports[`CalendarDate render if month table 1`] = `
+<div>
+  <div>
+    <div>
+      <button
+        onClick={[Function]}
+      >
+        <SvgIcon
+          file="arrow-left"
+        />
+      </button>
+      <span
+        onClick={[Function]}
+      >
+        2010
+      </span>
+      <button
+        onClick={[Function]}
+      >
+        <SvgIcon
+          file="arrow-right"
+        />
+      </button>
+    </div>
+    <TableSelect
+      cols={4}
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "name": "Jan",
+            "value": 0,
+          },
+          Object {
+            "name": "Feb",
+            "value": 1,
+          },
+          Object {
+            "name": "Mar",
+            "value": 2,
+          },
+          Object {
+            "name": "Apr",
+            "value": 3,
+          },
+          Object {
+            "name": "May",
+            "value": 4,
+          },
+          Object {
+            "name": "Jun",
+            "value": 5,
+          },
+          Object {
+            "name": "Jul",
+            "value": 6,
+          },
+          Object {
+            "name": "Aug",
+            "value": 7,
+          },
+          Object {
+            "name": "Sep",
+            "value": 8,
+          },
+          Object {
+            "name": "Oct",
+            "value": 9,
+          },
+          Object {
+            "name": "Nov",
+            "value": 10,
+          },
+          Object {
+            "name": "Dec",
+            "value": 11,
+          },
+        ]
+      }
+      value={10}
+    />
+    <button
+      onClick={[Function]}
+    >
+      Назад
+    </button>
+  </div>
+</div>
+`;
+
+exports[`CalendarDate render if rightArrow 1`] = `
+<div>
+  <button
+    onClick={[Function]}
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
+  >
+    <SvgIcon
+      file="arrow-left"
+    />
+  </button>
+  <button
+    onClick={[Function]}
+    style={
+      Object {
+        "visibility": "visible",
+      }
+    }
+  >
+    <SvgIcon
+      file="arrow-right"
+    />
+  </button>
+  <CalendarMonthGrid
+    activeDates={2010-11-09T18:00:00.000Z}
+    date={2010-11-09T18:00:00.000Z}
+    onClickDay={[Function]}
+    onClickMonth={[Function]}
+    rightArrow={true}
+  />
+</div>
+`;
+
+exports[`CalendarDate render if time 1`] = `
+<div>
+  <button
+    onClick={[Function]}
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
+  >
+    <SvgIcon
+      file="arrow-left"
+    />
+  </button>
+  <button
+    onClick={[Function]}
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
+  >
+    <SvgIcon
+      file="arrow-right"
+    />
+  </button>
+  <CalendarMonthGrid
+    activeDates={2010-11-09T18:00:00.000Z}
+    date={2010-11-09T18:00:00.000Z}
+    onClickDay={[Function]}
+    onClickMonth={[Function]}
+    time={true}
+  />
+  <TimePicker
+    activeDates={2010-11-09T18:00:00.000Z}
+    date={2010-11-09T18:00:00.000Z}
+    onChangeDate={[Function]}
+  />
+</div>
+`;
+
+exports[`CalendarDate render if year table 1`] = `
+<div>
+  <div>
+    <div>
+      <button
+        onClick={[Function]}
+      >
+        <SvgIcon
+          file="arrow-left"
+        />
+      </button>
+      <span
+        onClick={[Function]}
+      >
+        2010 - 2019
+      </span>
+      <button
+        onClick={[Function]}
+      >
+        <SvgIcon
+          file="arrow-right"
+        />
+      </button>
+    </div>
+    <TableSelect
+      cols={4}
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "name": "2010",
+            "value": 2010,
+          },
+          Object {
+            "name": "2011",
+            "value": 2011,
+          },
+          Object {
+            "name": "2012",
+            "value": 2012,
+          },
+          Object {
+            "name": "2013",
+            "value": 2013,
+          },
+          Object {
+            "name": "2014",
+            "value": 2014,
+          },
+          Object {
+            "name": "2015",
+            "value": 2015,
+          },
+          Object {
+            "name": "2016",
+            "value": 2016,
+          },
+          Object {
+            "name": "2017",
+            "value": 2017,
+          },
+          Object {
+            "name": "2018",
+            "value": 2018,
+          },
+          Object {
+            "name": "2019",
+            "value": 2019,
+          },
+        ]
+      }
+      value={2010}
+    />
+    <button
+      onClick={[Function]}
+    >
+      Назад
+    </button>
+  </div>
+</div>
+`;

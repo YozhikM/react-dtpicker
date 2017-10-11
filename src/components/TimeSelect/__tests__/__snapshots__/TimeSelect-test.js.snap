@@ -1,0 +1,293 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimeSelect render() basic 1`] = `
+<div>
+  <InputUpDown
+    circular={true}
+    max={23}
+    min={0}
+    onChange={[Function]}
+    onClickNumber={[Function]}
+    value={9}
+  />
+  <InputUpDown
+    circular={true}
+    max={59}
+    min={0}
+    onChange={[Function]}
+    onClickNumber={[Function]}
+    value={10}
+  />
+  <button
+    onClick={[Function]}
+  >
+    <SvgIcon
+      file="check"
+    />
+  </button>
+</div>
+`;
+
+exports[`TimeSelect render() show HH 1`] = `
+<TableSelect
+  cols={6}
+  onChange={[Function]}
+  options={
+    Array [
+      Object {
+        "name": "00",
+        "value": 0,
+      },
+      Object {
+        "name": "01",
+        "value": 1,
+      },
+      Object {
+        "name": "02",
+        "value": 2,
+      },
+      Object {
+        "name": "03",
+        "value": 3,
+      },
+      Object {
+        "name": "04",
+        "value": 4,
+      },
+      Object {
+        "name": "05",
+        "value": 5,
+      },
+      Object {
+        "name": "06",
+        "value": 6,
+      },
+      Object {
+        "name": "07",
+        "value": 7,
+      },
+      Object {
+        "name": "08",
+        "value": 8,
+      },
+      Object {
+        "name": "09",
+        "value": 9,
+      },
+      Object {
+        "name": "10",
+        "value": 10,
+      },
+      Object {
+        "name": "11",
+        "value": 11,
+      },
+      Object {
+        "name": "12",
+        "value": 12,
+      },
+      Object {
+        "name": "13",
+        "value": 13,
+      },
+      Object {
+        "name": "14",
+        "value": 14,
+      },
+      Object {
+        "name": "15",
+        "value": 15,
+      },
+      Object {
+        "name": "16",
+        "value": 16,
+      },
+      Object {
+        "name": "17",
+        "value": 17,
+      },
+      Object {
+        "name": "18",
+        "value": 18,
+      },
+      Object {
+        "name": "19",
+        "value": 19,
+      },
+      Object {
+        "name": "20",
+        "value": 20,
+      },
+      Object {
+        "name": "21",
+        "value": 21,
+      },
+      Object {
+        "name": "22",
+        "value": 22,
+      },
+      Object {
+        "name": "23",
+        "value": 23,
+      },
+    ]
+  }
+  value={0}
+/>
+`;
+
+exports[`TimeSelect render() show MM 1`] = `
+<TableSelect
+  cols={4}
+  onChange={[Function]}
+  options={
+    Array [
+      Object {
+        "name": "00",
+        "value": 0,
+      },
+      Object {
+        "name": "05",
+        "value": 5,
+      },
+      Object {
+        "name": "10",
+        "value": 10,
+      },
+      Object {
+        "name": "15",
+        "value": 15,
+      },
+      Object {
+        "name": "20",
+        "value": 20,
+      },
+      Object {
+        "name": "25",
+        "value": 25,
+      },
+      Object {
+        "name": "30",
+        "value": 30,
+      },
+      Object {
+        "name": "35",
+        "value": 35,
+      },
+      Object {
+        "name": "40",
+        "value": 40,
+      },
+      Object {
+        "name": "45",
+        "value": 45,
+      },
+      Object {
+        "name": "50",
+        "value": 50,
+      },
+      Object {
+        "name": "55",
+        "value": 55,
+      },
+    ]
+  }
+  value={0}
+/>
+`;
+
+exports[`TimeSelect render() show SS 1`] = `
+<TableSelect
+  cols={6}
+  onChange={[Function]}
+  options={
+    Array [
+      Object {
+        "name": "00",
+        "value": 0,
+      },
+      Object {
+        "name": "05",
+        "value": 5,
+      },
+      Object {
+        "name": "10",
+        "value": 10,
+      },
+      Object {
+        "name": "15",
+        "value": 15,
+      },
+      Object {
+        "name": "20",
+        "value": 20,
+      },
+      Object {
+        "name": "25",
+        "value": 25,
+      },
+      Object {
+        "name": "30",
+        "value": 30,
+      },
+      Object {
+        "name": "35",
+        "value": 35,
+      },
+      Object {
+        "name": "40",
+        "value": 40,
+      },
+      Object {
+        "name": "45",
+        "value": 45,
+      },
+      Object {
+        "name": "50",
+        "value": 50,
+      },
+      Object {
+        "name": "55",
+        "value": 55,
+      },
+    ]
+  }
+  value={0}
+/>
+`;
+
+exports[`TimeSelect render() with showSeconds 1`] = `
+<div>
+  <InputUpDown
+    circular={true}
+    max={23}
+    min={0}
+    onChange={[Function]}
+    onClickNumber={[Function]}
+    value={0}
+  />
+  <InputUpDown
+    circular={true}
+    max={59}
+    min={0}
+    onChange={[Function]}
+    onClickNumber={[Function]}
+    value={0}
+  />
+  <InputUpDown
+    circular={true}
+    max={59}
+    min={0}
+    onChange={[Function]}
+    onClickNumber={[Function]}
+    value={0}
+  />
+  <button
+    onClick={[Function]}
+  >
+    <SvgIcon
+      file="check"
+    />
+  </button>
+</div>
+`;

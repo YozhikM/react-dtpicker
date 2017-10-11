@@ -1,12 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import renderer from 'react-test-renderer';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import InputUpDown from '../InputUpDown';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 function findUpBtn(wrapper) {
   return wrapper.find('button').at(0);
@@ -20,41 +15,14 @@ function findP(wrapper) {
   return wrapper.find('p');
 }
 
-// function findText(wrapper) {
-//   return wrapper.find('p').text();
-// }
+function findText(wrapper) {
+  return wrapper.find('p').text();
+}
 
 describe('InputUpDown', () => {
   describe('render()', () => {
-    it('from props', () => {
-      expect(
-        renderer.create(
-          <InputUpDown
-            onClickNumber={() => {}}
-            onChange={() => {}}
-            min={0}
-            max={59}
-            circular
-            value={59}
-          />
-        )
-      ).toMatchSnapshot();
-    });
-
-    it('from state', () => {
-      let element = (
-        <InputUpDown
-          onClickNumber={() => {}}
-          onChange={() => {}}
-          min={0}
-          max={59}
-          circular
-          value={59}
-        />
-      );
-      const wrapper = shallow(element);
-      wrapper.setState({ value: 13 });
-      expect(renderer.create(wrapper)).toMatchSnapshot();
+    it('basic', () => {
+      expect(shallow(<InputUpDown value={59} />)).toMatchSnapshot();
     });
   });
 
@@ -99,10 +67,10 @@ describe('InputUpDown', () => {
     });
 
     it('onChange callback', () => {
-      const onChange = jest.fn();
-      const wrapper = shallow(<InputUpDown value={20} onChange={onChange} />);
+      const spy = jest.fn();
+      const wrapper = shallow(<InputUpDown value={20} onChange={spy} />);
       wrapper.instance().decrement();
-      expect(onChange).toBeCalledWith(19);
+      expect(spy).toBeCalledWith(19);
     });
 
     it('if circular', () => {
@@ -129,6 +97,7 @@ describe('InputUpDown', () => {
       const [wrapper, spy] = spyMount(<InputUpDown value={20} />, 'increment');
       findUpBtn(wrapper).simulate('click');
       expect(spy).toBeCalled();
+      expect(findText(wrapper)).toBe('21');
     });
 
     it('button up mouseDown', () => {
@@ -136,18 +105,21 @@ describe('InputUpDown', () => {
       let increment = wrapper.instance().increment;
       findUpBtn(wrapper).simulate('mouseDown');
       expect(spy).toBeCalledWith(increment);
+      expect(findText(wrapper)).toBe('20');
     });
 
     it('button up mouseUp', () => {
       const [wrapper, spy] = spyMount(<InputUpDown value={20} />, 'onHoldEnd');
       findUpBtn(wrapper).simulate('mouseUp');
       expect(spy).toBeCalled();
+      expect(findText(wrapper)).toBe('20');
     });
 
     it('button down click', () => {
       const [wrapper, spy] = spyMount(<InputUpDown value={20} />, 'decrement');
       findDownBtn(wrapper).simulate('click');
       expect(spy).toBeCalled();
+      expect(findText(wrapper)).toBe('19');
     });
 
     it('button down mouseDown', () => {
@@ -155,6 +127,7 @@ describe('InputUpDown', () => {
       let decrement = wrapper.instance().decrement;
       findDownBtn(wrapper).simulate('mouseDown');
       expect(spy).toBeCalledWith(decrement);
+      expect(findText(wrapper)).toBe('20');
     });
   });
 
@@ -162,11 +135,13 @@ describe('InputUpDown', () => {
     const wrapper = shallow(<InputUpDown value={1} />);
     wrapper.setProps({ value: 16 });
     expect(wrapper.state('value')).toBe(16);
+    expect(findText(wrapper)).toBe('16');
   });
 
   it('onClickNumber()', () => {
-    const [wrapper, spy] = spyMount(<InputUpDown value={20} />, 'onClickNumber');
+    const spy = jest.fn();
+    const wrapper = shallow(<InputUpDown value={20} onClickNumber={spy} />);
     findP(wrapper).simulate('click');
-    expect(spy).toBeCalled();
+    expect(spy).toBeCalledWith(20);
   });
 });

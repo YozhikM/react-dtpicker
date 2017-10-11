@@ -8,6 +8,8 @@ import TimePicker from './TimePicker';
 import SvgIcon from '../SvgIcon';
 import s from './Calendar.scss';
 
+type Show = 'calendar' | 'mm' | 'yy' | 'yy10';
+
 export type Props = {
   date: Date,
   activeDates: Date,
@@ -18,21 +20,20 @@ export type Props = {
   time?: boolean,
   startDate?: Date,
   endDate?: Date,
-  watchIncrementMonth?: (date: Date) => void,
-  watchDecrementMonth?: (date: Date) => void
+  show?: Show
 };
 
 type State = {
   show: 'calendar' | 'mm' | 'yy' | 'yy10',
   date: Date,
-  monthsOptions: Array<any>
+  monthsOptions: Array<{ value: number, name: string }>
 };
 
 class CalendarDate extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      show: 'calendar',
+      show: this.props.show || 'calendar',
       date: this.props.date,
       monthsOptions: this.getMonthOptions()
     };
@@ -46,13 +47,13 @@ class CalendarDate extends React.Component<Props, State> {
     }
   }
 
-  onClickDay = () => {
-    const { onClickDay, activeDates } = this.props;
-    if (onClickDay) onClickDay(activeDates);
+  onClickDay = (date: Date) => {
+    const { onClickDay } = this.props;
+    if (onClickDay) onClickDay(date);
   };
 
-  onChangeDate = () => {
-    const { onChangeDate, date } = this.props;
+  onChangeDate = (date: Date) => {
+    const { onChangeDate } = this.props;
     if (onChangeDate) onChangeDate(date);
   };
 
@@ -83,6 +84,10 @@ class CalendarDate extends React.Component<Props, State> {
     });
   };
 
+  showCalendar = () => {
+    this.setState({ show: 'calendar' });
+  };
+
   showMonthTable = () => {
     this.setState({ show: 'mm' });
   };
@@ -105,18 +110,18 @@ class CalendarDate extends React.Component<Props, State> {
     this.setState({ date });
   };
 
-  decrement10Years = () => {
+  increment10Years = () => {
     const { date } = this.state;
-    const newDate = addYears(date, -10);
+    const newDate = addYears(date, 10);
     this.setState({ date: newDate }, () => {
       const { onChangeDate } = this.props;
       if (onChangeDate) onChangeDate(newDate);
     });
   };
 
-  decrementYears = () => {
+  decrement10Years = () => {
     const { date } = this.state;
-    const newDate = addYears(date, -1);
+    const newDate = addYears(date, -10);
     this.setState({ date: newDate }, () => {
       const { onChangeDate } = this.props;
       if (onChangeDate) onChangeDate(newDate);
@@ -132,9 +137,9 @@ class CalendarDate extends React.Component<Props, State> {
     });
   };
 
-  increment10Years = () => {
+  decrementYears = () => {
     const { date } = this.state;
-    const newDate = addYears(date, 10);
+    const newDate = addYears(date, -1);
     this.setState({ date: newDate }, () => {
       const { onChangeDate } = this.props;
       if (onChangeDate) onChangeDate(newDate);
@@ -248,13 +253,7 @@ class CalendarDate extends React.Component<Props, State> {
               value={date.getMonth()}
               onChange={this.onChangeMonth}
             />
-            <button
-              onClick={() => {
-                this.setState({ show: 'calendar' });
-              }}
-            >
-              Назад
-            </button>
+            <button onClick={this.showCalendar}>Назад</button>
           </div>
         </div>
       );
@@ -268,7 +267,12 @@ class CalendarDate extends React.Component<Props, State> {
         <button style={rightArrowStyle} className={s.right_arrow} onClick={this.incrementMonth}>
           <SvgIcon file="arrow-right" />
         </button>
-        <CalendarMonthGrid {...this.props} date={date} onClickMonth={this.showMonthTable} />
+        <CalendarMonthGrid
+          {...this.props}
+          date={date}
+          onClickMonth={this.showMonthTable}
+          onClickDay={this.onClickDay}
+        />
         {time && (
           <TimePicker activeDates={activeDates} date={date} onChangeDate={this.onChangeDate} />
         )}

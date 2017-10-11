@@ -100,6 +100,7 @@ declare module "enzyme" {
     node: T,
     options?: { context?: Object, disableLifecycleMethods?: boolean }
   ): enzyme$ShallowWrapper<$PropertyType<$PropertyType<T, 'type'>, 'prototype'>>;
+
   declare function mount<T>(
     node: T,
     options?: {
@@ -108,6 +109,7 @@ declare module "enzyme" {
       childContextTypes?: Object
     }
   ): enzyme$ReactWrapper<$PropertyType<$PropertyType<T, 'type'>, 'prototype'>>;
+
   declare function render(
     node: React.Node,
     options?: { context?: Object }

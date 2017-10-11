@@ -1,15 +1,6 @@
 import Enzyme, { shallow, render, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-global.window = global;
-window.addEventListener = () => {};
-
-// Resolution for requestAnimationFrame not supported in jest error :
-// https://github.com/facebook/react/issues/9102#issuecomment-283873039
-window.requestAnimationFrame = () => {
-  throw new Error('requestAnimationFrame is not supported in Node');
-};
-
 Enzyme.configure({ adapter: new Adapter() });
 global.shallow = shallow;
 global.render = render;
