@@ -14,39 +14,39 @@ describe('CalendarDate', () => {
     });
 
     it('if month table', () => {
-      let date = new Date(2010, 10, 10);
+      let date = new Date(2014, 11, 1);
       expect(
         shallow(<CalendarDate date={date} activeDates={date} show={'mm'} />)
       ).toMatchSnapshot();
     });
 
     it('if year table', () => {
-      let date = new Date(2010, 10, 10);
+      let date = new Date(2022, 0, 21);
       expect(
         shallow(<CalendarDate date={date} activeDates={date} show={'yy'} />)
       ).toMatchSnapshot();
     });
 
     it('if decade table', () => {
-      let date = new Date(2010, 10, 10);
+      let date = new Date(2040, 5, 10);
       expect(
         shallow(<CalendarDate date={date} activeDates={date} show={'yy10'} />)
       ).toMatchSnapshot();
     });
 
     it('if time', () => {
-      let date = new Date(2010, 10, 10);
+      let date = new Date(2005, 6, 7);
       expect(shallow(<CalendarDate date={date} activeDates={date} time />)).toMatchSnapshot();
     });
 
-    it('if leftArrow', () => {
-      let date = new Date(2010, 10, 10);
-      expect(shallow(<CalendarDate date={date} activeDates={date} leftArrow />)).toMatchSnapshot();
+    it('if disabled leftArrow', () => {
+      let date = new Date(2007, 6, 5);
+      expect(shallow(<CalendarDate date={date} activeDates={date} leftArrow={false} />)).toMatchSnapshot();
     });
 
-    it('if rightArrow', () => {
-      let date = new Date(2010, 10, 10);
-      expect(shallow(<CalendarDate date={date} activeDates={date} rightArrow />)).toMatchSnapshot();
+    it('if disabled rightArrow', () => {
+      let date = new Date(1984, 4, 4);
+      expect(shallow(<CalendarDate date={date} activeDates={date} rightArrow={false} />)).toMatchSnapshot();
     });
   });
 
@@ -79,39 +79,37 @@ describe('CalendarDate', () => {
       const wrapper = shallow(
         <CalendarDate activeDates={new Date()} date={new Date()} onClickDay={spy} />
       );
-      const date = wrapper.find('CalendarMonthGrid').prop('date');
-      // как эксперимент - брать значение
-      // из пропсов вложенной компоненты
-      // и запускать коллбэк с ним
+      const newDate = new Date(2000, 11, 11, 0, 0, 0);
       wrapper
         .find('CalendarMonthGrid')
         .props()
-        .onClickDay(date);
+        .onClickDay(newDate);
       expect(spy).toBeCalled();
       const callbackValue = spy.mock.calls[0][0];
-      expect(callbackValue).toEqual(date);
+      expect(callbackValue).toEqual(newDate);
     });
 
     it('onChangeDate()', () => {
-      const date = new Date(2000, 11, 11, 0, 0, 0);
       const spy = jest.fn();
       const wrapper = shallow(
-        <CalendarDate activeDates={date} date={date} onChangeDate={spy} time />
+        <CalendarDate activeDates={new Date()} date={new Date()} onChange={spy} time />
       );
+
+      const newDate = new Date(2000, 11, 11, 0, 0, 0);
       wrapper
         .find('TimePicker')
         .props()
-        .onChangeDate(date);
+        .onChangeDate(newDate);
       expect(spy).toBeCalled();
       const callbackValue = spy.mock.calls[0][0];
-      expect(callbackValue).toEqual(date);
+      expect(callbackValue).toEqual(newDate);
     });
 
     it('onChangeMonth()', () => {
       const date = new Date(2000, 11, 11);
       const spy = jest.fn();
       const wrapper = shallow(
-        <CalendarDate activeDates={date} date={date} onChangeDate={spy} show={'mm'} />
+        <CalendarDate activeDates={date} date={date} onChange={spy} show={'mm'} />
       );
       const newDate = setMonth(date, 3);
       wrapper
@@ -129,7 +127,7 @@ describe('CalendarDate', () => {
       const date = new Date(2019, 11, 11);
       const spy = jest.fn();
       const wrapper = shallow(
-        <CalendarDate activeDates={date} date={date} onChangeDate={spy} show={'yy'} />
+        <CalendarDate activeDates={date} date={date} onChange={spy} show={'yy'} />
       );
       const newDate = setYear(date, 2018);
       wrapper
@@ -147,7 +145,7 @@ describe('CalendarDate', () => {
       const date = new Date(2029, 11, 11);
       const spy = jest.fn();
       const wrapper = shallow(
-        <CalendarDate activeDates={date} date={date} onChangeDate={spy} show={'yy10'} />
+        <CalendarDate activeDates={date} date={date} onChange={spy} show={'yy10'} />
       );
       const newDate = setYear(date, 2048);
       wrapper
@@ -173,7 +171,7 @@ describe('CalendarDate', () => {
     });
 
     describe('showMonthTable()', () => {
-      it('click month', () => {
+      it('click month in CalendarMonthGrid', () => {
         const wrapper = shallow(<CalendarDate activeDates={new Date()} date={new Date()} />);
         wrapper
           .find('CalendarMonthGrid')
@@ -182,7 +180,7 @@ describe('CalendarDate', () => {
         expect(wrapper.state('show')).toBe('mm');
       });
 
-      it('click button', () => {
+      it('click back in years TableSelect', () => {
         const wrapper = shallow(
           <CalendarDate activeDates={new Date()} date={new Date()} show={'yy'} />
         );
@@ -195,7 +193,7 @@ describe('CalendarDate', () => {
     });
 
     describe('showYearTable()', () => {
-      it('click year', () => {
+      it('click year months TableSelect', () => {
         const wrapper = shallow(
           <CalendarDate activeDates={new Date()} date={new Date()} show={'mm'} />
         );
@@ -203,7 +201,7 @@ describe('CalendarDate', () => {
         expect(wrapper.state('show')).toBe('yy');
       });
 
-      it('click button', () => {
+      it('click back in 10YY TableSelect', () => {
         const wrapper = shallow(
           <CalendarDate activeDates={new Date()} date={new Date()} show={'yy10'} />
         );
@@ -221,25 +219,33 @@ describe('CalendarDate', () => {
     });
 
     it('incrementMonth()', () => {
+      const spy = jest.fn();
       const date = new Date(1994, 6, 0);
       const newDate = addMonths(date, 1);
-      const wrapper = shallow(<CalendarDate activeDates={date} date={date} />);
+      const wrapper = shallow(<CalendarDate activeDates={date} date={date} onChange={spy} />);
       wrapper
         .find('button')
         .at(1)
         .simulate('click');
       expect(wrapper.state('date')).toEqual(newDate);
+      expect(spy).toBeCalledWith(newDate);
+      const callbackValue = spy.mock.calls[0][0];
+      expect(callbackValue).toEqual(newDate);
     });
 
     it('decrementMonth()', () => {
+      const spy = jest.fn();
       const date = new Date(1995, 8, 0);
       const newDate = addMonths(date, -1);
-      const wrapper = shallow(<CalendarDate activeDates={date} date={date} />);
+      const wrapper = shallow(<CalendarDate activeDates={date} date={date} onChange={spy} />);
       wrapper
         .find('button')
         .at(0)
         .simulate('click');
       expect(wrapper.state('date')).toEqual(newDate);
+      expect(spy).toBeCalledWith(newDate);
+      const callbackValue = spy.mock.calls[0][0];
+      expect(callbackValue).toEqual(newDate);
     });
 
     it('increment10Years()', () => {
@@ -247,14 +253,14 @@ describe('CalendarDate', () => {
       const date = new Date(1915, 8, 0);
       const newDate = addYears(date, 10);
       const wrapper = shallow(
-        <CalendarDate activeDates={date} date={date} show={'yy'} onChangeDate={spy} />
+        <CalendarDate activeDates={date} date={date} show={'yy'} onChange={spy} />
       );
       wrapper
         .find('button')
         .at(1)
         .simulate('click');
-      expect(spy).toBeCalledWith(newDate);
       expect(wrapper.state('date')).toEqual(newDate);
+      expect(spy).toBeCalledWith(newDate);
       const callbackValue = spy.mock.calls[0][0];
       expect(callbackValue).toEqual(newDate);
     });
@@ -264,7 +270,7 @@ describe('CalendarDate', () => {
       const date = new Date(1965, 8, 0);
       const newDate = addYears(date, -10);
       const wrapper = shallow(
-        <CalendarDate activeDates={date} date={date} show={'yy'} onChangeDate={spy} />
+        <CalendarDate activeDates={date} date={date} show={'yy'} onChange={spy} />
       );
       wrapper
         .find('button')
@@ -281,7 +287,7 @@ describe('CalendarDate', () => {
       const date = new Date(1997, 8, 0);
       const newDate = addYears(date, 1);
       const wrapper = shallow(
-        <CalendarDate activeDates={date} date={date} show={'mm'} onChangeDate={spy} />
+        <CalendarDate activeDates={date} date={date} show={'mm'} onChange={spy} />
       );
       wrapper
         .find('button')
@@ -298,7 +304,7 @@ describe('CalendarDate', () => {
       const date = new Date(1977, 8, 0);
       const newDate = addYears(date, -1);
       const wrapper = shallow(
-        <CalendarDate activeDates={date} date={date} show={'mm'} onChangeDate={spy} />
+        <CalendarDate activeDates={date} date={date} show={'mm'} onChange={spy} />
       );
       wrapper
         .find('button')

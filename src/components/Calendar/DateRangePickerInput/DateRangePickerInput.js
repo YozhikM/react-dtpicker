@@ -2,7 +2,7 @@
 
 import React from 'react';
 import MaskedInput from 'react-text-mask';
-import SvgIcon from '../SvgIcon';
+import SvgIcon from '../../SvgIcon';
 import s from './DateRangePickerInput.scss';
 import { format, isValid } from 'date-fns';
 

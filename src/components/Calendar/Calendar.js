@@ -3,51 +3,55 @@
 import React from 'react';
 import CalendarDateTimePicker from './CalendarDateTimePicker';
 import SvgIcon from '../SvgIcon';
-import { addMonths, getMonth } from 'date-fns';
 import s from './MainCalendar.scss';
+import { addMonths } from 'date-fns';
 
 type Props = {};
-type State = {
-  startDate: Date,
-  endDate: Date,
-  date: Date,
+type State = {|
+  highlight: Array<Date>,
+  value: Date,
   time: boolean,
   isCalendarShown: boolean,
   isSingleCalendar: boolean,
   firstClick: Date | boolean,
-  endClick: Date | boolean
-};
+  endClick: Date | boolean,
+  firstDate: Date,
+  secondDate: Date
+|};
 
 class Calendar extends React.Component<Props, State> {
   constructor() {
     super();
     this.state = {
-      startDate: new Date(),
-      endDate: addMonths(new Date(), 1),
-      date: new Date(),
+      value: new Date(),
+      highlight: [new Date()],
       time: false,
-      isCalendarShown: false,
+      isCalendarShown: true,
       isSingleCalendar: false,
       firstClick: false,
-      endClick: false
+      endClick: false,
+      firstDate: new Date(),
+      secondDate: new Date()
     };
   }
-  onChangeDay = (activeDates: Date) => {
-    const { firstClick, startDate, endDate, date } = this.state;
 
-    this.setState({ date: activeDates });
+  onSetDate = (date: Date) => {
+    const { firstClick, highlight } = this.state;
+    const highlightCopy = highlight.slice();
+    highlightCopy.push(date);
+    if (highlightCopy.length > 2) {
+      highlightCopy.shift();
+    }
     if (!firstClick) {
-      this.setState({ firstClick: true, startDate: activeDates });
+      this.setState({ firstClick: true, highlight: highlightCopy, endClick: false, firstDate: highlightCopy[1] });
     }
     if (firstClick) {
-      this.setState({ endClick: true, endDate: activeDates, firstClick: false });
+      this.setState({ endClick: true, highlight: highlightCopy, firstClick: false, secondDate: highlightCopy[1] });
     }
-    this.getFirstCalendarDate(date, startDate, endDate);
-    this.getSecondCalendarDate(date, startDate, endDate);
   };
 
-  onChangeDate = (date: Date) => {
-    this.setState({ date });
+  onChange = (value: Date) => {
+    this.setState({ value });
   };
 
   onChangeCalendarVisibility = (isCalendarShown: boolean) => {
@@ -69,31 +73,8 @@ class Calendar extends React.Component<Props, State> {
     this.setState({ isSingleCalendar: !isSingleCalendar });
   };
 
-  watchIncrementMonth = (date: Date) => {
-    this.setState({ date });
-  };
-
-  watchDecrementMonth = (date: Date) => {
-    this.setState({ date });
-  };
-
-  getFirstCalendarDate = (date: Date, startDate: Date, endDate: Date) => {
-    if (getMonth(startDate) < getMonth(endDate)) {
-      return startDate;
-    } else return date;
-  };
-
-  getSecondCalendarDate = (date: Date, startDate: Date, endDate: Date) => {
-    if (getMonth(startDate) === getMonth(endDate)) {
-      return addMonths(date, 1);
-    }
-    if (getMonth(startDate) > getMonth(endDate)) {
-      return addMonths(date, 1);
-    } else return endDate;
-  };
-
   render() {
-    const { startDate, endDate, time, date, isCalendarShown, isSingleCalendar } = this.state;
+    const { time, value, highlight, isCalendarShown, isSingleCalendar, firstDate, secondDate } = this.state;
     return (
       <div>
         <div className={s.control_panel}>
@@ -110,62 +91,50 @@ class Calendar extends React.Component<Props, State> {
         {isSingleCalendar ? (
           <div className={s.container}>
             <CalendarDateTimePicker
-              date={date}
-              time={time}
+              value={value}
+              highlight={highlight}
+              visibleDate={highlight}
               isCalendarShown={isCalendarShown}
-              onChangeDate={this.onChangeDate}
-              onChangeDay={this.onChangeDay}
-              activeDates={date}
+              onSetDate={this.onSetDate}
+              onChange={this.onChange}
               onChangeCalendarVisibility={this.onChangeCalendarVisibility}
-              startDate={date}
-              endDate={date}
               borderLeft
               borderRight
               icon={true}
-              leftArrow
-              rightArrow
             />
           </div>
         ) : (
           <div className={s.container}>
             <CalendarDateTimePicker
-              date={this.getFirstCalendarDate(date, startDate, endDate)}
-              time={time}
+              value={value}
+              highlight={highlight}
+              visibleDate={firstDate}
               isCalendarShown={isCalendarShown}
-              onChangeDay={this.onChangeDay}
-              onChangeDate={this.onChangeDate}
-              activeDates={startDate}
+              onSetDate={this.onSetDate}
+              onChange={this.onChange}
               onChangeCalendarVisibility={this.onChangeCalendarVisibility}
-              startDate={startDate}
-              endDate={endDate}
               borderLeft
               borderRight={false}
               icon={false}
-              leftArrow
-              rightArrow
-              watchIncrementMonth={this.watchIncrementMonth}
-              watchDecrementMonth={this.watchDecrementMonth}
+              rightArrow={false}
+              time={false}
             />
             <div className={s.arrow}>
-              {startDate < endDate ? <SvgIcon file="arrow-right" /> : <SvgIcon file="arrow-left" />}
+              {/* {startDate < endDate ? <SvgIcon file="arrow-right" /> : <SvgIcon file="arrow-left" />} */}
             </div>
             <CalendarDateTimePicker
-              date={this.getSecondCalendarDate(date, startDate, endDate)}
-              time={time}
+              value={addMonths(value, 1)}
+              highlight={highlight}
+              visibleDate={secondDate}
               isCalendarShown={isCalendarShown}
-              onChangeDay={this.onChangeDay}
-              onChangeDate={this.onChangeDate}
-              activeDates={endDate}
+              onSetDate={this.onSetDate}
+              onChange={this.onChange}
               onChangeCalendarVisibility={this.onChangeCalendarVisibility}
-              startDate={startDate}
-              endDate={endDate}
               borderLeft={false}
               borderRight
               icon={false}
-              leftArrow
-              rightArrow
-              watchIncrementMonth={this.watchIncrementMonth}
-              watchDecrementMonth={this.watchDecrementMonth}
+              leftArrow={false}
+              time={false}
             />
           </div>
         )}

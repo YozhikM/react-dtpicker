@@ -3,18 +3,18 @@
 import React from 'react';
 import s from './TableSelect.scss';
 
-export type Value = any;
+export type Value = number;
 export type Options = Array<{ value: Value, name: string }>;
 
-type Props = {
+type Props = {|
   cols: number,
   options: Options,
   value: Value,
   onChange?: (value: Value) => void
-};
-type State = {
+|};
+type State = {|
   value: Value
-};
+|};
 
 class TableSelect extends React.Component<Props, State> {
   constructor(props: Props) {

@@ -2,44 +2,43 @@
 
 import React from 'react';
 import s from './Calendar.scss';
-import Day from './CalendarDay';
-import { startOfMonth, endOfMonth, eachDay, getDay, format } from 'date-fns';
+import CalendarDay from './CalendarDay';
+import { startOfMonth, endOfMonth, eachDay, getDay, isSameDay, isWithinRange } from 'date-fns';
+import format from './format';
 
-export type Props = {
-  date: Date,
-  activeDates: Date,
-  onClickDay?: (date: Date) => void,
-  onClickMonth?: (date: Date) => void,
-  startDate: Date,
-  endDate: Date
-};
+export type Props = {|
+  value: Date,
+  // false - disable highlight
+  // null or undefined - use date for highlight
+  // value - use provided value(s) for hightlight
+  highlight: Array<Date>,
+  onSetDate?: (date: Date) => void,
+  onClickMonth?: (date: Date) => void
+|};
 
-type State = {
-  weeks: Array<any>,
-};
+type State = {|
+  weeks: Array<Array<Date>>
+|};
 
 class CalendarMonthGrid extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      weeks: [],
-    };
-  }
+  state: State = {
+    weeks: []
+  };
 
   componentWillMount() {
-    const { date } = this.props;
-    this.setState({ weeks: this.createMonth(date) });
+    const { value } = this.props;
+    this.setState({ weeks: this.createMonth(value) });
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.date !== this.props.date) {
-      this.setState({ weeks: this.createMonth(nextProps.date) });
+    if (nextProps.value !== this.props.value) {
+      this.setState({ weeks: this.createMonth(nextProps.value) });
     }
   }
 
-  createMonth = (date: Date) => {
-    let startDateOfMonth = startOfMonth(date);
-    let endDateOfMonth = endOfMonth(date);
+  createMonth = (value: Date) => {
+    let startDateOfMonth = startOfMonth(value);
+    let endDateOfMonth = endOfMonth(value);
     let currentMonth = eachDay(startDateOfMonth, endDateOfMonth);
     let firstOfMonthDay = getDay(startDateOfMonth);
     let beginOfMonth;
@@ -57,53 +56,58 @@ class CalendarMonthGrid extends React.Component<Props, State> {
     return weeks;
   };
 
-  isSameDate(lDate: Date, rDate: Date): boolean {
-    return (
-      lDate.getDate() === rDate.getDate() &&
-      lDate.getMonth() === rDate.getMonth() &&
-      lDate.getFullYear() === rDate.getFullYear()
-    );
-  }
-
-  onClickDay = (date: Date) => {
-    const { onClickDay } = this.props;
-    if (onClickDay) {
-      onClickDay(date);
+  onSetDate = (date: Date) => {
+    const { onSetDate } = this.props;
+    if (onSetDate) {
+      onSetDate(date);
     }
   };
 
   onClickMonth = () => {
     const { onClickMonth } = this.props;
     if (onClickMonth) {
-      onClickMonth(this.props.date);
+      onClickMonth(this.props.value);
     }
   };
 
-  checkInvalidDate = () => {
-    const { date } = this.props;
-    const validFormat = format(date, 'MMMM YYYY');
-    if (validFormat === 'Invalid Date') {
-      return 'Данные неверны';
-    } else return validFormat;
+  getWeekDays = () => {
+    const { weeks } = this.state;
+    return weeks[1].map((weekDay, i) => {
+      return format(weekDay, 'dd');
+    });
+  };
+
+  setDayStyle = (highlight: Array<Date>, date: Date) => {
+    const highlightStyle = { backgroundColor: '#34495e', color: '#fff' };
+    const rangeStyle = { backgroundColor: '#8196ab', color: '#fff' };
+    for (let i = 0; i < highlight.length; i++) {
+      if (isSameDay(highlight[i], date)) {
+        return highlightStyle;
+      }
+    }
+    if (highlight[0] < highlight[1]) {
+      if (isWithinRange(date, highlight[0], highlight[1])) {
+        return rangeStyle;
+      }
+    } else {
+      if (isWithinRange(date, highlight[1], highlight[0])) {
+        return rangeStyle;
+      }
+    }
   };
 
   render() {
     const { weeks } = this.state;
-    const { date, startDate, endDate } = this.props;
-
+    const { value, highlight } = this.props;
     return (
       <div className={s.root}>
-        <span onClick={this.onClickMonth}>{format(date, 'MMMM YYYY')}</span>
+        <span onClick={this.onClickMonth}>{format(value, 'MMMM YYYY')}</span>
         <table>
           <thead>
             <tr>
-              <th>Mo</th>
-              <th>Tu</th>
-              <th>We</th>
-              <th>Th</th>
-              <th>Fr</th>
-              <th>Sa</th>
-              <th>Su</th>
+              {this.getWeekDays().map((weekDay, i) => {
+                return <th key={i}>{weekDay.toUpperCase()}</th>;
+              })}
             </tr>
           </thead>
           <tbody>
@@ -111,13 +115,11 @@ class CalendarMonthGrid extends React.Component<Props, State> {
               <tr key={i}>
                 {week.map((date, dayOfWeek) => {
                   return (
-                    <Day
+                    <CalendarDay
                       key={dayOfWeek}
                       date={date}
-                      startDate={startDate}
-                      endDate={endDate}
-                      onClick={this.onClickDay}
-                      isActive={this.isSameDate(endDate, date)}
+                      style={this.setDayStyle(highlight, date)}
+                      onClick={this.onSetDate}
                     />
                   );
                 })}

@@ -2,42 +2,34 @@
 
 import React from 'react';
 import SvgIcon from '../SvgIcon';
-import TimeSelect from '../TimeSelect/TimeSelect';
+import TimeSelect from './TimeSelect';
 import s from './Calendar.scss';
 
 type Show = 'button' | 'timeSelect'
 
-type Props = {
-  onChangeDate?: (date: Date) => void,
+type Props = {|
+  onSetTime?: (time: Date) => void,
   activeDates?: Date,
   date?: Date,
   onSubmit?: any => void,
   show?: Show
-};
+|};
 
-type State = {
-  date: Date,
+type State = {|
   show: 'button' | 'timeSelect'
-};
+|};
 
 class TimePicker extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      date: this.props.date || new Date(),
       show: this.props.show || 'button'
     };
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.date !== this.props.date) {
-      this.setState({ date: nextProps.date });
-    }
-  }
-
-  onChangeDate = (date: Date) => {
-    const { onChangeDate } = this.props;
-    if (onChangeDate) onChangeDate(date);
+  onSetTime = (time: Date) => {
+    const { onSetTime } = this.props;
+    if (onSetTime) onSetTime(time);
   };
 
   onClickClock = () => {
@@ -49,14 +41,15 @@ class TimePicker extends React.Component<Props, State> {
   };
 
   render() {
-    const { show, date } = this.state;
+    const { date } = this.props;
+    const { show } = this.state;
 
     if (show === 'timeSelect') {
       return (
         <TimeSelect
           value={date}
           onSubmit={this.onSubmitTime}
-          onChange={this.onChangeDate}
+          onSetTime={this.onSetTime}
         />
       );
     }

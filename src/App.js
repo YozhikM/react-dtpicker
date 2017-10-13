@@ -3,8 +3,8 @@
 import React from 'react';
 import Calendar from './components/Calendar/Calendar';
 
-type Props = {};
-type State = {};
+type Props = void;
+type State = void;
 
 class App extends React.Component<Props, State> {
 

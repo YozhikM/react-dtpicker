@@ -1,6 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CalendarDay render() 1`] = `
+exports[`CalendarDay render() basic 1`] = `
+<td
+  onClick={[Function]}
+  style={
+    Object {
+      "backgroundColor": null,
+      "border": "1px solid #e4e7e7",
+      "color": "#34495e",
+    }
+  }
+>
+  9
+</td>
+`;
+
+exports[`CalendarDay render() if inRange 1`] = `
+<td
+  onClick={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#9bb0c5",
+      "border": "1px solid transparent",
+      "color": "white",
+    }
+  }
+>
+  6
+</td>
+`;
+
+exports[`CalendarDay render() if isActive 1`] = `
 <td
   onClick={[Function]}
   style={
@@ -11,6 +41,6 @@ exports[`CalendarDay render() 1`] = `
     }
   }
 >
-  8
+  6
 </td>
 `;

@@ -24,12 +24,6 @@ describe('TimePicker', () => {
     });
   });
 
-  it('componentWillReceiveProps()', () => {
-    const wrapper = shallow(<TimePicker />);
-    wrapper.setProps({ date: new Date(2001, 8, 4, 10, 13, 12) });
-    expect(wrapper.state()).toEqual({ date: new Date('2001-09-04T03:13:12.000Z'), show: 'button' });
-  });
-
   it('onChangeDate()', () => {
     const date = new Date(2000, 1, 1, 0, 0, 0);
     const spy = jest.fn();

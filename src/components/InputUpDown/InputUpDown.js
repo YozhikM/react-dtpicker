@@ -4,19 +4,19 @@ import React from 'react';
 import SvgIcon from '../SvgIcon';
 import s from './InputUpDown.scss';
 
-type Props = {
+type Props = {|
   value?: number,
   min?: number,
   max?: number,
   circular?: boolean,
   onChange?: (value: number) => void,
   onClickNumber?: (value: number) => void
-};
+|};
 
-type State = {
+type State = {|
   value: number,
   isBtnHold: boolean
-};
+|};
 
 class InputUpDown extends React.Component<Props, State> {
   state: State;

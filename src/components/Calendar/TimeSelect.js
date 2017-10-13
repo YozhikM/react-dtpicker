@@ -16,13 +16,13 @@ type HHMMSS = {
   ss: number
 };
 
-type Props = {
+type Props = {|
   value?: ?Value,
-  onChange?: (value: Value) => void,
+  onSetTime?: (value: Value) => void,
   onSubmit?: (value: Value) => void,
   showSeconds?: boolean,
   show?: ShowEnum,
-};
+|};
 
 type State = HHMMSS & {
   show: ShowEnum,
@@ -39,9 +39,9 @@ class TimeSelect extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    if (this.props.value !== nextProps.value) {
-      this.setState(this.parseTime(nextProps.value));
-    }
+    // if (this.props.value !== nextProps.value) {
+    //   this.setState(this.parseTime(nextProps.value));
+    // }
     if (this.props.show !== nextProps.show) {
       this.setState({ show: nextProps.show });
     }
@@ -49,7 +49,7 @@ class TimeSelect extends React.Component<Props, State> {
 
   genTableOpts = (from: number, till: number, step: number = 1): Options => {
     const res: Options = [];
-    for (let i = from; i <= till; i) {
+    for (let i = from; i <= till; i = i + step) {
       res.push({ value: i, name: i < 10 ? `0${i}` : `${i}` });
     }
     return res;
@@ -62,11 +62,10 @@ class TimeSelect extends React.Component<Props, State> {
 
   getValue = (): Value => {
     const { hh, mm, ss } = this.state;
-    let value = this.props.value || new Date();
-    value.setHours(hh);
-    value.setMinutes(mm);
-    value.setSeconds(ss);
-    return value;
+    const { value } = this.props;
+    const newDate = value ? new Date(value.getTime()) : new Date();
+    newDate.setHours(hh, mm, ss);
+    return newDate;
   };
 
   onSubmit = () => {
@@ -74,21 +73,21 @@ class TimeSelect extends React.Component<Props, State> {
     if (onSubmit) onSubmit(this.getValue());
   };
 
-  onChange = () => {
-    const { onChange } = this.props;
-    if (onChange) onChange(this.getValue());
+  onSetTime = () => {
+    const { onSetTime } = this.props;
+    if (onSetTime) onSetTime(this.getValue());
   };
 
   onChangeHH = (hh: number) => {
-    this.setState({ hh }, this.onChange);
+    this.setState({ hh }, this.onSetTime);
   };
 
   onChangeMM = (mm: number) => {
-    this.setState({ mm }, this.onChange);
+    this.setState({ mm }, this.onSetTime);
   };
 
   onChangeSS = (ss: number) => {
-    this.setState({ ss }, this.onChange);
+    this.setState({ ss }, this.onSetTime);
   };
 
   onClickHH = () => {
@@ -104,15 +103,15 @@ class TimeSelect extends React.Component<Props, State> {
   };
 
   onChangeTableHH = (value: number) => {
-    this.setState({ hh: value, show: 'main' }, this.onChange)
+    this.setState({ hh: value, show: 'main' }, this.onSetTime)
   };
 
   onChangeTableMM = (value: number) => {
-    this.setState({ mm: value, show: 'main' }, this.onChange)
+    this.setState({ mm: value, show: 'main' }, this.onSetTime)
   };
 
   onChangeTableSS = (value: number) => {
-    this.setState({ ss: value, show: 'main' }, this.onChange)
+    this.setState({ ss: value, show: 'main' }, this.onSetTime)
   };
 
   render() {
