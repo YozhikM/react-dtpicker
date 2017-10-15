@@ -181,7 +181,7 @@ class CalendarDate extends React.Component<Props, State> {
 
   render() {
     const { show, value, monthsOptions } = this.state;
-    const { time, highlight, visibleTime } = this.props;
+    const { time, highlight, visibleTime, isSingleCalendar } = this.props;
     const leftArrowStyle = {
       visibility:
         this.props.leftArrow === false ? 'hidden' : 'visible',
@@ -189,6 +189,8 @@ class CalendarDate extends React.Component<Props, State> {
     const rightArrowStyle = {
       visibility:
         this.props.rightArrow === false ? 'hidden' : 'visible',
+	  left:
+		isSingleCalendar === false ? 400 : 120
     };
 
     if (show === 'yy10') {

@@ -20,6 +20,7 @@ exports[`CalendarDate render basic 1`] = `
     onClick={[Function]}
     style={
       Object {
+        "left": 120,
         "visibility": "visible",
       }
     }
@@ -113,6 +114,7 @@ exports[`CalendarDate render if disabled leftArrow 1`] = `
     onClick={[Function]}
     style={
       Object {
+        "left": 120,
         "visibility": "visible",
       }
     }
@@ -148,6 +150,7 @@ exports[`CalendarDate render if disabled rightArrow 1`] = `
     onClick={[Function]}
     style={
       Object {
+        "left": 120,
         "visibility": "hidden",
       }
     }
@@ -273,6 +276,7 @@ exports[`CalendarDate render if time 1`] = `
     onClick={[Function]}
     style={
       Object {
+        "left": 120,
         "visibility": "visible",
       }
     }

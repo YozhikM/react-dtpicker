@@ -77,7 +77,9 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     if (
       nextProps.visibleDate !== this.state.visibleDate &&
       !isSameDay(nextProps.visibleDate, this.props.value)
-    ) {
+    ) 
+		this.setState({ visibleDate: nextProps.visibleDate });
+	{
       if (time) {
         this.setState({
           inputValue: this.formatWithTime(nextProps.visibleDate),
@@ -180,6 +182,7 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
       time,
       isCalendarShown,
       visibleDate,
+	  isSingleCalendar
     } = this.props;
     const { inputValue, value } = this.state;
     const iconStyle = {
@@ -255,6 +258,7 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
             leftArrow={leftArrow}
             rightArrow={rightArrow}
             time={time}
+			isSingleCalendar={isSingleCalendar}
           />
         )}
       </div>
