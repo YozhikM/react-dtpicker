@@ -9,9 +9,8 @@ describe('CalendarMonthGrid', () => {
       expect(
         shallow(
           <CalendarMonthGrid
-            date={new Date(2009, 0, 9)}
-            startDate={new Date(2001, 2, 4)}
-            endDate={new Date(2015, 3, 5)}
+            value={new Date(2009, 0, 9)}
+            highlight={new Date(2001, 2, 4)}
           />
         )
       ).toMatchSnapshot();
@@ -19,77 +18,69 @@ describe('CalendarMonthGrid', () => {
   });
 
   it('componentWillMount()', () => {
-    const date = new Date(2019, 0, 9);
+    const value = new Date(2019, 0, 9);
     const wrapper = shallow(
       <CalendarMonthGrid
-        date={date}
-        startDate={new Date()}
-        endDate={new Date()}
+        value={value}
+        highlight={new Date()}
       />
     );
-    wrapper.instance().createMonth(date);
+    wrapper.instance().createMonth(value);
     expect(wrapper.state('weeks')).toMatchSnapshot();
   });
 
   it('componentWillReceiveProps()', () => {
     const wrapper = shallow(
       <CalendarMonthGrid
-        date={new Date()}
-        startDate={new Date()}
-        endDate={new Date()}
+        value={new Date()}
+        highlight={new Date()}
       />
     );
-    wrapper.setProps({ date: new Date(2017, 10, 12) });
+    wrapper.setProps({ value: new Date(2017, 10, 12) });
     expect(wrapper.state('weeks')).toMatchSnapshot();
   });
 
   it('createMonth()', () => {
     const wrapper = shallow(
       <CalendarMonthGrid
-        date={new Date()}
-        startDate={new Date()}
-        endDate={new Date()}
+        value={new Date()}
+        highlight={new Date()}
       />
     );
     const weeks = wrapper.instance().createMonth(new Date(2009, 9, 8));
     expect(weeks).toMatchSnapshot();
   });
 
-  it('isSameDate()', () => {
-    const endDate = new Date(2010, 5, 6);
-    const wrapper = shallow(
-      <CalendarMonthGrid
-        date={new Date()}
-        startDate={new Date()}
-        endDate={endDate}
-      />
-    );
-    const date = new Date(2010, 5, 7);
-    const isSame = wrapper.instance().isSameDate(endDate, date);
-    expect(isSame).toBeFalsy();
-  });
 
   it('getWeekDays()', () => {
     const wrapper = shallow(
       <CalendarMonthGrid
-        date={new Date()}
-        startDate={new Date()}
-        endDate={new Date()}
+        value={new Date()}
+        highlight={new Date()}
       />
     );
     const getWeekDays = wrapper.instance().getWeekDays();
     expect(getWeekDays).toMatchSnapshot();
   });
 
+    it('setDayStyle()', () => {
+        const wrapper = shallow(
+      <CalendarMonthGrid
+        value={new Date(1994, 6)}
+        highlight={[new Date('1994-07-01T18:00:00.000Z'), new Date('1994-07-05T18:00:00.000Z')]}
+      />
+        );
+        expect(wrapper).toMatchSnapshot();
+    });
+
   describe('user interactions', () => {
-    it('onClickDay()', () => {
+    it('onSetDate()', () => {
       const spy = jest.fn();
       const wrapper = shallow(
         <CalendarMonthGrid
-          date={new Date(2010, 0)}
-          startDate={new Date()}
-          endDate={new Date()}
-          onClickDay={spy}
+          value={new Date(2010, 0)}
+          highlight={new Date()}
+          onSetDate={spy}
         />
       );
       const newDate = new Date(2017, 1, 1);
@@ -103,17 +94,17 @@ describe('CalendarMonthGrid', () => {
 
     it('onClickMonth()', () => {
       const spy = jest.fn();
-      const date = new Date(2009, 1);
+      const value = new Date(2009, 1);
       const wrapper = shallow(
         <CalendarMonthGrid
-          date={date}
+          value={value}
           startDate={new Date()}
           endDate={new Date()}
           onClickMonth={spy}
         />
       );
       wrapper.find('span').simulate('click');
-      expect(spy).toBeCalledWith(date);
+      expect(spy).toBeCalledWith(value);
     });
   });
 });

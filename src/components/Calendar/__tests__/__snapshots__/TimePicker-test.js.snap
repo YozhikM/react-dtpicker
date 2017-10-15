@@ -14,7 +14,6 @@ exports[`TimePicker render() basic 1`] = `
 
 exports[`TimePicker render() show TimeSelect 1`] = `
 <TimeSelect
-  onChange={[Function]}
   onSubmit={[Function]}
   value={2010-11-09T18:00:00.000Z}
 />

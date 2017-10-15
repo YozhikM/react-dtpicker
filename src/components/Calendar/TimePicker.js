@@ -9,9 +9,7 @@ type Show = 'button' | 'timeSelect'
 
 type Props = {|
   onSetTime?: (time: Date) => void,
-  activeDates?: Date,
   date?: Date,
-  onSubmit?: any => void,
   show?: Show
 |};
 
@@ -27,17 +25,14 @@ class TimePicker extends React.Component<Props, State> {
     };
   }
 
-  onSetTime = (time: Date) => {
-    const { onSetTime } = this.props;
-    if (onSetTime) onSetTime(time);
-  };
-
   onClickClock = () => {
     this.setState({ show: 'timeSelect' });
   };
 
-  onSubmitTime = () => {
+  onSubmitTime = (time: Date) => {
+    const { onSetTime } = this.props;
     this.setState({ show: 'button' });
+    if (onSetTime) onSetTime(time);
   };
 
   render() {
@@ -49,7 +44,6 @@ class TimePicker extends React.Component<Props, State> {
         <TimeSelect
           value={date}
           onSubmit={this.onSubmitTime}
-          onSetTime={this.onSetTime}
         />
       );
     }

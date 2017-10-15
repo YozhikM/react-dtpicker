@@ -202,35 +202,23 @@ exports[`CalendarMonthGrid render() basic 1`] = `
       >
         <CalendarDay
           date={2008-12-31T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="0"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-01T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="1"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-02T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="2"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-03T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="3"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
       </tr>
       <tr
@@ -238,59 +226,38 @@ exports[`CalendarMonthGrid render() basic 1`] = `
       >
         <CalendarDay
           date={2009-01-04T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="0"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-05T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="1"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-06T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="2"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-07T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="3"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-08T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="4"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-09T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="5"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-10T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="6"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
       </tr>
       <tr
@@ -298,59 +265,38 @@ exports[`CalendarMonthGrid render() basic 1`] = `
       >
         <CalendarDay
           date={2009-01-11T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="0"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-12T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="1"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-13T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="2"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-14T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="3"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-15T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="4"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-16T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="5"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-17T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="6"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
       </tr>
       <tr
@@ -358,59 +304,38 @@ exports[`CalendarMonthGrid render() basic 1`] = `
       >
         <CalendarDay
           date={2009-01-18T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="0"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-19T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="1"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-20T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="2"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-21T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="3"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-22T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="4"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-23T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="5"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-24T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="6"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
       </tr>
       <tr
@@ -418,51 +343,291 @@ exports[`CalendarMonthGrid render() basic 1`] = `
       >
         <CalendarDay
           date={2009-01-25T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="0"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-26T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="1"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-27T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="2"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-28T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="3"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-29T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="4"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
         />
         <CalendarDay
           date={2009-01-30T18:00:00.000Z}
-          endDate={2015-04-04T18:00:00.000Z}
-          isActive={false}
           key="5"
           onClick={[Function]}
-          startDate={2001-03-03T18:00:00.000Z}
+        />
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`CalendarMonthGrid setDayStyle() 1`] = `
+<div>
+  <span
+    onClick={[Function]}
+  >
+    July 1994
+  </span>
+  <table>
+    <thead>
+      <tr>
+        <th
+          key="0"
+        >
+          MO
+        </th>
+        <th
+          key="1"
+        >
+          TU
+        </th>
+        <th
+          key="2"
+        >
+          WE
+        </th>
+        <th
+          key="3"
+        >
+          TH
+        </th>
+        <th
+          key="4"
+        >
+          FR
+        </th>
+        <th
+          key="5"
+        >
+          SA
+        </th>
+        <th
+          key="6"
+        >
+          SU
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        key="0"
+      >
+        <CalendarDay
+          date={1994-06-30T18:00:00.000Z}
+          key="0"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-01T18:00:00.000Z}
+          key="1"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "#34495e",
+              "color": "#fff",
+            }
+          }
+        />
+        <CalendarDay
+          date={1994-07-02T18:00:00.000Z}
+          key="2"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "#8196ab",
+              "color": "#fff",
+            }
+          }
+        />
+      </tr>
+      <tr
+        key="1"
+      >
+        <CalendarDay
+          date={1994-07-03T18:00:00.000Z}
+          key="0"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "#8196ab",
+              "color": "#fff",
+            }
+          }
+        />
+        <CalendarDay
+          date={1994-07-04T18:00:00.000Z}
+          key="1"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "#8196ab",
+              "color": "#fff",
+            }
+          }
+        />
+        <CalendarDay
+          date={1994-07-05T18:00:00.000Z}
+          key="2"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "#34495e",
+              "color": "#fff",
+            }
+          }
+        />
+        <CalendarDay
+          date={1994-07-06T18:00:00.000Z}
+          key="3"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-07T18:00:00.000Z}
+          key="4"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-08T18:00:00.000Z}
+          key="5"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-09T18:00:00.000Z}
+          key="6"
+          onClick={[Function]}
+        />
+      </tr>
+      <tr
+        key="2"
+      >
+        <CalendarDay
+          date={1994-07-10T18:00:00.000Z}
+          key="0"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-11T18:00:00.000Z}
+          key="1"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-12T18:00:00.000Z}
+          key="2"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-13T18:00:00.000Z}
+          key="3"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-14T18:00:00.000Z}
+          key="4"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-15T18:00:00.000Z}
+          key="5"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-16T18:00:00.000Z}
+          key="6"
+          onClick={[Function]}
+        />
+      </tr>
+      <tr
+        key="3"
+      >
+        <CalendarDay
+          date={1994-07-17T18:00:00.000Z}
+          key="0"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-18T18:00:00.000Z}
+          key="1"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-19T18:00:00.000Z}
+          key="2"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-20T18:00:00.000Z}
+          key="3"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-21T18:00:00.000Z}
+          key="4"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-22T18:00:00.000Z}
+          key="5"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-23T18:00:00.000Z}
+          key="6"
+          onClick={[Function]}
+        />
+      </tr>
+      <tr
+        key="4"
+      >
+        <CalendarDay
+          date={1994-07-24T18:00:00.000Z}
+          key="0"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-25T18:00:00.000Z}
+          key="1"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-26T18:00:00.000Z}
+          key="2"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-27T18:00:00.000Z}
+          key="3"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-28T18:00:00.000Z}
+          key="4"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-29T18:00:00.000Z}
+          key="5"
+          onClick={[Function]}
+        />
+        <CalendarDay
+          date={1994-07-30T18:00:00.000Z}
+          key="6"
+          onClick={[Function]}
         />
       </tr>
     </tbody>

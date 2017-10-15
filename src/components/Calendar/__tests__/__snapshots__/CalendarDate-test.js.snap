@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CalendarDate componentWillReceiveProps() 1`] = `1994-07-31T18:00:00.000Z`;
+
 exports[`CalendarDate render basic 1`] = `
 <div>
   <button
@@ -27,9 +29,10 @@ exports[`CalendarDate render basic 1`] = `
     />
   </button>
   <CalendarMonthGrid
-    date={2010-11-09T18:00:00.000Z}
-    onClickDay={[Function]}
+    highlight={2010-11-09T18:00:00.000Z}
     onClickMonth={[Function]}
+    onSetDate={[Function]}
+    value={2010-11-09T18:00:00.000Z}
   />
 </div>
 `;
@@ -119,9 +122,10 @@ exports[`CalendarDate render if disabled leftArrow 1`] = `
     />
   </button>
   <CalendarMonthGrid
-    date={2007-07-04T18:00:00.000Z}
-    onClickDay={[Function]}
+    highlight={2007-07-04T18:00:00.000Z}
     onClickMonth={[Function]}
+    onSetDate={[Function]}
+    value={2007-07-04T18:00:00.000Z}
   />
 </div>
 `;
@@ -153,9 +157,10 @@ exports[`CalendarDate render if disabled rightArrow 1`] = `
     />
   </button>
   <CalendarMonthGrid
-    date={1984-05-03T17:00:00.000Z}
-    onClickDay={[Function]}
+    highlight={1984-05-03T18:00:00.000Z}
     onClickMonth={[Function]}
+    onSetDate={[Function]}
+    value={1984-05-03T18:00:00.000Z}
   />
 </div>
 `;
@@ -277,14 +282,13 @@ exports[`CalendarDate render if time 1`] = `
     />
   </button>
   <CalendarMonthGrid
-    date={2005-07-06T18:00:00.000Z}
-    onClickDay={[Function]}
+    highlight={2005-07-06T18:00:00.000Z}
     onClickMonth={[Function]}
+    onSetDate={[Function]}
+    value={2005-07-06T18:00:00.000Z}
   />
   <TimePicker
-    activeDates={2005-07-06T18:00:00.000Z}
-    date={2005-07-06T18:00:00.000Z}
-    onChangeDate={[Function]}
+    onSetTime={[Function]}
   />
 </div>
 `;

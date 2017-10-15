@@ -1,7 +1,14 @@
 /* @flow */
 
 import React from 'react';
-import { setMonth, setYear, addYears, addMonths, getYear, format } from 'date-fns';
+import {
+  setMonth,
+  setYear,
+  addYears,
+  addMonths,
+  getYear,
+  format,
+} from 'date-fns';
 import TableSelect from '../TableSelect/TableSelect';
 import CalendarMonthGrid from './CalendarMonthGrid';
 import TimePicker from './TimePicker';
@@ -10,22 +17,23 @@ import s from './Calendar.scss';
 
 type Show = 'calendar' | 'mm' | 'yy' | 'yy10';
 
-export type Props= {|
+export type Props = {|
   value: Date,
-  onChange: (value: Date) => void, // works on change day, month, year, year10, time (it only work for displaying value)
+  onChange?: (value: Date) => void, // works on change day, month, year, year10, time (it only work for displaying value)
   highlight: Array<Date>,
+  visibleTime: Date,
   onSetDate?: (date: Date) => void, // user click by day in calendar
-  onSetTime?:  (time: Date) => void, // user click on time in calendar
+  onSetTime?: (time: Date) => void, // user click on time in calendar
   leftArrow?: boolean, // show left arrow in header (true by default)
-  rightArrow?: boolean,  // show right arrow in header (true by default)
+  rightArrow?: boolean, // show right arrow in header (true by default)
   time?: boolean, // display time picker (hidden by default)
-  show?: Show // display needed view type (calendar by default)
+  show?: Show, // display needed view type (calendar by default)
 |};
 
 type State = {|
   show: 'calendar' | 'mm' | 'yy' | 'yy10',
   value: Date,
-  monthsOptions: Array<{ value: number, name: string }>
+  monthsOptions: Array<{ value: number, name: string }>,
 |};
 
 class CalendarDate extends React.Component<Props, State> {
@@ -34,14 +42,14 @@ class CalendarDate extends React.Component<Props, State> {
     this.state = {
       show: this.props.show || 'calendar',
       value: this.props.value,
-      monthsOptions: this.getMonthOptions()
+      monthsOptions: this.getMonthOptions(),
     };
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (this.props.value !== nextProps.value) {
       this.setState({
-        value: nextProps.value
+        value: nextProps.value,
       });
     }
   }
@@ -66,21 +74,21 @@ class CalendarDate extends React.Component<Props, State> {
   onChangeMonth = (n: number) => {
     const { value } = this.state;
     const newDate = setMonth(value, n);
-    this.setState({ show: 'calendar'});
+    this.setState({ show: 'calendar' });
     this.onChange(newDate);
   };
 
   onChangeYear = (n: number) => {
     const { value } = this.state;
     const newDate = setYear(value, n);
-    this.setState({ show: 'mm'});
+    this.setState({ show: 'mm' });
     this.onChange(newDate);
   };
 
   onChangeDecade = (n: number) => {
     const { value } = this.state;
     const newDate = setYear(value, n);
-    this.setState({ show: 'yy'});
+    this.setState({ show: 'yy' });
     this.onChange(newDate);
   };
 
@@ -145,7 +153,7 @@ class CalendarDate extends React.Component<Props, State> {
   getMonthOptions() {
     return [...Array(12)].map((v, i) => ({
       value: i,
-      name: format(new Date(2000, i, 1), 'MMM')
+      name: format(new Date(2000, i, 1), 'MMM'),
     }));
   }
 
@@ -154,7 +162,7 @@ class CalendarDate extends React.Component<Props, State> {
     const startYear = tmp - tmp % 10;
     return [...Array(10)].map((v, i) => ({
       value: startYear + i,
-      name: `${startYear + i}`
+      name: `${startYear + i}`,
     }));
   }
 
@@ -166,16 +174,22 @@ class CalendarDate extends React.Component<Props, State> {
       const year = startYear + i * 10;
       return {
         value: year,
-        name: `${year} ${year + 9}`
+        name: `${year} ${year + 9}`,
       };
     });
   }
 
   render() {
     const { show, value, monthsOptions } = this.state;
-    const { time, highlight } = this.props;
-    const leftArrowStyle = { visibility: this.props.leftArrow === false ? 'hidden' : 'visible' };
-    const rightArrowStyle = { visibility: this.props.rightArrow === false ? 'hidden' : 'visible' };
+    const { time, highlight, visibleTime } = this.props;
+    const leftArrowStyle = {
+      visibility:
+        this.props.leftArrow === false ? 'hidden' : 'visible',
+    };
+    const rightArrowStyle = {
+      visibility:
+        this.props.rightArrow === false ? 'hidden' : 'visible',
+    };
 
     if (show === 'yy10') {
       const curYear = getYear(value);
@@ -205,7 +219,9 @@ class CalendarDate extends React.Component<Props, State> {
               <button onClick={this.decrement10Years}>
                 <SvgIcon file="arrow-left" />
               </button>
-              <span onClick={this.showDecadeTable}>{this.showDecade()}</span>
+              <span onClick={this.showDecadeTable}>
+                {this.showDecade()}
+              </span>
               <button onClick={this.increment10Years}>
                 <SvgIcon file="arrow-right" />
               </button>
@@ -230,7 +246,9 @@ class CalendarDate extends React.Component<Props, State> {
               <button onClick={this.decrementYears}>
                 <SvgIcon file="arrow-left" />
               </button>
-              <span onClick={this.showYearTable}>{getYear(value)}</span>
+              <span onClick={this.showYearTable}>
+                {getYear(value)}
+              </span>
               <button onClick={this.incrementYears}>
                 <SvgIcon file="arrow-right" />
               </button>
@@ -249,10 +267,18 @@ class CalendarDate extends React.Component<Props, State> {
 
     return (
       <div className={s.calendar_container}>
-        <button style={leftArrowStyle} className={s.left_arrow} onClick={this.decrementMonth}>
+        <button
+          style={leftArrowStyle}
+          className={s.left_arrow}
+          onClick={this.decrementMonth}
+        >
           <SvgIcon file="arrow-left" />
         </button>
-        <button style={rightArrowStyle} className={s.right_arrow} onClick={this.incrementMonth}>
+        <button
+          style={rightArrowStyle}
+          className={s.right_arrow}
+          onClick={this.incrementMonth}
+        >
           <SvgIcon file="arrow-right" />
         </button>
         <CalendarMonthGrid
@@ -262,7 +288,7 @@ class CalendarDate extends React.Component<Props, State> {
           onSetDate={this.onSetDate}
         />
         {time && (
-          <TimePicker date={value} onSetTime={this.onSetTime} />
+          <TimePicker date={visibleTime} onSetTime={this.onSetTime} />
         )}
       </div>
     );

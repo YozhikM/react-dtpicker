@@ -43,12 +43,6 @@ describe('TimeSelect', () => {
     });
   });
 
-  it('componentWillReceiveProps()', () => {
-    const wrapper = shallow(<TimeSelect showSeconds={true} />);
-    wrapper.setProps({ value: new Date(2000, 1, 1, 10, 20, 30) });
-    expect(wrapper.state()).toEqual({ hh: 10, mm: 20, ss: 30, show: 'main' });
-  });
-
   describe('parseTime()', () => {
     const wrapper = shallow(<TimeSelect showSeconds={true} />);
     let value = new Date(2017, 7, 7, 10, 9, 8);
@@ -83,18 +77,15 @@ describe('TimeSelect', () => {
     it('onChange()', () => {
       const value = new Date(2020, 2, 2, 0, 0, 0);
       const spy = jest.fn();
-      const wrapper = shallow(<TimeSelect value={value} onChange={spy} />);
-      wrapper.instance().onChange();
+      const wrapper = shallow(<TimeSelect value={value} onSetTime={spy} />);
+      wrapper.instance().onSetTime();
       expect(spy).toBeCalled();
-      const callbackValue = spy.mock.calls[0][0];
-      expect(callbackValue).toEqual(value);
-      expect(callbackValue).not.toBe(value);
     });
 
     it('onChangeHH', () => {
       const dt = new Date();
       const spy = jest.fn();
-      const wrapper = shallow(<TimeSelect value={dt} onChange={spy} />);
+      const wrapper = shallow(<TimeSelect value={dt} onSetTime={spy} />);
       wrapper
         .find('InputUpDown')
         .at(0)
@@ -107,7 +98,7 @@ describe('TimeSelect', () => {
     it('onChangeMM', () => {
       const dt = new Date();
       const spy = jest.fn();
-      const wrapper = shallow(<TimeSelect value={dt} onChange={spy} />);
+      const wrapper = shallow(<TimeSelect value={dt} onSetTime={spy} />);
       wrapper
         .find('InputUpDown')
         .at(1)
@@ -120,7 +111,7 @@ describe('TimeSelect', () => {
     it('onChangeSS', () => {
       const dt = new Date();
       const spy = jest.fn();
-      const wrapper = shallow(<TimeSelect value={dt} onChange={spy} showSeconds />);
+      const wrapper = shallow(<TimeSelect value={dt} onSetTime={spy} showSeconds />);
       wrapper
         .find('InputUpDown')
         .at(2)
@@ -162,7 +153,7 @@ describe('TimeSelect', () => {
 
     it('onChangeTableHH()', () => {
       const spy = jest.fn();
-      const wrapper = shallow(<TimeSelect value={new Date(2010, 9, 8)} onChange={spy} />);
+      const wrapper = shallow(<TimeSelect value={new Date(2010, 9, 8)} onSetTime={spy} />);
       wrapper.setState({ show: 'hh' });
       findTable(wrapper)
         .props()
@@ -174,7 +165,7 @@ describe('TimeSelect', () => {
 
     it('onChangeTableMM()', () => {
       const spy = jest.fn();
-      const wrapper = shallow(<TimeSelect value={new Date(2010, 9, 8)} onChange={spy} />);
+      const wrapper = shallow(<TimeSelect value={new Date(2010, 9, 8)} onSetTime={spy} />);
       wrapper.setState({ show: 'mm' });
       findTable(wrapper)
         .props()
@@ -187,7 +178,7 @@ describe('TimeSelect', () => {
     it('onChangeTableSS()', () => {
       const spy = jest.fn();
       const wrapper = shallow(
-        <TimeSelect value={new Date(2010, 9, 8)} onChange={spy} showSeconds />
+        <TimeSelect value={new Date(2010, 9, 8)} onSetTime={spy} showSeconds />
       );
       wrapper.setState({ show: 'ss' });
       findTable(wrapper)

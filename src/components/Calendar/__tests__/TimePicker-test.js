@@ -24,19 +24,6 @@ describe('TimePicker', () => {
     });
   });
 
-  it('onChangeDate()', () => {
-    const date = new Date(2000, 1, 1, 0, 0, 0);
-    const spy = jest.fn();
-    const wrapper = shallow(<TimePicker date={date} onChangeDate={spy} show={'timeSelect'} />);
-    wrapper
-      .find('TimeSelect')
-      .props()
-      .onChange(date);
-    expect(spy).toBeCalled();
-    const callbackValue = spy.mock.calls[0][0];
-    expect(callbackValue).toEqual(date);
-  });
-
   describe('user interactions', () => {
     it('onClickClock()', () => {
       const wrapper = shallow(<TimePicker />);
@@ -45,10 +32,13 @@ describe('TimePicker', () => {
     });
 
     it('onSubmitTime()', () => {
-      const wrapper = shallow(<TimePicker />);
+      const spy = jest.fn();
+      const wrapper = shallow(<TimePicker date={new Date()} onSetTime={spy} />);
+      const newDate = new Date(2018, 9, 11);
       wrapper.setState({ show: 'timeSelect' });
-      findTimeSelect(wrapper).simulate('submit');
+      findTimeSelect(wrapper).props().onSubmit(newDate);
       expect(wrapper.state('show')).toBe('button');
+      expect(spy).toBeCalledWith(newDate);
     });
   });
 });

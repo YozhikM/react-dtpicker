@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CalendarDateTimePicker componentWillReceiveProps() activeDates if !time 1`] = `
+exports[`CalendarDateTimePicker componentWillReceiveProps() isCalendarShown 1`] = `
 <div>
   <t
     mask={
@@ -17,7 +17,200 @@ exports[`CalendarDateTimePicker componentWillReceiveProps() activeDates if !time
         /\\\\d/,
       ]
     }
-    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyPress={[Function]}
+    showMask={true}
+    style={
+      Object {
+        "borderLeft": 0,
+        "borderRight": 0,
+      }
+    }
+    type="text"
+    value="11/06/2060"
+  />
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <SvgIcon
+      file="calendar"
+    />
+  </div>
+  <CalendarDate
+    highlight={2060-06-10T18:00:00.000Z}
+    onChange={[Function]}
+    onSetDate={[Function]}
+    onSetTime={[Function]}
+    value={2051-03-31T18:00:00.000Z}
+    visibleTime={2060-06-10T18:00:00.000Z}
+  />
+</div>
+`;
+
+exports[`CalendarDateTimePicker componentWillReceiveProps() time if !time 1`] = `
+<div>
+  <t
+    mask={
+      Array [
+        /\\[0-9\\]/,
+        /\\\\d/,
+        "/",
+        /\\\\d/,
+        /\\\\d/,
+        "/",
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+      ]
+    }
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyPress={[Function]}
+    showMask={true}
+    style={
+      Object {
+        "borderLeft": 0,
+        "borderRight": 0,
+      }
+    }
+    type="text"
+    value="31/01/2099 00:00"
+  />
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <SvgIcon
+      file="calendar"
+    />
+  </div>
+</div>
+`;
+
+exports[`CalendarDateTimePicker componentWillReceiveProps() time if time 1`] = `
+<div>
+  <t
+    mask={
+      Array [
+        /\\[0-9\\]/,
+        /\\\\d/,
+        "/",
+        /\\\\d/,
+        /\\\\d/,
+        "/",
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        " ",
+        /\\\\d/,
+        /\\\\d/,
+        ":",
+        /\\\\d/,
+        /\\\\d/,
+      ]
+    }
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyPress={[Function]}
+    showMask={true}
+    style={
+      Object {
+        "borderLeft": 0,
+        "borderRight": 0,
+      }
+    }
+    type="text"
+    value="31/01/2099"
+  />
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <SvgIcon
+      file="calendar"
+    />
+  </div>
+</div>
+`;
+
+exports[`CalendarDateTimePicker componentWillReceiveProps() value 1`] = `
+<div>
+  <t
+    mask={
+      Array [
+        /\\[0-9\\]/,
+        /\\\\d/,
+        "/",
+        /\\\\d/,
+        /\\\\d/,
+        "/",
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+      ]
+    }
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyPress={[Function]}
+    showMask={true}
+    style={
+      Object {
+        "borderLeft": 0,
+        "borderRight": 0,
+      }
+    }
+    type="text"
+    value="11/06/2060"
+  />
+  <div
+    onClick={[Function]}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <SvgIcon
+      file="calendar"
+    />
+  </div>
+</div>
+`;
+
+exports[`CalendarDateTimePicker componentWillReceiveProps() visibleDate if !time 1`] = `
+<div>
+  <t
+    mask={
+      Array [
+        /\\[0-9\\]/,
+        /\\\\d/,
+        "/",
+        /\\\\d/,
+        /\\\\d/,
+        "/",
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+      ]
+    }
     onChange={[Function]}
     onFocus={[Function]}
     onKeyPress={[Function]}
@@ -46,7 +239,7 @@ exports[`CalendarDateTimePicker componentWillReceiveProps() activeDates if !time
 </div>
 `;
 
-exports[`CalendarDateTimePicker componentWillReceiveProps() activeDates if time 1`] = `
+exports[`CalendarDateTimePicker componentWillReceiveProps() visibleDate if time 1`] = `
 <div>
   <t
     mask={
@@ -69,7 +262,6 @@ exports[`CalendarDateTimePicker componentWillReceiveProps() activeDates if time 
         /\\\\d/,
       ]
     }
-    onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
     onKeyPress={[Function]}
@@ -82,110 +274,6 @@ exports[`CalendarDateTimePicker componentWillReceiveProps() activeDates if time 
     }
     type="text"
     value="10/01/2010 00:00"
-  />
-  <div
-    onClick={[Function]}
-    style={
-      Object {
-        "display": "none",
-      }
-    }
-  >
-    <SvgIcon
-      file="calendar"
-    />
-  </div>
-</div>
-`;
-
-exports[`CalendarDateTimePicker componentWillReceiveProps() date 1`] = `
-<div>
-  <t
-    mask={
-      Array [
-        /\\[0-9\\]/,
-        /\\\\d/,
-        "/",
-        /\\\\d/,
-        /\\\\d/,
-        "/",
-        /\\\\d/,
-        /\\\\d/,
-        /\\\\d/,
-        /\\\\d/,
-        " ",
-        /\\\\d/,
-        /\\\\d/,
-        ":",
-        /\\\\d/,
-        /\\\\d/,
-      ]
-    }
-    onBlur={[Function]}
-    onChange={[Function]}
-    onFocus={[Function]}
-    onKeyPress={[Function]}
-    showMask={true}
-    style={
-      Object {
-        "borderLeft": 0,
-        "borderRight": 0,
-      }
-    }
-    type="text"
-    value="11/06/2060 00:00"
-  />
-  <div
-    onClick={[Function]}
-    style={
-      Object {
-        "display": "none",
-      }
-    }
-  >
-    <SvgIcon
-      file="calendar"
-    />
-  </div>
-</div>
-`;
-
-exports[`CalendarDateTimePicker componentWillReceiveProps() time 1`] = `
-<div>
-  <t
-    mask={
-      Array [
-        /\\[0-9\\]/,
-        /\\\\d/,
-        "/",
-        /\\\\d/,
-        /\\\\d/,
-        "/",
-        /\\\\d/,
-        /\\\\d/,
-        /\\\\d/,
-        /\\\\d/,
-        " ",
-        /\\\\d/,
-        /\\\\d/,
-        ":",
-        /\\\\d/,
-        /\\\\d/,
-      ]
-    }
-    onBlur={[Function]}
-    onChange={[Function]}
-    onFocus={[Function]}
-    onKeyPress={[Function]}
-    showMask={true}
-    style={
-      Object {
-        "borderLeft": 0,
-        "borderRight": 0,
-      }
-    }
-    type="text"
-    value="31/01/2099 00:00"
   />
   <div
     onClick={[Function]}
@@ -217,15 +305,8 @@ exports[`CalendarDateTimePicker render() basic 1`] = `
         /\\\\d/,
         /\\\\d/,
         /\\\\d/,
-        " ",
-        /\\\\d/,
-        /\\\\d/,
-        ":",
-        /\\\\d/,
-        /\\\\d/,
       ]
     }
-    onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
     onKeyPress={[Function]}
@@ -237,7 +318,7 @@ exports[`CalendarDateTimePicker render() basic 1`] = `
       }
     }
     type="text"
-    value="08/10/2017 00:00"
+    value="08/10/2017"
   />
   <div
     onClick={[Function]}
@@ -271,7 +352,6 @@ exports[`CalendarDateTimePicker render() if !time 1`] = `
         /\\\\d/,
       ]
     }
-    onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
     onKeyPress={[Function]}
@@ -315,15 +395,8 @@ exports[`CalendarDateTimePicker render() if isCalendarShown 1`] = `
         /\\\\d/,
         /\\\\d/,
         /\\\\d/,
-        " ",
-        /\\\\d/,
-        /\\\\d/,
-        ":",
-        /\\\\d/,
-        /\\\\d/,
       ]
     }
-    onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
     onKeyPress={[Function]}
@@ -335,7 +408,7 @@ exports[`CalendarDateTimePicker render() if isCalendarShown 1`] = `
       }
     }
     type="text"
-    value="08/10/2017 00:00"
+    value="08/10/2017"
   />
   <div
     onClick={[Function]}
@@ -350,11 +423,12 @@ exports[`CalendarDateTimePicker render() if isCalendarShown 1`] = `
     />
   </div>
   <CalendarDate
-    activeDates={2017-10-07T18:00:00.000Z}
-    date={2001-03-31T17:00:00.000Z}
+    highlight={2017-10-07T18:00:00.000Z}
     onChange={[Function]}
-    onClickDay={[Function]}
-    time={true}
+    onSetDate={[Function]}
+    onSetTime={[Function]}
+    value={2001-03-31T18:00:00.000Z}
+    visibleTime={2017-10-07T18:00:00.000Z}
   />
 </div>
 `;
@@ -374,15 +448,8 @@ exports[`CalendarDateTimePicker user interactions onChangeInputValue() 1`] = `
         /\\\\d/,
         /\\\\d/,
         /\\\\d/,
-        " ",
-        /\\\\d/,
-        /\\\\d/,
-        ":",
-        /\\\\d/,
-        /\\\\d/,
       ]
     }
-    onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
     onKeyPress={[Function]}
@@ -408,17 +475,10 @@ exports[`CalendarDateTimePicker user interactions onChangeInputValue() 1`] = `
       file="calendar"
     />
   </div>
-  <CalendarDate
-    activeDates={2009-02-09T18:00:00.000Z}
-    date={2019-12-10T06:00:00.000Z}
-    onChange={[Function]}
-    onClickDay={[Function]}
-    time={true}
-  />
 </div>
 `;
 
-exports[`CalendarDateTimePicker user interactions onClickInput() 1`] = `
+exports[`CalendarDateTimePicker user interactions onFocusInput() 1`] = `
 <div>
   <t
     mask={
@@ -433,15 +493,8 @@ exports[`CalendarDateTimePicker user interactions onClickInput() 1`] = `
         /\\\\d/,
         /\\\\d/,
         /\\\\d/,
-        " ",
-        /\\\\d/,
-        /\\\\d/,
-        ":",
-        /\\\\d/,
-        /\\\\d/,
       ]
     }
-    onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
     onKeyPress={[Function]}
@@ -453,7 +506,7 @@ exports[`CalendarDateTimePicker user interactions onClickInput() 1`] = `
       }
     }
     type="text"
-    value="10/02/2009 00:00"
+    value="10/02/2009"
   />
   <div
     onClick={[Function]}
@@ -467,12 +520,5 @@ exports[`CalendarDateTimePicker user interactions onClickInput() 1`] = `
       file="calendar"
     />
   </div>
-  <CalendarDate
-    activeDates={2009-02-09T18:00:00.000Z}
-    date={1994-04-30T17:00:00.000Z}
-    onChange={[Function]}
-    onClickDay={[Function]}
-    time={true}
-  />
 </div>
 `;

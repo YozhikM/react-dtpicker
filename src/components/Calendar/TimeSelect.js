@@ -39,9 +39,6 @@ class TimeSelect extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    // if (this.props.value !== nextProps.value) {
-    //   this.setState(this.parseTime(nextProps.value));
-    // }
     if (this.props.show !== nextProps.show) {
       this.setState({ show: nextProps.show });
     }

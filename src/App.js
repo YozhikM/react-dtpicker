@@ -7,11 +7,8 @@ type Props = void;
 type State = void;
 
 class App extends React.Component<Props, State> {
-
   render() {
-    return (
-      <Calendar />
-    );
+    return <Calendar />;
   }
 }
 

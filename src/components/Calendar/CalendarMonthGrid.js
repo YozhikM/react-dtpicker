@@ -11,7 +11,7 @@ export type Props = {|
   // false - disable highlight
   // null or undefined - use date for highlight
   // value - use provided value(s) for hightlight
-  highlight: Array<Date>,
+  highlight: Array<Date> | Date,
   onSetDate?: (date: Date) => void,
   onClickMonth?: (date: Date) => void
 |};
@@ -77,22 +77,29 @@ class CalendarMonthGrid extends React.Component<Props, State> {
     });
   };
 
-  setDayStyle = (highlight: Array<Date>, date: Date) => {
+  setDayStyle = (highlight: Array<Date> | Date, date: Date) => {
     const highlightStyle = { backgroundColor: '#34495e', color: '#fff' };
     const rangeStyle = { backgroundColor: '#8196ab', color: '#fff' };
-    for (let i = 0; i < highlight.length; i++) {
-      if (isSameDay(highlight[i], date)) {
-        return highlightStyle;
-      }
+    if (Array.isArray(highlight)) {
+        for (let i = 0; i < highlight.length; i++) {
+          if (isSameDay(highlight[i], date)) {
+            return highlightStyle;
+          }
+        }
+        if (highlight[0] < highlight[1]) {
+          if (isWithinRange(date, highlight[0], highlight[1])) {
+            return rangeStyle;
+          }
+        } else {
+          if (isWithinRange(date, highlight[1], highlight[0])) {
+            return rangeStyle;
+          }
+        }
     }
-    if (highlight[0] < highlight[1]) {
-      if (isWithinRange(date, highlight[0], highlight[1])) {
-        return rangeStyle;
-      }
-    } else {
-      if (isWithinRange(date, highlight[1], highlight[0])) {
-        return rangeStyle;
-      }
+    else {
+        if (isSameDay(highlight, date)) {
+            return highlightStyle;
+        }
     }
   };
 

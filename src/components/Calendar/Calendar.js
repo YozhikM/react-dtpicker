@@ -8,7 +8,7 @@ import { addMonths } from 'date-fns';
 
 type Props = {};
 type State = {|
-  highlight: Array<Date>,
+  highlight: Array<Date> | Date,
   value: Date,
   time: boolean,
   isCalendarShown: boolean,
@@ -16,37 +16,70 @@ type State = {|
   firstClick: Date | boolean,
   endClick: Date | boolean,
   firstDate: Date,
-  secondDate: Date
+  secondDate: Date,
 |};
 
 class Calendar extends React.Component<Props, State> {
   constructor() {
     super();
+
     this.state = {
       value: new Date(),
-      highlight: [new Date()],
       time: false,
       isCalendarShown: true,
       isSingleCalendar: false,
       firstClick: false,
       endClick: false,
       firstDate: new Date(),
-      secondDate: new Date()
+      secondDate: new Date(),
     };
   }
 
+  componentWillMount() {
+    const { isSingleCalendar } = this.state;
+    if (isSingleCalendar) {
+      this.setState({
+        highlight: new Date(),
+      });
+    } else {
+      this.setState({
+        highlight: [new Date()],
+      });
+    }
+  }
+
   onSetDate = (date: Date) => {
-    const { firstClick, highlight } = this.state;
-    const highlightCopy = highlight.slice();
-    highlightCopy.push(date);
-    if (highlightCopy.length > 2) {
-      highlightCopy.shift();
-    }
-    if (!firstClick) {
-      this.setState({ firstClick: true, highlight: highlightCopy, endClick: false, firstDate: highlightCopy[1] });
-    }
-    if (firstClick) {
-      this.setState({ endClick: true, highlight: highlightCopy, firstClick: false, secondDate: highlightCopy[1] });
+    const { firstClick, highlight, isSingleCalendar } = this.state;
+
+    if (!isSingleCalendar) {
+      const highlightCopy = highlight.slice();
+      highlightCopy.push(date);
+
+      if (highlightCopy.length > 2) {
+        highlightCopy.shift();
+      }
+
+      if (!firstClick) {
+        this.setState({
+          firstClick: true,
+          highlight: highlightCopy,
+          endClick: false,
+          firstDate: highlightCopy[1],
+        });
+      }
+
+      if (firstClick) {
+        this.setState({
+          endClick: true,
+          highlight: highlightCopy,
+          firstClick: false,
+          secondDate: highlightCopy[1],
+        });
+      }
+    } else {
+      this.setState({
+        highlight: date,
+      });
     }
   };
 
@@ -54,40 +87,23 @@ class Calendar extends React.Component<Props, State> {
     this.setState({ value });
   };
 
-  onChangeCalendarVisibility = (isCalendarShown: boolean) => {
-    this.setState({ isCalendarShown });
-  };
-
-  toggleTimeDisplay = () => {
-    const { time } = this.state;
-    this.setState({ time: !time });
-  };
-
-  showCalendarIcon = () => {
+  onChangeCalendarVisibility = () => {
     const { isCalendarShown } = this.state;
     this.setState({ isCalendarShown: !isCalendarShown });
   };
 
-  toggleCalendarQuantity = () => {
-    const { isSingleCalendar } = this.state;
-    this.setState({ isSingleCalendar: !isSingleCalendar });
-  };
-
   render() {
-    const { time, value, highlight, isCalendarShown, isSingleCalendar, firstDate, secondDate } = this.state;
+    const {
+      time,
+      value,
+      highlight,
+      isCalendarShown,
+      isSingleCalendar,
+      firstDate,
+      secondDate,
+    } = this.state;
     return (
       <div>
-        <div className={s.control_panel}>
-          <button onClick={this.toggleTimeDisplay}>
-            <SvgIcon file="clock" />
-          </button>
-          <button onClick={this.showCalendarIcon}>
-            {isCalendarShown ? <SvgIcon file="eye" /> : <SvgIcon file="eye-off" />}
-          </button>
-          <button onClick={this.toggleCalendarQuantity}>
-            {isSingleCalendar ? <SvgIcon file="plus" /> : <SvgIcon file="minus" />}
-          </button>
-        </div>
         {isSingleCalendar ? (
           <div className={s.container}>
             <CalendarDateTimePicker
@@ -97,10 +113,13 @@ class Calendar extends React.Component<Props, State> {
               isCalendarShown={isCalendarShown}
               onSetDate={this.onSetDate}
               onChange={this.onChange}
-              onChangeCalendarVisibility={this.onChangeCalendarVisibility}
+              onChangeCalendarVisibility={
+                this.onChangeCalendarVisibility
+              }
               borderLeft
               borderRight
               icon={true}
+              time={time}
             />
           </div>
         ) : (
@@ -112,15 +131,21 @@ class Calendar extends React.Component<Props, State> {
               isCalendarShown={isCalendarShown}
               onSetDate={this.onSetDate}
               onChange={this.onChange}
-              onChangeCalendarVisibility={this.onChangeCalendarVisibility}
+              onChangeCalendarVisibility={
+                this.onChangeCalendarVisibility
+              }
               borderLeft
               borderRight={false}
               icon={false}
               rightArrow={false}
-              time={false}
+              time={time}
             />
             <div className={s.arrow}>
-              {/* {startDate < endDate ? <SvgIcon file="arrow-right" /> : <SvgIcon file="arrow-left" />} */}
+              {firstDate < secondDate ? (
+                <SvgIcon file="arrow-right" />
+              ) : (
+                <SvgIcon file="arrow-left" />
+              )}
             </div>
             <CalendarDateTimePicker
               value={addMonths(value, 1)}
@@ -129,12 +154,14 @@ class Calendar extends React.Component<Props, State> {
               isCalendarShown={isCalendarShown}
               onSetDate={this.onSetDate}
               onChange={this.onChange}
-              onChangeCalendarVisibility={this.onChangeCalendarVisibility}
+              onChangeCalendarVisibility={
+                this.onChangeCalendarVisibility
+              }
               borderLeft={false}
               borderRight
               icon={false}
               leftArrow={false}
-              time={false}
+              time={time}
             />
           </div>
         )}
