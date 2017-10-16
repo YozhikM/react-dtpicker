@@ -28,30 +28,25 @@ class Calendar extends React.Component<Props, State> {
 
     this.state = {
       value: this.props.value || new Date(),
-      highlight: this.props.highlight || new Date(),
+      highlight: this.props.highlight || [new Date()],
       time: false,
       isCalendarShown: true,
-      isSingleCalendar: true,
+      isSingleCalendar: false,
       firstClick: false,
       endClick: false
     };
   }
 
   componentWillMount() {
-    const { highlight } = this.props;
-    const { isSingleCalendar, value } = this.state;
-    if (!isSingleCalendar && Array.isArray(highlight)) {
+    const { isSingleCalendar } = this.state;
+    if (!isSingleCalendar) {
       this.setState({
-        highlight: highlight || [value],
-        firstDate: highlight[0] || value,
-        secondDate: highlight[0] || value
+        highlight: [new Date()],
+        firstDate: new Date(),
+        secondDate: new Date()
       });
-    }
-    if (isSingleCalendar && Array.isArray(highlight)) {
-      this.setState({ highlight: this.props.highlight[0] || new Date() });
-    }
-    if (!Array.isArray(highlight)) {
-      this.setState({ highlight: this.props.highlight || new Date() });
+    } else {
+      this.setState({ highlight: new Date() });
     }
   }
 
@@ -118,7 +113,7 @@ class Calendar extends React.Component<Props, State> {
             <CalendarDateTimePicker
               value={value}
               highlight={highlight}
-              visibleDate={highlight}
+              visibleDate={new Date()}
               isCalendarShown={isCalendarShown}
               onSetDate={this.onSetDate}
               onChange={this.onChange}

@@ -25,10 +25,10 @@ Highlights the days. By default is `new Date()`. It can be a single date or an a
 Displayed months on the calendar. By default is `new Date()`
 
 #### `time`
-When the value is set to `true`, the time in hours and minutes will be displayed, as well as the ability to change it
+When the value is set to `true`, the time in hours and minutes will be displayed, as well as the ability to change it. By default is `false`
 
 #### `isSingleCalendar`
-When set to `true`, a single calendar will be displayed without the ability to select a date range
+When set to `true`, a single calendar will be displayed without the ability to select a date range. By default is `false`
 
 ![DateTimePicker](http://mysolaris.xyz/single.png)
 
