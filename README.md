@@ -31,3 +31,5 @@ When the value is set to `true`, the time in hours and minutes will be displayed
 When set to `true`, a single calendar will be displayed without the ability to select a date range
 
 ![DateTimePicker](http://mysolaris.xyz/single.png)
+
+To work with dates, use the library [date-fns](https://date-fns.org). Localization can be changed in a file `src/components/Calendar/format.js`
