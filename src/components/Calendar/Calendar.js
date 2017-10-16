@@ -31,7 +31,7 @@ class Calendar extends React.Component<Props, State> {
       highlight: this.props.highlight || new Date(),
       time: false,
       isCalendarShown: true,
-      isSingleCalendar: false,
+      isSingleCalendar: true,
       firstClick: false,
       endClick: false
     };
@@ -109,7 +109,7 @@ class Calendar extends React.Component<Props, State> {
     } = this.state;
     return (
       <div>
-        {isSingleCalendar && !Array.isArray(highlight) ? (
+        {isSingleCalendar ? (
           <div className={s.container}>
             <CalendarDateTimePicker
               value={value}
