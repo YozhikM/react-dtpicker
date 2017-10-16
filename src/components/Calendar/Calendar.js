@@ -11,7 +11,7 @@ type Props = {|
   value?: Date
 |};
 type State = {|
-  highlight: Array<Date> | Date,
+  highlight: Date | Array<Date>,
   value: Date,
   time: boolean,
   isCalendarShown: boolean,
@@ -28,7 +28,7 @@ class Calendar extends React.Component<Props, State> {
 
     this.state = {
       value: this.props.value || new Date(),
-      highlight: this.props.highlight || [new Date()],
+      highlight: this.props.highlight,
       time: false,
       isCalendarShown: true,
       isSingleCalendar: false,
@@ -38,14 +38,16 @@ class Calendar extends React.Component<Props, State> {
   }
 
   componentWillMount() {
+    const { highlight } = this.props;
     const { isSingleCalendar } = this.state;
-    if (!isSingleCalendar) {
+    if (!highlight && !isSingleCalendar) {
       this.setState({
-        highlight: [new Date()],
+        highlight: [new Date(), new Date()],
         firstDate: new Date(),
         secondDate: new Date()
       });
-    } else {
+    }
+    if (!highlight && isSingleCalendar) {
       this.setState({ highlight: new Date() });
     }
   }
@@ -108,12 +110,12 @@ class Calendar extends React.Component<Props, State> {
     } = this.state;
     return (
       <div>
-        {isSingleCalendar ? (
+        {isSingleCalendar && !Array.isArray(highlight) ? (
           <div className={s.container}>
             <CalendarDateTimePicker
               value={value}
               highlight={highlight}
-              visibleDate={new Date()}
+              visibleDate={highlight}
               isCalendarShown={isCalendarShown}
               onSetDate={this.onSetDate}
               onChange={this.onChange}

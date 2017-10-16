@@ -5,6 +5,29 @@ exports[`Calendar componentWillMount() !isSingleCalendar 1`] = `
   <div>
     <CalendarDateTimePicker
       borderLeft={true}
+      borderRight={false}
+      highlight={
+        Array [
+          2006-03-31T18:00:00.000Z,
+          2006-03-31T18:00:00.000Z,
+        ]
+      }
+      icon={false}
+      isCalendarShown={true}
+      onChange={[Function]}
+      onChangeCalendarVisibility={[Function]}
+      onSetDate={[Function]}
+      rightArrow={false}
+      time={false}
+      value={2006-04-30T18:00:00.000Z}
+    />
+    <div>
+      <SvgIcon
+        file="arrow-left"
+      />
+    </div>
+    <CalendarDateTimePicker
+      borderLeft={false}
       borderRight={true}
       highlight={
         Array [
@@ -12,19 +35,14 @@ exports[`Calendar componentWillMount() !isSingleCalendar 1`] = `
           2006-03-31T18:00:00.000Z,
         ]
       }
-      icon={true}
+      icon={false}
       isCalendarShown={true}
+      leftArrow={false}
       onChange={[Function]}
       onChangeCalendarVisibility={[Function]}
       onSetDate={[Function]}
       time={false}
-      value={2006-04-30T18:00:00.000Z}
-      visibleDate={
-        Array [
-          2006-03-31T18:00:00.000Z,
-          2006-03-31T18:00:00.000Z,
-        ]
-      }
+      value={2006-05-31T18:00:00.000Z}
     />
   </div>
 </div>
@@ -54,9 +72,19 @@ exports[`Calendar onChange() 1`] = `2016-04-30T18:00:00.000Z`;
 
 exports[`Calendar onChangeSecondValue() 1`] = `2016-04-30T18:00:00.000Z`;
 
-exports[`Calendar onSetDate() !isSingleCalendar !firstClick 1`] = `2009-04-08T18:00:00.000Z`;
+exports[`Calendar onSetDate() !isSingleCalendar !firstClick 1`] = `
+Array [
+  2009-04-05T18:00:00.000Z,
+  2009-04-08T18:00:00.000Z,
+]
+`;
 
-exports[`Calendar onSetDate() !isSingleCalendar firstClick 1`] = `2009-04-08T18:00:00.000Z`;
+exports[`Calendar onSetDate() !isSingleCalendar firstClick 1`] = `
+Array [
+  2009-04-06T18:00:00.000Z,
+  2009-04-08T18:00:00.000Z,
+]
+`;
 
 exports[`Calendar onSetDate() isSingleCalendar 1`] = `2009-04-08T18:00:00.000Z`;
 
@@ -65,6 +93,29 @@ exports[`Calendar render() !isSingleCalendar 1`] = `
   <div>
     <CalendarDateTimePicker
       borderLeft={true}
+      borderRight={false}
+      highlight={
+        Array [
+          2009-04-03T18:00:00.000Z,
+          2009-04-05T18:00:00.000Z,
+        ]
+      }
+      icon={false}
+      isCalendarShown={true}
+      onChange={[Function]}
+      onChangeCalendarVisibility={[Function]}
+      onSetDate={[Function]}
+      rightArrow={false}
+      time={false}
+      value={2009-04-30T18:00:00.000Z}
+    />
+    <div>
+      <SvgIcon
+        file="arrow-left"
+      />
+    </div>
+    <CalendarDateTimePicker
+      borderLeft={false}
       borderRight={true}
       highlight={
         Array [
@@ -72,19 +123,14 @@ exports[`Calendar render() !isSingleCalendar 1`] = `
           2009-04-05T18:00:00.000Z,
         ]
       }
-      icon={true}
+      icon={false}
       isCalendarShown={true}
+      leftArrow={false}
       onChange={[Function]}
       onChangeCalendarVisibility={[Function]}
       onSetDate={[Function]}
       time={false}
-      value={2009-04-30T18:00:00.000Z}
-      visibleDate={
-        Array [
-          2009-04-03T18:00:00.000Z,
-          2009-04-05T18:00:00.000Z,
-        ]
-      }
+      value={2009-05-31T18:00:00.000Z}
     />
   </div>
 </div>
@@ -95,16 +141,34 @@ exports[`Calendar render() basic 1`] = `
   <div>
     <CalendarDateTimePicker
       borderLeft={true}
-      borderRight={true}
+      borderRight={false}
       highlight={2018-04-03T18:00:00.000Z}
-      icon={true}
+      icon={false}
       isCalendarShown={true}
       onChange={[Function]}
       onChangeCalendarVisibility={[Function]}
       onSetDate={[Function]}
+      rightArrow={false}
       time={false}
       value={2018-03-31T18:00:00.000Z}
-      visibleDate={2018-04-03T18:00:00.000Z}
+    />
+    <div>
+      <SvgIcon
+        file="arrow-left"
+      />
+    </div>
+    <CalendarDateTimePicker
+      borderLeft={false}
+      borderRight={true}
+      highlight={2018-04-03T18:00:00.000Z}
+      icon={false}
+      isCalendarShown={true}
+      leftArrow={false}
+      onChange={[Function]}
+      onChangeCalendarVisibility={[Function]}
+      onSetDate={[Function]}
+      time={false}
+      value={2018-04-30T18:00:00.000Z}
     />
   </div>
 </div>

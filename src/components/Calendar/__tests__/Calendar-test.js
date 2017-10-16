@@ -28,9 +28,7 @@ describe('Calendar', () => {
       const wrapper = shallow(
         <Calendar value={new Date(2006, 7)} highlight={new Date(2006, 7, 4)} />
       );
-      wrapper.setState({
-        isSingleCalendar: true
-      });
+      wrapper.setState({ isSingleCalendar: true });
       expect(wrapper).toMatchSnapshot();
     });
 
@@ -75,7 +73,7 @@ describe('Calendar', () => {
 
       it('firstClick', () => {
         const wrapper = shallow(
-          <Calendar value={new Date(2009, 4)} highlight={[new Date(2009, 3, 4)]} />
+          <Calendar value={new Date(2009, 4)} highlight={[new Date(2009, 3, 4), new Date(2009, 3, 7)]} />
         );
         const newDate = new Date(2009, 3, 9);
         wrapper.instance().onSetDate(newDate);
