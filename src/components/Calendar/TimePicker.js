@@ -5,7 +5,7 @@ import SvgIcon from '../SvgIcon';
 import TimeSelect from './TimeSelect';
 import s from './Calendar.scss';
 
-type Show = 'button' | 'timeSelect'
+type Show = 'button' | 'timeSelect';
 
 type Props = {|
   onSetTime?: (time: Date) => void,
@@ -40,12 +40,7 @@ class TimePicker extends React.Component<Props, State> {
     const { show } = this.state;
 
     if (show === 'timeSelect') {
-      return (
-        <TimeSelect
-          value={date}
-          onSubmit={this.onSubmitTime}
-        />
-      );
+      return <TimeSelect value={date} onSubmit={this.onSubmitTime} />;
     }
 
     return (

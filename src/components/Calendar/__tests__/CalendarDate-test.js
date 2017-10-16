@@ -41,12 +41,16 @@ describe('CalendarDate', () => {
 
     it('if disabled leftArrow', () => {
       let value = new Date(2007, 6, 5);
-      expect(shallow(<CalendarDate value={value} highlight={value} leftArrow={false} />)).toMatchSnapshot();
+      expect(
+        shallow(<CalendarDate value={value} highlight={value} leftArrow={false} />)
+      ).toMatchSnapshot();
     });
 
     it('if disabled rightArrow', () => {
       let value = new Date(1984, 4, 4);
-      expect(shallow(<CalendarDate value={value} highlight={value} rightArrow={false} />)).toMatchSnapshot();
+      expect(
+        shallow(<CalendarDate value={value} highlight={value} rightArrow={false} />)
+      ).toMatchSnapshot();
     });
   });
 

@@ -6,7 +6,7 @@ import { getDate } from 'date-fns';
 type Props = {|
   date: Date,
   onClick?: (date: Date) => void,
-  style: any
+  style?: any
 |};
 
 type State = void;
@@ -22,7 +22,11 @@ class CalendarDay extends React.Component<Props, State> {
   render() {
     const { date, style } = this.props;
     let dayOfMonth = getDate(date);
-    return <td style={style} onClick={this.onClick}>{dayOfMonth}</td>;
+    return (
+      <td style={style} onClick={this.onClick}>
+        {dayOfMonth}
+      </td>
+    );
   }
 }
 

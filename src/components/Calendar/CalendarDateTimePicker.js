@@ -5,7 +5,7 @@ import CalendarDate from '../Calendar/CalendarDate';
 import MaskedInput from 'react-text-mask';
 import SvgIcon from '../SvgIcon';
 import s from './Calendar.scss';
-import { format, isValid, isSameDay } from 'date-fns';
+import { format, isValid } from 'date-fns';
 
 type Props = {|
   highlight: Array<Date> | Date,
@@ -20,14 +20,14 @@ type Props = {|
   icon?: boolean,
   onSetDate: (date: Date) => void,
   leftArrow?: boolean,
-  rightArrow?: boolean,
+  rightArrow?: boolean
 |};
 type State = {|
   highlight: Array<Date> | Date,
   value: Date,
   visibleDate: Date,
   isCalendarShown: boolean,
-  inputValue: string,
+  inputValue: string
 |};
 
 class CalendarDateTimePicker extends React.Component<Props, State> {
@@ -36,10 +36,10 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
 
     this.state = {
       highlight: this.props.highlight,
-      visibleDate: this.props.visibleDate,
+      visibleDate: this.props.visibleDate || new Date(),
       value: this.props.value,
       isCalendarShown: !!this.props.isCalendarShown,
-      inputValue: '',
+      inputValue: ''
     };
   }
 
@@ -52,43 +52,36 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
 
   componentWillMount() {
     const { visibleDate, time } = this.props;
-    if (time) {
-      this.setState({ inputValue: this.formatWithTime(visibleDate) });
-    } else {
-      this.setState({
-        inputValue: this.formatWithoutTime(visibleDate),
-      });
+    if (visibleDate) {
+      if (time) {
+        this.setState({ inputValue: this.formatWithTime(visibleDate) });
+      } else {
+        this.setState({ inputValue: this.formatWithoutTime(visibleDate) });
+      }
     }
   }
 
   componentWillReceiveProps(nextProps: Props) {
     const { time } = this.props;
-    if (nextProps.time !== time) {
+    if (nextProps.visibleDate && nextProps.time !== time) {
       if (time) {
         this.setState({
-          inputValue: this.formatWithTime(nextProps.visibleDate),
+          inputValue: this.formatWithTime(nextProps.visibleDate)
         });
       } else {
         this.setState({
-          inputValue: this.formatWithoutTime(nextProps.visibleDate),
+          inputValue: this.formatWithoutTime(nextProps.visibleDate)
         });
       }
     }
-    if (
-      nextProps.visibleDate !== this.state.visibleDate &&
-      !isSameDay(nextProps.visibleDate, this.props.value)
-    ) 
-		this.setState({ visibleDate: nextProps.visibleDate });
-	{
-      if (time) {
-        this.setState({
-          inputValue: this.formatWithTime(nextProps.visibleDate),
-        });
-      } else {
-        this.setState({
-          inputValue: this.formatWithoutTime(nextProps.visibleDate),
-        });
-      }
+    if (nextProps.visibleDate !== this.state.visibleDate)
+      this.setState({ visibleDate: nextProps.visibleDate });
+    if (time) {
+      // $FlowFixMe
+      this.setState({ inputValue: this.formatWithTime(nextProps.visibleDate) });
+    } else {
+      // $FlowFixMe
+      this.setState({ inputValue: this.formatWithoutTime(nextProps.visibleDate) });
     }
 
     if (nextProps.value !== this.state.value) {
@@ -117,6 +110,8 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     }
     if (value.length > 0 && onSetDate && isValid(userDate)) {
       onSetDate(userDate);
+    }
+    if (value.length > 0 && onChange && isValid(userDate)) {
       onChange(userDate);
     }
   };
@@ -153,11 +148,11 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     const { time } = this.props;
     if (time) {
       this.setState({
-        inputValue: this.formatWithTime(date),
+        inputValue: this.formatWithTime(date)
       });
     } else {
       this.setState({
-        inputValue: this.formatWithoutTime(date),
+        inputValue: this.formatWithoutTime(date)
       });
     }
     const { onSetDate } = this.props;
@@ -167,7 +162,7 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
   onSetTime = (time: Date) => {
     this.setState({
       visibleDate: time,
-      inputValue: this.formatWithTime(time),
+      inputValue: this.formatWithTime(time)
     });
   };
 
@@ -181,16 +176,15 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
       rightArrow,
       time,
       isCalendarShown,
-      visibleDate,
-	  isSingleCalendar
+      visibleDate
     } = this.props;
     const { inputValue, value } = this.state;
     const iconStyle = {
-      display: icon ? 'flex' : 'none',
+      display: icon ? 'flex' : 'none'
     };
     const borderStyle = {
       borderLeft: borderLeft ? '3px solid #34495e' : 0,
-      borderRight: borderRight ? '3px solid #34495e' : 0,
+      borderRight: borderRight ? '3px solid #34495e' : 0
     };
     let mask;
     if (time) {
@@ -210,21 +204,10 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
         /\d/,
         ':',
         /\d/,
-        /\d/,
+        /\d/
       ];
     } else {
-      mask = [
-        /[0-9]/,
-        /\d/,
-        '/',
-        /\d/,
-        /\d/,
-        '/',
-        /\d/,
-        /\d/,
-        /\d/,
-        /\d/,
-      ];
+      mask = [/[0-9]/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
     }
 
     return (
@@ -240,11 +223,7 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
           value={inputValue}
           showMask
         />
-        <div
-          onClick={this.onChangeVisibility}
-          className={s.icon}
-          style={iconStyle}
-        >
+        <div onClick={this.onChangeVisibility} className={s.icon} style={iconStyle}>
           <SvgIcon file="calendar" />
         </div>
         {isCalendarShown && (
@@ -258,7 +237,6 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
             leftArrow={leftArrow}
             rightArrow={rightArrow}
             time={time}
-			isSingleCalendar={isSingleCalendar}
           />
         )}
       </div>

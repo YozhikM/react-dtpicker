@@ -7,7 +7,7 @@ import MaskedInput from 'react-text-mask';
 describe('CalendarDateTimePicker', () => {
   describe('render()', () => {
     it('basic', () => {
-        const date = new Date(2017, 9, 8);
+      const date = new Date(2017, 9, 8);
       expect(
         shallow(
           <CalendarDateTimePicker
@@ -21,7 +21,7 @@ describe('CalendarDateTimePicker', () => {
     });
 
     it('if !time', () => {
-        const date = new Date(2017, 9, 8);
+      const date = new Date(2017, 9, 8);
       expect(
         shallow(
           <CalendarDateTimePicker
@@ -110,39 +110,39 @@ describe('CalendarDateTimePicker', () => {
 
   describe('componentWillReceiveProps()', () => {
     describe('time', () => {
-        it('if time', () => {
-      const highlight = new Date(2099, 1, 0);
-      const wrapper = shallow(
-        <CalendarDateTimePicker
-          highlight={highlight}
-          visibleDate={highlight}
-          value={new Date(2009, 3, 1)}
-          onSetDate={jest.fn()}
-          time={false}
-        />
-      );
-      wrapper.setProps({ time: true });
-      const format = wrapper.instance().formatWithTime(highlight);
-      expect(wrapper).toMatchSnapshot();
-      expect(format).toBe('31/01/2099 00:00');
-        });
+      it('if time', () => {
+        const highlight = new Date(2099, 1, 0);
+        const wrapper = shallow(
+          <CalendarDateTimePicker
+            highlight={highlight}
+            visibleDate={highlight}
+            value={new Date(2009, 3, 1)}
+            onSetDate={jest.fn()}
+            time={false}
+          />
+        );
+        wrapper.setProps({ time: true });
+        const format = wrapper.instance().formatWithTime(highlight);
+        expect(wrapper).toMatchSnapshot();
+        expect(format).toBe('31/01/2099 00:00');
+      });
 
-        it('if !time', () => {
-            const highlight = new Date(2099, 1, 0);
-      const wrapper = shallow(
-        <CalendarDateTimePicker
-          highlight={highlight}
-          visibleDate={highlight}
-          value={new Date(2009, 3, 1)}
-          onSetDate={jest.fn()}
-          time={true}
-        />
-      );
-      wrapper.setProps({ time: false });
-      const format = wrapper.instance().formatWithoutTime(highlight);
-      expect(wrapper).toMatchSnapshot();
-      expect(format).toBe('31/01/2099');
-        });
+      it('if !time', () => {
+        const highlight = new Date(2099, 1, 0);
+        const wrapper = shallow(
+          <CalendarDateTimePicker
+            highlight={highlight}
+            visibleDate={highlight}
+            value={new Date(2009, 3, 1)}
+            onSetDate={jest.fn()}
+            time={true}
+          />
+        );
+        wrapper.setProps({ time: false });
+        const format = wrapper.instance().formatWithoutTime(highlight);
+        expect(wrapper).toMatchSnapshot();
+        expect(format).toBe('31/01/2099');
+      });
     });
 
     describe('visibleDate', () => {
@@ -237,7 +237,10 @@ describe('CalendarDateTimePicker', () => {
       />
     );
     const newDate = new Date(2019, 8, 3);
-    wrapper.find('CalendarDate').props().onChange(newDate);
+    wrapper
+      .find('CalendarDate')
+      .props()
+      .onChange(newDate);
     expect(spy).toBeCalledWith(newDate);
   });
 
@@ -253,7 +256,10 @@ describe('CalendarDateTimePicker', () => {
       />
     );
     const newDate = new Date(2009, 2, 3);
-    wrapper.find('CalendarDate').props().onSetDate(newDate);
+    wrapper
+      .find('CalendarDate')
+      .props()
+      .onSetDate(newDate);
     expect(spy).toBeCalledWith(newDate);
     expect(wrapper.state('inputValue')).toBe('03/03/2009');
   });
@@ -269,15 +275,18 @@ describe('CalendarDateTimePicker', () => {
       />
     );
     const newDate = new Date('2019-12-12T18:00:00.000Z');
-    wrapper.find('CalendarDate').props().onSetTime(newDate);
+    wrapper
+      .find('CalendarDate')
+      .props()
+      .onSetTime(newDate);
     expect(wrapper.state('inputValue')).toBe('13/12/2019 00:00');
     expect(wrapper.state('visibleDate')).toEqual(newDate);
   });
 
   describe('user interactions', () => {
     it('onPressEnter()', () => {
-        const spy = jest.fn();
-        const wrapper = shallow(
+      const spy = jest.fn();
+      const wrapper = shallow(
         <CalendarDateTimePicker
           highlight={new Date(2009, 1, 10)}
           visibleDate={new Date(2009, 1, 10)}
@@ -288,9 +297,9 @@ describe('CalendarDateTimePicker', () => {
       );
       const input = wrapper.find(MaskedInput);
       input.simulate('keyPress', { keyCode: 13 });
-      expect(wrapper.state('isCalendarShown')).toBe(false); 
-    });  
-      
+      expect(wrapper.state('isCalendarShown')).toBe(false);
+    });
+
     it('onFocusInput()', () => {
       const spy = jest.fn();
       const wrapper = shallow(

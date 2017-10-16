@@ -21,11 +21,11 @@ type Props = {|
   onSetTime?: (value: Value) => void,
   onSubmit?: (value: Value) => void,
   showSeconds?: boolean,
-  show?: ShowEnum,
+  show?: ShowEnum
 |};
 
 type State = HHMMSS & {
-  show: ShowEnum,
+  show: ShowEnum
 };
 
 class TimeSelect extends React.Component<Props, State> {
@@ -34,7 +34,7 @@ class TimeSelect extends React.Component<Props, State> {
 
     this.state = {
       ...this.parseTime(this.props.value),
-      show: this.props.show || 'main',
+      show: this.props.show || 'main'
     };
   }
 
@@ -100,15 +100,15 @@ class TimeSelect extends React.Component<Props, State> {
   };
 
   onChangeTableHH = (value: number) => {
-    this.setState({ hh: value, show: 'main' }, this.onSetTime)
+    this.setState({ hh: value, show: 'main' }, this.onSetTime);
   };
 
   onChangeTableMM = (value: number) => {
-    this.setState({ mm: value, show: 'main' }, this.onSetTime)
+    this.setState({ mm: value, show: 'main' }, this.onSetTime);
   };
 
   onChangeTableSS = (value: number) => {
-    this.setState({ ss: value, show: 'main' }, this.onSetTime)
+    this.setState({ ss: value, show: 'main' }, this.onSetTime);
   };
 
   render() {

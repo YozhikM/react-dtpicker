@@ -10,15 +10,15 @@ type State = {
 };
 
 class App extends React.Component<Props, State> {
-	constructor() {
-	super();
-	this.state={
-		highlight: new Date,
-		value: new Date,
-		}
-	}
+  constructor() {
+    super();
+    this.state = {
+      highlight: [new Date(), new Date()],
+      value: new Date()
+    };
+  }
   render() {
-	  const { highlight, value } = this.state;
+    const { highlight, value } = this.state;
     return <Calendar highlight={highlight} value={value} />;
   }
 }

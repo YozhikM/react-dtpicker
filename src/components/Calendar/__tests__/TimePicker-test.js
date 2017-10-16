@@ -36,7 +36,9 @@ describe('TimePicker', () => {
       const wrapper = shallow(<TimePicker date={new Date()} onSetTime={spy} />);
       const newDate = new Date(2018, 9, 11);
       wrapper.setState({ show: 'timeSelect' });
-      findTimeSelect(wrapper).props().onSubmit(newDate);
+      findTimeSelect(wrapper)
+        .props()
+        .onSubmit(newDate);
       expect(wrapper.state('show')).toBe('button');
       expect(spy).toBeCalledWith(newDate);
     });

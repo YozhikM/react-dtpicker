@@ -427,7 +427,7 @@ exports[`CalendarDateTimePicker render() if isCalendarShown 1`] = `
     onChange={[Function]}
     onSetDate={[Function]}
     onSetTime={[Function]}
-    value={2001-03-31T18:00:00.000Z}
+    value={2001-03-31T17:00:00.000Z}
     visibleTime={2017-10-07T18:00:00.000Z}
   />
 </div>

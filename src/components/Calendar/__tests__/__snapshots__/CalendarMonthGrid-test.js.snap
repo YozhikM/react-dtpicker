@@ -429,12 +429,12 @@ exports[`CalendarMonthGrid setDayStyle() 1`] = `
         key="0"
       >
         <CalendarDay
-          date={1994-06-30T18:00:00.000Z}
+          date={1994-06-30T17:00:00.000Z}
           key="0"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-01T18:00:00.000Z}
+          date={1994-07-01T17:00:00.000Z}
           key="1"
           onClick={[Function]}
           style={
@@ -445,7 +445,7 @@ exports[`CalendarMonthGrid setDayStyle() 1`] = `
           }
         />
         <CalendarDay
-          date={1994-07-02T18:00:00.000Z}
+          date={1994-07-02T17:00:00.000Z}
           key="2"
           onClick={[Function]}
           style={
@@ -460,7 +460,7 @@ exports[`CalendarMonthGrid setDayStyle() 1`] = `
         key="1"
       >
         <CalendarDay
-          date={1994-07-03T18:00:00.000Z}
+          date={1994-07-03T17:00:00.000Z}
           key="0"
           onClick={[Function]}
           style={
@@ -471,7 +471,7 @@ exports[`CalendarMonthGrid setDayStyle() 1`] = `
           }
         />
         <CalendarDay
-          date={1994-07-04T18:00:00.000Z}
+          date={1994-07-04T17:00:00.000Z}
           key="1"
           onClick={[Function]}
           style={
@@ -482,7 +482,7 @@ exports[`CalendarMonthGrid setDayStyle() 1`] = `
           }
         />
         <CalendarDay
-          date={1994-07-05T18:00:00.000Z}
+          date={1994-07-05T17:00:00.000Z}
           key="2"
           onClick={[Function]}
           style={
@@ -493,22 +493,22 @@ exports[`CalendarMonthGrid setDayStyle() 1`] = `
           }
         />
         <CalendarDay
-          date={1994-07-06T18:00:00.000Z}
+          date={1994-07-06T17:00:00.000Z}
           key="3"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-07T18:00:00.000Z}
+          date={1994-07-07T17:00:00.000Z}
           key="4"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-08T18:00:00.000Z}
+          date={1994-07-08T17:00:00.000Z}
           key="5"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-09T18:00:00.000Z}
+          date={1994-07-09T17:00:00.000Z}
           key="6"
           onClick={[Function]}
         />
@@ -517,37 +517,37 @@ exports[`CalendarMonthGrid setDayStyle() 1`] = `
         key="2"
       >
         <CalendarDay
-          date={1994-07-10T18:00:00.000Z}
+          date={1994-07-10T17:00:00.000Z}
           key="0"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-11T18:00:00.000Z}
+          date={1994-07-11T17:00:00.000Z}
           key="1"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-12T18:00:00.000Z}
+          date={1994-07-12T17:00:00.000Z}
           key="2"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-13T18:00:00.000Z}
+          date={1994-07-13T17:00:00.000Z}
           key="3"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-14T18:00:00.000Z}
+          date={1994-07-14T17:00:00.000Z}
           key="4"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-15T18:00:00.000Z}
+          date={1994-07-15T17:00:00.000Z}
           key="5"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-16T18:00:00.000Z}
+          date={1994-07-16T17:00:00.000Z}
           key="6"
           onClick={[Function]}
         />
@@ -556,37 +556,37 @@ exports[`CalendarMonthGrid setDayStyle() 1`] = `
         key="3"
       >
         <CalendarDay
-          date={1994-07-17T18:00:00.000Z}
+          date={1994-07-17T17:00:00.000Z}
           key="0"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-18T18:00:00.000Z}
+          date={1994-07-18T17:00:00.000Z}
           key="1"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-19T18:00:00.000Z}
+          date={1994-07-19T17:00:00.000Z}
           key="2"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-20T18:00:00.000Z}
+          date={1994-07-20T17:00:00.000Z}
           key="3"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-21T18:00:00.000Z}
+          date={1994-07-21T17:00:00.000Z}
           key="4"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-22T18:00:00.000Z}
+          date={1994-07-22T17:00:00.000Z}
           key="5"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-23T18:00:00.000Z}
+          date={1994-07-23T17:00:00.000Z}
           key="6"
           onClick={[Function]}
         />
@@ -595,37 +595,37 @@ exports[`CalendarMonthGrid setDayStyle() 1`] = `
         key="4"
       >
         <CalendarDay
-          date={1994-07-24T18:00:00.000Z}
+          date={1994-07-24T17:00:00.000Z}
           key="0"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-25T18:00:00.000Z}
+          date={1994-07-25T17:00:00.000Z}
           key="1"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-26T18:00:00.000Z}
+          date={1994-07-26T17:00:00.000Z}
           key="2"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-27T18:00:00.000Z}
+          date={1994-07-27T17:00:00.000Z}
           key="3"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-28T18:00:00.000Z}
+          date={1994-07-28T17:00:00.000Z}
           key="4"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-29T18:00:00.000Z}
+          date={1994-07-29T17:00:00.000Z}
           key="5"
           onClick={[Function]}
         />
         <CalendarDay
-          date={1994-07-30T18:00:00.000Z}
+          date={1994-07-30T17:00:00.000Z}
           key="6"
           onClick={[Function]}
         />
