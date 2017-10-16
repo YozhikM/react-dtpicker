@@ -7,7 +7,7 @@ The date can be changed in the input.
 ![DateTimePicker](http://mysolaris.xyz/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202017-10-16%20%D0%B2%204.26.32%20%D0%9F%D0%9F.png)
 
 
-## Get started
+## Usage
 
 1. `git clone https://github.com/YozhikM/dtpicker.git`
 2. `npm install`
@@ -31,5 +31,7 @@ When the value is set to `true`, the time in hours and minutes will be displayed
 When set to `true`, a single calendar will be displayed without the ability to select a date range. By default is `false`
 
 ![DateTimePicker](http://mysolaris.xyz/single.png)
+
+## Locales
 
 To work with dates, use the library [date-fns](https://date-fns.org). Localization can be changed in a file `src/components/Calendar/format.js`
