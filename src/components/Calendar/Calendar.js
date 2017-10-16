@@ -46,8 +46,12 @@ class Calendar extends React.Component<Props, State> {
         firstDate: highlight[0] || value,
         secondDate: highlight[0] || value
       });
-    } else {
-      this.setState({ highlight: this.props.highlight || value });
+    }
+    if (isSingleCalendar && Array.isArray(highlight)) {
+      this.setState({ highlight: this.props.highlight[0] || new Date() });
+    }
+    if (!Array.isArray(highlight)) {
+      this.setState({ highlight: this.props.highlight || new Date() });
     }
   }
 

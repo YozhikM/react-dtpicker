@@ -59,15 +59,18 @@ describe('Calendar', () => {
     describe('!isSingleCalendar', () => {
       it('!firstClick', () => {
         const wrapper = shallow(
-          <Calendar value={new Date(2009, 4)} highlight={[new Date(2009, 3, 4)]} />
+          <Calendar
+            value={new Date(2009, 4)}
+            highlight={[new Date(2009, 3, 4), new Date(2009, 3, 6)]}
+          />
         );
         const newDate = new Date(2009, 3, 9);
-        wrapper.setState({ firstClick: false });
-        wrapper.instance().onSetDate(newDate);
+        wrapper
+          .find('CalendarDateTimePicker')
+          .at(0)
+          .props()
+          .onSetDate(newDate);
         expect(wrapper.state('highlight')).toMatchSnapshot();
-        expect(wrapper.state('firstClick')).toBe(true);
-        expect(wrapper.state('endClick')).toBe(false);
-        expect(wrapper.state('firstDate')).toBe(newDate);
       });
 
       it('firstClick', () => {
@@ -75,12 +78,8 @@ describe('Calendar', () => {
           <Calendar value={new Date(2009, 4)} highlight={[new Date(2009, 3, 4)]} />
         );
         const newDate = new Date(2009, 3, 9);
-        wrapper.setState({ firstClick: true });
         wrapper.instance().onSetDate(newDate);
         expect(wrapper.state('highlight')).toMatchSnapshot();
-        expect(wrapper.state('firstClick')).toBe(false);
-        expect(wrapper.state('endClick')).toBe(true);
-        expect(wrapper.state('secondDate')).toBe(newDate);
       });
     });
   });
