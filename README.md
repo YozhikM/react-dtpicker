@@ -1,6 +1,7 @@
 # Date Time Picker
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/YozhikM/dtpicker.svg)](https://greenkeeper.io/)
+[![DeepScan Grade](https://deepscan.io/api/projects/1543/branches/5299/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=1543&bid=5299)
 
 The calendar is written using the React library. Can be used both as a common calendar, and as a date time picker with range.
 There is a possibility to choose a date by days, months, years and decades.
