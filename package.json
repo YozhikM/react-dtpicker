@@ -1,7 +1,7 @@
 {
-  "name": "test",
-  "version": "0.1.0",
-  "private": true,
+  "name": "react-dtpicker",
+  "version": "1.0.1",
+  "description": "React Date Time Picker",
   "dependencies": {
     "autoprefixer": "7.2.3",
     "babel-core": "^6.26.0",
@@ -59,22 +59,11 @@
     "lint": "eslint --ext .js ./src"
   },
   "jest": {
-    "roots": [
-      "<rootDir>/src"
-    ],
-    "testMatch": [
-      "**/*-test.js"
-    ],
-    "collectCoverageFrom": [
-      "<rootDir>/src/**/*.{js,jsx}"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/jestPolyfills.js",
-      "<rootDir>/config/jestGlobals.js"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
+    "roots": ["<rootDir>/src"],
+    "testMatch": ["**/*-test.js"],
+    "collectCoverageFrom": ["<rootDir>/src/**/*.{js,jsx}"],
+    "setupFiles": ["<rootDir>/config/jestPolyfills.js", "<rootDir>/config/jestGlobals.js"],
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "testEnvironment": "node",
     "testURL": "http://localhost",
     "transform": {
@@ -82,22 +71,15 @@
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
       "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
-    ],
-    "moduleFileExtensions": [
-      "js"
-    ]
+    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"],
+    "moduleFileExtensions": ["js"]
   },
   "babel": {
-    "presets": [
-      "react-app"
-    ]
+    "presets": ["react-app"]
   },
   "eslintConfig": {
     "extends": "react-app",
     "globals": {
-      "spyMount": true,
       "mount": true,
       "shallow": true,
       "render": true
@@ -110,5 +92,9 @@
     "react-test-renderer": "^16.0.0",
     "sass-loader": "^6.0.6",
     "svg-inline-loader": "^0.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YozhikM/dtpicker.git"
   }
 }
