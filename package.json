@@ -15,7 +15,7 @@
     "case-sensitive-paths-webpack-plugin": "2.1.1",
     "chalk": "2.3.0",
     "consolidated-events": "^1.1.1",
-    "css-loader": "0.28.7",
+    "css-loader": "0.28.8",
     "date-fns": "^1.29.0",
     "dotenv": "4.0.0",
     "enzyme": "^3.1.0",
