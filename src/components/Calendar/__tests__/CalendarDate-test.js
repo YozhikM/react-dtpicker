@@ -1,8 +1,8 @@
 /* @flow */
 
 import React from 'react';
-import CalendarDate from '../CalendarDate';
 import { setMonth, setYear, addMonths, addYears } from 'date-fns';
+import CalendarDate from '../CalendarDate';
 
 describe('CalendarDate', () => {
   describe('render', () => {
@@ -313,7 +313,7 @@ describe('CalendarDate', () => {
     const value = new Date(1767, 8, 0);
     const wrapper = shallow(<CalendarDate highlight={value} value={value} show="yy" />);
     wrapper.instance().getYearOptions(value);
-    const options = wrapper.find('TableSelect').props().options;
+    const { options } = wrapper.find('TableSelect').props();
     expect(options).toEqual([
       { value: 1760, name: '1760' },
       { value: 1761, name: '1761' },

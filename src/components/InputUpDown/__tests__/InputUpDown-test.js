@@ -102,7 +102,7 @@ describe('InputUpDown', () => {
 
     it('button up mouseDown', () => {
       const [wrapper, spy] = spyMount(<InputUpDown value={20} />, 'onHoldStart');
-      const increment = wrapper.instance().increment;
+      const { increment } = wrapper.instance();
       findUpBtn(wrapper).simulate('mouseDown');
       expect(spy).toBeCalledWith(increment);
       expect(findText(wrapper)).toBe('20');
@@ -124,7 +124,7 @@ describe('InputUpDown', () => {
 
     it('button down mouseDown', () => {
       const [wrapper, spy] = spyMount(<InputUpDown value={20} />, 'onHoldStart');
-      const decrement = wrapper.instance().decrement;
+      const { decrement } = wrapper.instance();
       findDownBtn(wrapper).simulate('mouseDown');
       expect(spy).toBeCalledWith(decrement);
       expect(findText(wrapper)).toBe('20');

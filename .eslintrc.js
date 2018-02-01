@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     es6: true,
-    browser: true,
+    browser: true
   },
   parser: 'babel-eslint',
   extends: ['airbnb', 'prettier', 'plugin:flowtype/recommended'],
@@ -14,13 +14,16 @@ module.exports = {
     'jsx-a11y/no-noninteractive-element-interactions': 0,
     'jsx-a11y/anchor-is-valid': 0,
     'jsx-a11y/label-has-for': 0,
-    'jsx-a11y/no-static-element-interactions': 0.
+    'jsx-a11y/no-static-element-interactions': 0,
     'class-methods-use-this': 0,
-    'no-plusplus': 0,
+    'no-plusplus': 0
   },
   globals: {
     expect: true,
     it: true,
     shallow: true,
-  },
+    describe: true,
+    spyMount: true,
+    jest: true
+  }
 };

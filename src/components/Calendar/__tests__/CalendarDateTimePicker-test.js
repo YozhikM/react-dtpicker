@@ -1,8 +1,8 @@
 /* @flow */
 
 import React from 'react';
-import CalendarDateTimePicker from '../CalendarDateTimePicker';
 import MaskedInput from 'react-text-mask';
+import CalendarDateTimePicker from '../CalendarDateTimePicker';
 
 describe('CalendarDateTimePicker', () => {
   describe('render()', () => {
