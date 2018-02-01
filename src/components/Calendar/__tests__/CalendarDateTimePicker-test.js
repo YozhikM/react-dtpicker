@@ -72,7 +72,7 @@ describe('CalendarDateTimePicker', () => {
           visibleDate={highlight}
           value={new Date()}
           onSetDate={jest.fn()}
-          time={true}
+          time
         />
       );
       const format = wrapper.instance().formatWithTime(highlight);
@@ -135,7 +135,7 @@ describe('CalendarDateTimePicker', () => {
             visibleDate={highlight}
             value={new Date(2009, 3, 1)}
             onSetDate={jest.fn()}
-            time={true}
+            time
           />
         );
         wrapper.setProps({ time: false });
@@ -168,7 +168,7 @@ describe('CalendarDateTimePicker', () => {
             visibleDate={new Date(2010, 1, 11)}
             value={new Date(2011, 9, 7)}
             onSetDate={jest.fn()}
-            time={true}
+            time
           />
         );
         const newDate = new Date(2010, 0, 10);

@@ -19,7 +19,7 @@ describe('TimePicker', () => {
 
     it('show TimeSelect', () => {
       expect(
-        shallow(<TimePicker date={new Date(2010, 10, 10)} show={'timeSelect'} />)
+        shallow(<TimePicker date={new Date(2010, 10, 10)} show="timeSelect" />)
       ).toMatchSnapshot();
     });
   });

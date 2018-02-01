@@ -122,7 +122,7 @@ class Calendar extends React.Component<Props, State> {
               onChangeCalendarVisibility={this.onChangeCalendarVisibility}
               borderLeft
               borderRight
-              icon={true}
+              icon
               time={time}
             />
           </div>

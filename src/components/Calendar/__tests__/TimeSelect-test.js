@@ -44,9 +44,9 @@ describe('TimeSelect', () => {
   });
 
   describe('parseTime()', () => {
-    const wrapper = shallow(<TimeSelect showSeconds={true} />);
-    let value = new Date(2017, 7, 7, 10, 9, 8);
-    let result = wrapper.instance().parseTime(value);
+    const wrapper = shallow(<TimeSelect showSeconds />);
+    const value = new Date(2017, 7, 7, 10, 9, 8);
+    const result = wrapper.instance().parseTime(value);
     expect(result).toEqual({ hh: 10, mm: 9, ss: 8 });
   });
 

@@ -10,23 +10,20 @@ type Props = {|
   max?: number,
   circular?: boolean,
   onChange?: (value: number) => void,
-  onClickNumber?: (value: number) => void
+  onClickNumber?: (value: number) => void,
 |};
 
 type State = {|
   value: number,
-  isBtnHold: boolean
+  isBtnHold: boolean,
 |};
 
 class InputUpDown extends React.Component<Props, State> {
-  state: State;
-  holdIntervalId: ?number;
-
   constructor(props: Props) {
     super(props);
     this.state = {
       value: this.props.value || 0,
-      isBtnHold: false
+      isBtnHold: false,
     };
   }
 
@@ -82,6 +79,8 @@ class InputUpDown extends React.Component<Props, State> {
       this.holdIntervalId = null;
     }
   };
+
+  holdIntervalId: ?number;
 
   render() {
     return (

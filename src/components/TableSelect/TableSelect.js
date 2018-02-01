@@ -50,21 +50,19 @@ class TableSelect extends React.Component<Props, State> {
             width: `${cols * 68.25}px`
           }}
         >
-          {options.map((options, i) => {
-            return (
-              <li
-                onClick={e => {
-                  this.clickItem(e, options.value);
+          {options.map((option, i) => (
+            <li
+              onClick={e => {
+                  this.clickItem(e, option.value);
                 }}
-                key={i}
-                style={{
-                  fontWeight: options.value === value ? 'bold' : 'normal'
+              key={i}
+              style={{
+                  fontWeight: option.value === value ? 'bold' : 'normal'
                 }}
-              >
-                {options.name}
-              </li>
-            );
-          })}
+            >
+              {option.name}
+            </li>
+            ))}
         </ul>
       </div>
     );

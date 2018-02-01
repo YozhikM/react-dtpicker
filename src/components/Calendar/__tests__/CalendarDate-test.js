@@ -7,47 +7,47 @@ import { setMonth, setYear, addMonths, addYears } from 'date-fns';
 describe('CalendarDate', () => {
   describe('render', () => {
     it('basic', () => {
-      let value = new Date(2010, 10, 10);
+      const value = new Date(2010, 10, 10);
       expect(
-        shallow(<CalendarDate value={value} highlight={value} show={'calendar'} />)
+        shallow(<CalendarDate value={value} highlight={value} show="calendar" />)
       ).toMatchSnapshot();
     });
 
     it('if month table', () => {
-      let value = new Date(2014, 11, 1);
+      const value = new Date(2014, 11, 1);
       expect(
-        shallow(<CalendarDate value={value} highlight={value} show={'mm'} />)
+        shallow(<CalendarDate value={value} highlight={value} show="mm" />)
       ).toMatchSnapshot();
     });
 
     it('if year table', () => {
-      let value = new Date(2022, 0, 21);
+      const value = new Date(2022, 0, 21);
       expect(
-        shallow(<CalendarDate value={value} highlight={value} show={'yy'} />)
+        shallow(<CalendarDate value={value} highlight={value} show="yy" />)
       ).toMatchSnapshot();
     });
 
     it('if decade table', () => {
-      let value = new Date(2040, 5, 10);
+      const value = new Date(2040, 5, 10);
       expect(
-        shallow(<CalendarDate value={value} highlight={value} show={'yy10'} />)
+        shallow(<CalendarDate value={value} highlight={value} show="yy10" />)
       ).toMatchSnapshot();
     });
 
     it('if time', () => {
-      let value = new Date(2005, 6, 7);
+      const value = new Date(2005, 6, 7);
       expect(shallow(<CalendarDate value={value} highlight={value} time />)).toMatchSnapshot();
     });
 
     it('if disabled leftArrow', () => {
-      let value = new Date(2007, 6, 5);
+      const value = new Date(2007, 6, 5);
       expect(
         shallow(<CalendarDate value={value} highlight={value} leftArrow={false} />)
       ).toMatchSnapshot();
     });
 
     it('if disabled rightArrow', () => {
-      let value = new Date(1984, 4, 4);
+      const value = new Date(1984, 4, 4);
       expect(
         shallow(<CalendarDate value={value} highlight={value} rightArrow={false} />)
       ).toMatchSnapshot();
@@ -92,7 +92,7 @@ describe('CalendarDate', () => {
       const value = new Date(2000, 11, 11);
       const spy = jest.fn();
       const wrapper = shallow(
-        <CalendarDate highlight={value} value={value} onChange={spy} show={'mm'} />
+        <CalendarDate highlight={value} value={value} onChange={spy} show="mm" />
       );
       const newDate = setMonth(value, 3);
       wrapper
@@ -108,7 +108,7 @@ describe('CalendarDate', () => {
       const value = new Date(2019, 11, 11);
       const spy = jest.fn();
       const wrapper = shallow(
-        <CalendarDate highlight={value} value={value} onChange={spy} show={'yy'} />
+        <CalendarDate highlight={value} value={value} onChange={spy} show="yy" />
       );
       const newDate = setYear(value, 2018);
       wrapper
@@ -124,7 +124,7 @@ describe('CalendarDate', () => {
       const value = new Date(2029, 11, 11);
       const spy = jest.fn();
       const wrapper = shallow(
-        <CalendarDate highlight={value} value={value} onChange={spy} show={'yy10'} />
+        <CalendarDate highlight={value} value={value} onChange={spy} show="yy10" />
       );
       const newDate = setYear(value, 2048);
       wrapper
@@ -138,7 +138,7 @@ describe('CalendarDate', () => {
 
     it('showCalendar()', () => {
       const wrapper = shallow(
-        <CalendarDate highlight={new Date()} show={'mm'} value={new Date()} />
+        <CalendarDate highlight={new Date()} show="mm" value={new Date()} />
       );
       wrapper
         .find('button')
@@ -159,7 +159,7 @@ describe('CalendarDate', () => {
 
       it('click back in years TableSelect', () => {
         const wrapper = shallow(
-          <CalendarDate highlight={new Date()} value={new Date()} show={'yy'} />
+          <CalendarDate highlight={new Date()} value={new Date()} show="yy" />
         );
         wrapper
           .find('button')
@@ -172,7 +172,7 @@ describe('CalendarDate', () => {
     describe('showYearTable()', () => {
       it('click year months TableSelect', () => {
         const wrapper = shallow(
-          <CalendarDate highlight={new Date()} value={new Date()} show={'mm'} />
+          <CalendarDate highlight={new Date()} value={new Date()} show="mm" />
         );
         wrapper.find('span').simulate('click');
         expect(wrapper.state('show')).toBe('yy');
@@ -180,7 +180,7 @@ describe('CalendarDate', () => {
 
       it('click back in 10YY TableSelect', () => {
         const wrapper = shallow(
-          <CalendarDate highlight={new Date()} value={new Date()} show={'yy10'} />
+          <CalendarDate highlight={new Date()} value={new Date()} show="yy10" />
         );
         wrapper.find('button').simulate('click');
         expect(wrapper.state('show')).toBe('yy');
@@ -189,7 +189,7 @@ describe('CalendarDate', () => {
 
     it('showDecadeTable()', () => {
       const wrapper = shallow(
-        <CalendarDate highlight={new Date()} value={new Date()} show={'yy'} />
+        <CalendarDate highlight={new Date()} value={new Date()} show="yy" />
       );
       wrapper.find('span').simulate('click');
       expect(wrapper.state('show')).toBe('yy10');
@@ -226,7 +226,7 @@ describe('CalendarDate', () => {
       const value = new Date(1915, 8, 0);
       const newDate = addYears(value, 10);
       const wrapper = shallow(
-        <CalendarDate highlight={value} value={value} show={'yy'} onChange={spy} />
+        <CalendarDate highlight={value} value={value} show="yy" onChange={spy} />
       );
       wrapper
         .find('button')
@@ -241,7 +241,7 @@ describe('CalendarDate', () => {
       const value = new Date(1965, 8, 0);
       const newDate = addYears(value, -10);
       const wrapper = shallow(
-        <CalendarDate highlight={value} value={value} show={'yy'} onChange={spy} />
+        <CalendarDate highlight={value} value={value} show="yy" onChange={spy} />
       );
       wrapper
         .find('button')
@@ -256,7 +256,7 @@ describe('CalendarDate', () => {
       const value = new Date(1997, 8, 0);
       const newDate = addYears(value, 1);
       const wrapper = shallow(
-        <CalendarDate highlight={value} value={value} show={'mm'} onChange={spy} />
+        <CalendarDate highlight={value} value={value} show="mm" onChange={spy} />
       );
       wrapper
         .find('button')
@@ -271,7 +271,7 @@ describe('CalendarDate', () => {
       const value = new Date(1977, 8, 0);
       const newDate = addYears(value, -1);
       const wrapper = shallow(
-        <CalendarDate highlight={value} value={value} show={'mm'} onChange={spy} />
+        <CalendarDate highlight={value} value={value} show="mm" onChange={spy} />
       );
       wrapper
         .find('button')
@@ -284,7 +284,7 @@ describe('CalendarDate', () => {
 
   it('showDecade()', () => {
     const value = new Date(1477, 8, 0);
-    const wrapper = shallow(<CalendarDate highlight={value} value={value} show={'yy'} />);
+    const wrapper = shallow(<CalendarDate highlight={value} value={value} show="yy" />);
     wrapper.instance().showDecade();
     expect(wrapper.find('span').text()).toEqual('1470 - 1479');
   });
@@ -311,7 +311,7 @@ describe('CalendarDate', () => {
 
   it('getYearOptions()', () => {
     const value = new Date(1767, 8, 0);
-    const wrapper = shallow(<CalendarDate highlight={value} value={value} show={'yy'} />);
+    const wrapper = shallow(<CalendarDate highlight={value} value={value} show="yy" />);
     wrapper.instance().getYearOptions(value);
     const options = wrapper.find('TableSelect').props().options;
     expect(options).toEqual([
@@ -330,7 +330,7 @@ describe('CalendarDate', () => {
 
   it('getYearDecadeOptions()', () => {
     const value = new Date(1767, 8, 0);
-    const wrapper = shallow(<CalendarDate highlight={value} value={value} show={'yy'} />);
+    const wrapper = shallow(<CalendarDate highlight={value} value={value} show="yy" />);
     const options = wrapper.instance().getYearDecadeOptions(value);
     expect(options).toEqual([
       { value: 1730, name: '1730 1739' },

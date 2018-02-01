@@ -37,18 +37,18 @@ class CalendarMonthGrid extends React.Component<Props, State> {
   }
 
   createMonth = (value: Date) => {
-    let startDateOfMonth = startOfMonth(value);
-    let endDateOfMonth = endOfMonth(value);
-    let currentMonth = eachDay(startDateOfMonth, endDateOfMonth);
-    let firstOfMonthDay = getDay(startDateOfMonth);
+    const startDateOfMonth = startOfMonth(value);
+    const endDateOfMonth = endOfMonth(value);
+    const currentMonth = eachDay(startDateOfMonth, endDateOfMonth);
+    const firstOfMonthDay = getDay(startDateOfMonth);
     let beginOfMonth;
     firstOfMonthDay === 0 ? (beginOfMonth = 1) : (beginOfMonth = 8 - firstOfMonthDay);
-    let firstWeek = currentMonth.slice(0, beginOfMonth);
-    let secondWeek = currentMonth.slice(beginOfMonth, 7 + firstWeek.length);
-    let thirdWeek = currentMonth.slice(beginOfMonth + 7, beginOfMonth + 14);
-    let fourthWeek = currentMonth.slice(beginOfMonth + 14, beginOfMonth + 21);
-    let fiveWeek = currentMonth.slice(beginOfMonth + 21, beginOfMonth + 28);
-    let tailWeek = currentMonth.slice(beginOfMonth + 28);
+    const firstWeek = currentMonth.slice(0, beginOfMonth);
+    const secondWeek = currentMonth.slice(beginOfMonth, 7 + firstWeek.length);
+    const thirdWeek = currentMonth.slice(beginOfMonth + 7, beginOfMonth + 14);
+    const fourthWeek = currentMonth.slice(beginOfMonth + 14, beginOfMonth + 21);
+    const fiveWeek = currentMonth.slice(beginOfMonth + 21, beginOfMonth + 28);
+    const tailWeek = currentMonth.slice(beginOfMonth + 28);
     const weeks = [firstWeek, secondWeek, thirdWeek, fourthWeek, fiveWeek];
     if (tailWeek.length > 0) {
       weeks.push(tailWeek);
@@ -72,9 +72,7 @@ class CalendarMonthGrid extends React.Component<Props, State> {
 
   getWeekDays = () => {
     const { weeks } = this.state;
-    return weeks[1].map((weekDay, i) => {
-      return format(weekDay, 'dd');
-    });
+    return weeks[1].map((weekDay, i) => format(weekDay, 'dd'));
   };
 
   setDayStyle = (highlight: Array<Date> | Date, date: Date) => {
@@ -90,16 +88,12 @@ class CalendarMonthGrid extends React.Component<Props, State> {
         if (isWithinRange(date, highlight[0], highlight[1])) {
           return rangeStyle;
         }
-      } else {
-        if (isWithinRange(date, highlight[1], highlight[0])) {
+      } else if (isWithinRange(date, highlight[1], highlight[0])) {
           return rangeStyle;
         }
-      }
-    } else {
-      if (isSameDay(highlight, date)) {
+    } else if (isSameDay(highlight, date)) {
         return highlightStyle;
       }
-    }
   };
 
   render() {
@@ -111,24 +105,20 @@ class CalendarMonthGrid extends React.Component<Props, State> {
         <table>
           <thead>
             <tr>
-              {this.getWeekDays().map((weekDay, i) => {
-                return <th key={i}>{weekDay.toUpperCase()}</th>;
-              })}
+              {this.getWeekDays().map((weekDay, i) => <th key={i}>{weekDay.toUpperCase()}</th>)}
             </tr>
           </thead>
           <tbody>
             {weeks.map((week, i) => (
               <tr key={i}>
-                {week.map((date, dayOfWeek) => {
-                  return (
-                    <CalendarDay
-                      key={dayOfWeek}
-                      date={date}
-                      style={highlight ? this.setDayStyle(highlight, date) : null}
-                      onClick={this.onSetDate}
-                    />
-                  );
-                })}
+                {week.map((date, dayOfWeek) => (
+                  <CalendarDay
+                    key={dayOfWeek}
+                    date={date}
+                    style={highlight ? this.setDayStyle(highlight, date) : null}
+                    onClick={this.onSetDate}
+                  />
+                  ))}
               </tr>
             ))}
           </tbody>

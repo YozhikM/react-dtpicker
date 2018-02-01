@@ -43,12 +43,8 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     };
   }
 
-  formatWithTime = (date: Date) => {
-    return format(date, 'DD/MM/YYYY HH:mm');
-  };
-  formatWithoutTime = (date: Date) => {
-    return format(date, 'DD/MM/YYYY');
-  };
+  formatWithTime = (date: Date) => format(date, 'DD/MM/YYYY HH:mm');
+  formatWithoutTime = (date: Date) => format(date, 'DD/MM/YYYY');
 
   componentWillMount() {
     const { visibleDate, time } = this.props;

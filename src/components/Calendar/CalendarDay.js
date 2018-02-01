@@ -21,7 +21,7 @@ class CalendarDay extends React.Component<Props, State> {
 
   render() {
     const { date, style } = this.props;
-    let dayOfMonth = getDate(date);
+    const dayOfMonth = getDate(date);
     return (
       <td style={style} onClick={this.onClick}>
         {dayOfMonth}

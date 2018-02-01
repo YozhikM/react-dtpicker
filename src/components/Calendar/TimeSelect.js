@@ -46,7 +46,7 @@ class TimeSelect extends React.Component<Props, State> {
 
   genTableOpts = (from: number, till: number, step: number = 1): Options => {
     const res: Options = [];
-    for (let i = from; i <= till; i = i + step) {
+    for (let i = from; i <= till; i += step) {
       res.push({ value: i, name: i < 10 ? `0${i}` : `${i}` });
     }
     return res;
