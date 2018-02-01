@@ -1,11 +1,12 @@
 /* @flow */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 
 import React from 'react';
-import CalendarDate from '../Calendar/CalendarDate';
 import MaskedInput from 'react-text-mask';
+import { format, isValid } from 'date-fns';
+import CalendarDate from '../Calendar/CalendarDate';
 import SvgIcon from '../SvgIcon';
 import s from './Calendar.scss';
-import { format, isValid } from 'date-fns';
 
 type Props = {|
   highlight: Array<Date> | Date,
@@ -35,7 +36,6 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      highlight: this.props.highlight,
       visibleDate: this.props.visibleDate || new Date(),
       value: this.props.value,
       isCalendarShown: !!this.props.isCalendarShown,
@@ -91,7 +91,7 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
 
   onChangeInputValue = (e: any) => {
     const { onChange, onSetDate, time } = this.props;
-    const value = e.target.value;
+    const { value } = e.target;
     this.setState({ inputValue: value });
     let userDate;
     const YY = Number(value.substr(6, 4));

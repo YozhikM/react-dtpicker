@@ -3,14 +3,6 @@
 import React from 'react';
 import Calendar from './components/Calendar/Calendar';
 
-type Props = void;
-type State = {
-  highlight?: Array<Date> | Date,
-  value?: Date,
-};
-
-const App = (props: Props) => {
-  return <Calendar />;
-};
+const App = () => <Calendar />;
 
 export default App;

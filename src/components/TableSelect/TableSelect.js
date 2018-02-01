@@ -50,12 +50,12 @@ class TableSelect extends React.Component<Props, State> {
             width: `${cols * 68.25}px`
           }}
         >
-          {options.map((option, i) => (
+          {options.map(option => (
             <li
               onClick={e => {
                   this.clickItem(e, option.value);
                 }}
-              key={i}
+              key={option.value}
               style={{
                   fontWeight: option.value === value ? 'bold' : 'normal'
                 }}

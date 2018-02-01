@@ -65,7 +65,7 @@ class InputUpDown extends React.Component<Props, State> {
     this.setState({ isBtnHold: true });
     setTimeout(() => {
       if (this.state.isBtnHold && !this.holdIntervalId) {
-        this.holdIntervalId = this.holdIntervalId = setInterval(() => {
+        this.holdIntervalId = this.holdIntervalId = setInterval(() => { // eslint-disable-line
           if (this.state.isBtnHold) cb();
         }, 50);
       }

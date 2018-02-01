@@ -1,26 +1,26 @@
 /* @flow */
 
 import React from 'react';
+import { addMonths } from 'date-fns';
 import CalendarDateTimePicker from './CalendarDateTimePicker';
 import SvgIcon from '../SvgIcon';
 import s from './MainCalendar.scss';
-import { addMonths } from 'date-fns';
 
 type Props = {|
   highlight?: Array<Date> | Date,
   value?: Date
 |};
-type State = {|
+
+type State = {
   highlight: Date | Array<Date>,
   value: Date,
   time: boolean,
   isCalendarShown: boolean,
   isSingleCalendar: boolean,
   firstClick?: boolean,
-  endClick?: boolean,
   firstDate?: Date,
   secondDate?: Date
-|};
+};
 
 class Calendar extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -33,7 +33,6 @@ class Calendar extends React.Component<Props, State> {
       isCalendarShown: true,
       isSingleCalendar: false,
       firstClick: false,
-      endClick: false
     };
   }
 
@@ -67,14 +66,12 @@ class Calendar extends React.Component<Props, State> {
         this.setState({
           firstClick: true,
           highlight: highlightCopy,
-          endClick: false,
           firstDate: highlightCopy[1]
         });
       }
 
       if (firstClick) {
         this.setState({
-          endClick: true,
           highlight: highlightCopy,
           firstClick: false,
           secondDate: highlightCopy[1]

@@ -1,9 +1,9 @@
 /* @flow */
-/* eslint-disable react/no-danger, global-require, import/no-dynamic-require */
+/* eslint-disable react/no-danger, global-require, import/no-dynamic-require, react/require-default-props */
 
 import * as React from 'react';
 
-type Props = {
+type Props = {|
   file: string,
   width?: string,
   height?: string,
@@ -11,20 +11,20 @@ type Props = {
   color?: string,
   style?: Object,
   className?: string,
-};
+|};
 
 const SvgIcon = (props: Props) => {
-  const { file, wh = '24px', width, height } = this.props;
+  const { file, wh = '24px', width, height, style, className, color } = props;
 
   return (
     <div
-      className={this.props.className}
+      className={className}
       style={{
         width: width || wh,
         height: height || wh,
-        fill: this.props.color,
+        fill: color,
         display: 'inline-block',
-        ...this.props.style,
+        ...style,
       }}
       dangerouslySetInnerHTML={{
         // $FlowFixMe
