@@ -16,8 +16,6 @@ type Props = {|
   onChangeCalendarVisibility?: boolean => void,
   isCalendarShown?: boolean,
   onChange?: (value: Date) => void,
-  borderLeft?: boolean,
-  borderRight?: boolean,
   icon?: boolean,
   onSetDate: (date: Date) => void,
   leftArrow?: boolean,
@@ -165,8 +163,6 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
   render() {
     const {
       highlight,
-      borderLeft,
-      borderRight,
       icon,
       leftArrow,
       rightArrow,
@@ -177,10 +173,6 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     const { inputValue, value } = this.state;
     const iconStyle = {
       display: icon ? 'flex' : 'none'
-    };
-    const borderStyle = {
-      borderLeft: borderLeft ? '3px solid #34495e' : 0,
-      borderRight: borderRight ? '3px solid #34495e' : 0
     };
     let mask;
     if (time) {
@@ -211,7 +203,6 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
         <MaskedInput
           mask={mask}
           className={s.input}
-          style={borderStyle}
           type="text"
           onChange={this.onChangeInputValue}
           onFocus={this.onFocusInput}
