@@ -1,0 +1,239 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Calendar convertValueToArray() if !singleCalendar 1`] = `
+Array [
+  2010-03-02T18:00:00.000Z,
+  2010-03-02T17:59:59.000Z,
+]
+`;
+
+exports[`Calendar convertValueToArray() if singleCalendar 1`] = `2010-03-02T18:00:00.000Z`;
+
+exports[`Calendar convertValueToDate() 1`] = `
+Object {
+  "max": 2010-04-02T18:00:00.000Z,
+  "min": 2010-03-02T18:00:00.000Z,
+}
+`;
+
+exports[`Calendar getValue() if firstDate < secondDate 1`] = `
+Object {
+  "max": "2010-03-04T17:59:59.000Z",
+  "min": "2010-03-02T18:00:00.000Z",
+}
+`;
+
+exports[`Calendar getValue() if firstDate > secondDate 1`] = `
+Object {
+  "max": "2010-03-26T17:59:59.000Z",
+  "min": "2010-02-28T18:00:00.000Z",
+}
+`;
+
+exports[`Calendar render() basic 1`] = `
+<div>
+  <div
+    className="undefined"
+  >
+    <CalendarDateTimePicker
+      highlight={
+        Array [
+          2010-03-02T18:00:00.000Z,
+          2010-03-02T17:59:59.000Z,
+        ]
+      }
+      isCalendarShown={true}
+      leftArrow={true}
+      onChange={[Function]}
+      onChangeCalendarVisibility={[Function]}
+      onSetDate={[Function]}
+      onSetDateByClick={[Function]}
+      time={false}
+      value={2010-03-02T18:00:00.000Z}
+      visibleDate={2010-03-02T18:00:00.000Z}
+    />
+    <CalendarDateTimePicker
+      highlight={
+        Array [
+          2010-03-02T18:00:00.000Z,
+          2010-03-02T17:59:59.000Z,
+        ]
+      }
+      isCalendarShown={true}
+      onChange={[Function]}
+      onChangeCalendarVisibility={[Function]}
+      onSetDate={[Function]}
+      onSetDateByClick={[Function]}
+      rightArrow={true}
+      time={false}
+      value={2010-04-02T18:00:00.000Z}
+      visibleDate={2010-03-02T17:59:59.000Z}
+    />
+  </div>
+</div>
+`;
+
+exports[`Calendar render() if singleCalendar 1`] = `
+<div>
+  <CalendarDateTimePicker
+    highlight={2010-03-02T18:00:00.000Z}
+    isCalendarShown={true}
+    leftArrow={true}
+    onChange={[Function]}
+    onChangeCalendarVisibility={[Function]}
+    onSetDate={[Function]}
+    rightArrow={true}
+    time={false}
+    value={2010-03-02T18:00:00.000Z}
+    visibleDate={2010-03-02T18:00:00.000Z}
+  />
+</div>
+`;
+
+exports[`Calendar render() if time 1`] = `
+<div>
+  <div
+    className="undefined"
+  >
+    <CalendarDateTimePicker
+      highlight={
+        Array [
+          2010-03-02T18:00:00.000Z,
+          2010-03-02T17:59:59.000Z,
+        ]
+      }
+      isCalendarShown={true}
+      leftArrow={true}
+      onChange={[Function]}
+      onChangeCalendarVisibility={[Function]}
+      onSetDate={[Function]}
+      onSetDateByClick={[Function]}
+      time={true}
+      value={2010-03-02T18:00:00.000Z}
+      visibleDate={2010-03-02T18:00:00.000Z}
+    />
+    <CalendarDateTimePicker
+      highlight={
+        Array [
+          2010-03-02T18:00:00.000Z,
+          2010-03-02T17:59:59.000Z,
+        ]
+      }
+      isCalendarShown={true}
+      onChange={[Function]}
+      onChangeCalendarVisibility={[Function]}
+      onSetDate={[Function]}
+      onSetDateByClick={[Function]}
+      rightArrow={true}
+      time={true}
+      value={2010-04-02T18:00:00.000Z}
+      visibleDate={2010-03-02T17:59:59.000Z}
+    />
+  </div>
+</div>
+`;
+
+exports[`Calendar render() if time 2`] = `
+<div>
+  <div
+    className="undefined"
+  >
+    <CalendarDateTimePicker
+      highlight={
+        Array [
+          2010-03-02T18:00:00.000Z,
+          2010-03-02T17:59:59.000Z,
+        ]
+      }
+      isCalendarShown={true}
+      leftArrow={true}
+      onChange={[Function]}
+      onChangeCalendarVisibility={[Function]}
+      onSetDate={[Function]}
+      onSetDateByClick={[Function]}
+      time={false}
+      value={2010-03-02T18:00:00.000Z}
+      visibleDate={2010-03-02T18:00:00.000Z}
+    />
+    <CalendarDateTimePicker
+      highlight={
+        Array [
+          2010-03-02T18:00:00.000Z,
+          2010-03-02T17:59:59.000Z,
+        ]
+      }
+      isCalendarShown={true}
+      onChange={[Function]}
+      onChangeCalendarVisibility={[Function]}
+      onSetDate={[Function]}
+      onSetDateByClick={[Function]}
+      rightArrow={true}
+      time={false}
+      value={2010-04-02T18:00:00.000Z}
+      visibleDate={2010-03-02T17:59:59.000Z}
+    />
+  </div>
+</div>
+`;
+
+exports[`Calendar renderSingleCalendar() 1`] = `
+<div
+  className={undefined}
+>
+  <CalendarDateTimePicker
+    highlight={2010-03-02T18:00:00.000Z}
+    isCalendarShown={true}
+    leftArrow={true}
+    onChange={[Function]}
+    onChangeCalendarVisibility={[Function]}
+    onSetDate={[Function]}
+    rightArrow={true}
+    time={false}
+    value={2010-03-02T18:00:00.000Z}
+    visibleDate={2010-03-02T18:00:00.000Z}
+  />
+</div>
+`;
+
+exports[`Calendar renderSingleCalendar() 2`] = `
+<div>
+  <div
+    className="undefined"
+  >
+    <CalendarDateTimePicker
+      highlight={
+        Array [
+          2010-03-02T18:00:00.000Z,
+          2010-03-02T17:59:59.000Z,
+        ]
+      }
+      isCalendarShown={true}
+      leftArrow={true}
+      onChange={[Function]}
+      onChangeCalendarVisibility={[Function]}
+      onSetDate={[Function]}
+      onSetDateByClick={[Function]}
+      time={false}
+      value={2010-03-02T18:00:00.000Z}
+      visibleDate={2010-03-02T18:00:00.000Z}
+    />
+    <CalendarDateTimePicker
+      highlight={
+        Array [
+          2010-03-02T18:00:00.000Z,
+          2010-03-02T17:59:59.000Z,
+        ]
+      }
+      isCalendarShown={true}
+      onChange={[Function]}
+      onChangeCalendarVisibility={[Function]}
+      onSetDate={[Function]}
+      onSetDateByClick={[Function]}
+      rightArrow={true}
+      time={false}
+      value={2010-04-02T18:00:00.000Z}
+      visibleDate={2010-03-02T17:59:59.000Z}
+    />
+  </div>
+</div>
+`;

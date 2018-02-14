@@ -1,0 +1,200 @@
+.btns {
+  display: flex;
+}
+
+.icon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 24px;
+  top: 5px;
+  cursor: pointer;
+}
+
+.root {
+  position: relative;
+  bottom: 28px;
+
+  table {
+    border-collapse: collapse;
+  }
+
+  tr {
+    display: flex;
+  }
+
+  tr:nth-of-type(1) {
+    justify-content: flex-end;
+  }
+
+  td,
+  th {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    outline: none;
+  }
+}
+
+.button_container {
+  display: flex;
+  justify-content: space-around;
+
+  button {
+    display: block;
+    text-align: center;
+    margin: 3% 0 3% 0;
+    color: #3c3f40;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    outline: none;
+  }
+}
+
+.button_single_container {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 45px;
+  z-index: -1;
+
+  button {
+    display: block;
+    text-align: center;
+    margin: 0;
+    color: #3c3f40;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    transform: scale(1);
+    transition: transform 0.6s ease;
+  }
+  button:hover {
+    transform: scale(0.8);
+    transition: transform 0.6s ease;
+  }
+}
+.left_arrow {
+  align-self: flex-start;
+  z-index: 2;
+  color: #333 !important;
+  margin: 0 !important;
+  border: none !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  position: relative;
+  top: 3px;
+}
+.right_arrow {
+  align-self: flex-end;
+  z-index: 2;
+  color: #333 !important;
+  margin: 0 !important;
+  border: none !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  position: relative;
+  top: 3px;
+}
+.calendar_container {
+  .span {
+    margin: 3% auto;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  button {
+    display: block;
+    margin: 3% auto;
+  }
+}
+.table {
+  display: inline-block;
+  z-index: 2;
+}
+
+.c_button_container {
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    display: block;
+    text-align: center;
+    margin: 3% 0 3% 0;
+    color: #3c3f40;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    z-index: 1;
+  }
+}
+
+.time_picker {
+  text-align: center;
+
+  button {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    margin: 0 auto;
+    padding: 0 !important;
+  }
+}
+.container {
+  display: flex;
+  align-items: center;
+  margin: 0 2px;
+  flex-direction: column;
+}
+
+.arrow {
+  position: absolute;
+  top: 5px;
+  z-index: 3;
+}
+
+.control_panel {
+  position: absolute;
+  bottom: 50%;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-around;
+  width: 150px;
+  left: 10%;
+  z-index: 3;
+
+  button {
+    cursor: pointer;
+    background: transparent;
+    border-radius: 50px;
+    border: 1px solid rgb(52, 73, 94);
+    padding: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+  }
+}

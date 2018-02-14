@@ -1,0 +1,31 @@
+.container {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.wideContainer {
+  margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+}
+
+.arrow {
+  position: absolute;
+  top: 5px;
+  z-index: 3;
+}
+
+.resetBtn {
+  display: flex;
+  justify-content: center;
+  margin: 5px 0;
+  height: 100%;
+}

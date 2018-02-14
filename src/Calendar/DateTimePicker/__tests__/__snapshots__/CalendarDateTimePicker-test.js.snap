@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CalendarDateTimePicker render() basic 1`] = `
+<div>
+  <DateMaskInput
+    onChange={[Function]}
+    style={
+      Object {
+        "width": "80%",
+      }
+    }
+  />
+  <CalendarDate
+    highlight={2017-10-07T18:00:00.000Z}
+    onChange={[Function]}
+    onSetDate={[Function]}
+    onSetTime={[Function]}
+    value={2001-03-31T17:00:00.000Z}
+  />
+</div>
+`;
+
+exports[`CalendarDateTimePicker render() if !isCalendarShown 1`] = `
+<div>
+  <DateMaskInput
+    onChange={[Function]}
+    style={
+      Object {
+        "width": "80%",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`CalendarDateTimePicker render() if icon 1`] = `
+<div>
+  <DateMaskInput
+    onChange={[Function]}
+    style={
+      Object {
+        "width": "80%",
+      }
+    }
+  />
+  <div>
+    <SvgIcon
+      file="calendar"
+    />
+  </div>
+  <CalendarDate
+    highlight={2017-10-07T18:00:00.000Z}
+    onChange={[Function]}
+    onSetDate={[Function]}
+    onSetTime={[Function]}
+    value={2001-03-31T17:00:00.000Z}
+  />
+</div>
+`;
+
+exports[`CalendarDateTimePicker render() if leftArrow 1`] = `
+<div>
+  <DateMaskInput
+    onChange={[Function]}
+    style={
+      Object {
+        "width": "80%",
+      }
+    }
+  />
+  <CalendarDate
+    highlight={2017-10-07T18:00:00.000Z}
+    leftArrow={true}
+    onChange={[Function]}
+    onSetDate={[Function]}
+    onSetTime={[Function]}
+    value={2001-03-31T17:00:00.000Z}
+  />
+</div>
+`;
+
+exports[`CalendarDateTimePicker render() if rightArrow 1`] = `
+<div>
+  <DateMaskInput
+    onChange={[Function]}
+    style={
+      Object {
+        "width": "80%",
+      }
+    }
+  />
+  <CalendarDate
+    highlight={2017-10-07T18:00:00.000Z}
+    onChange={[Function]}
+    onSetDate={[Function]}
+    onSetTime={[Function]}
+    rightArrow={true}
+    value={2001-03-31T17:00:00.000Z}
+  />
+</div>
+`;
+
+exports[`CalendarDateTimePicker render() if time 1`] = `
+<div>
+  <DateMaskInput
+    onChange={[Function]}
+    style={
+      Object {
+        "width": "80%",
+      }
+    }
+  />
+  <CalendarDate
+    highlight={2017-10-07T18:00:00.000Z}
+    onChange={[Function]}
+    onSetDate={[Function]}
+    onSetTime={[Function]}
+    time={true}
+    value={2001-03-31T17:00:00.000Z}
+  />
+</div>
+`;

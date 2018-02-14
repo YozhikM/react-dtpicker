@@ -16,7 +16,8 @@ module.exports = {
     'jsx-a11y/label-has-for': 0,
     'jsx-a11y/no-static-element-interactions': 0,
     'class-methods-use-this': 0,
-    'no-plusplus': 0
+    'no-plusplus': 0,
+    'no-underscore-dangle': 0,
   },
   globals: {
     expect: true,

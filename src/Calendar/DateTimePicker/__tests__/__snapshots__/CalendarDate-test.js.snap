@@ -1,0 +1,443 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CalendarDate componentWillReceiveProps() 1`] = `1994-07-31T17:00:00.000Z`;
+
+exports[`CalendarDate getMonthOptions() 1`] = `
+Array [
+  Object {
+    "name": "Jan",
+    "value": 0,
+  },
+  Object {
+    "name": "Feb",
+    "value": 1,
+  },
+  Object {
+    "name": "Mar",
+    "value": 2,
+  },
+  Object {
+    "name": "Apr",
+    "value": 3,
+  },
+  Object {
+    "name": "May",
+    "value": 4,
+  },
+  Object {
+    "name": "Jun",
+    "value": 5,
+  },
+  Object {
+    "name": "Jul",
+    "value": 6,
+  },
+  Object {
+    "name": "Aug",
+    "value": 7,
+  },
+  Object {
+    "name": "Sep",
+    "value": 8,
+  },
+  Object {
+    "name": "Oct",
+    "value": 9,
+  },
+  Object {
+    "name": "Nov",
+    "value": 10,
+  },
+  Object {
+    "name": "Dec",
+    "value": 11,
+  },
+]
+`;
+
+exports[`CalendarDate getYearDecadeOptions() 1`] = `
+Array [
+  Object {
+    "name": "1730 1739",
+    "value": 1730,
+  },
+  Object {
+    "name": "1740 1749",
+    "value": 1740,
+  },
+  Object {
+    "name": "1750 1759",
+    "value": 1750,
+  },
+  Object {
+    "name": "1760 1769",
+    "value": 1760,
+  },
+  Object {
+    "name": "1770 1779",
+    "value": 1770,
+  },
+]
+`;
+
+exports[`CalendarDate getYearOptions() 1`] = `
+Array [
+  Object {
+    "name": "1760",
+    "value": 1760,
+  },
+  Object {
+    "name": "1761",
+    "value": 1761,
+  },
+  Object {
+    "name": "1762",
+    "value": 1762,
+  },
+  Object {
+    "name": "1763",
+    "value": 1763,
+  },
+  Object {
+    "name": "1764",
+    "value": 1764,
+  },
+  Object {
+    "name": "1765",
+    "value": 1765,
+  },
+  Object {
+    "name": "1766",
+    "value": 1766,
+  },
+  Object {
+    "name": "1767",
+    "value": 1767,
+  },
+  Object {
+    "name": "1768",
+    "value": 1768,
+  },
+  Object {
+    "name": "1769",
+    "value": 1769,
+  },
+]
+`;
+
+exports[`CalendarDate render basic 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "justifyContent": "space-between",
+      }
+    }
+  />
+  <CalendarMonthGrid
+    highlight={2010-11-09T18:00:00.000Z}
+    onClickMonth={[Function]}
+    onSetDate={[Function]}
+    value={2010-11-09T18:00:00.000Z}
+  />
+</div>
+`;
+
+exports[`CalendarDate render if decade table 1`] = `
+<div>
+  <div>
+    <span>
+        
+      <br />
+        
+    </span>
+    <TableSelect
+      cols={4}
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "name": "2000 2009",
+            "value": 2000,
+          },
+          Object {
+            "name": "2010 2019",
+            "value": 2010,
+          },
+          Object {
+            "name": "2020 2029",
+            "value": 2020,
+          },
+          Object {
+            "name": "2030 2039",
+            "value": 2030,
+          },
+          Object {
+            "name": "2040 2049",
+            "value": 2040,
+          },
+          Object {
+            "name": "2050 2059",
+            "value": 2050,
+          },
+          Object {
+            "name": "2060 2069",
+            "value": 2060,
+          },
+          Object {
+            "name": "2070 2079",
+            "value": 2070,
+          },
+        ]
+      }
+      value={2040}
+    />
+    <Button
+      onClick={[Function]}
+      outline={true}
+      ripple={true}
+      type="button"
+      xs={true}
+    >
+      Назад
+    </Button>
+  </div>
+</div>
+`;
+
+exports[`CalendarDate render if disabled leftArrow 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "justifyContent": "space-between",
+      }
+    }
+  />
+  <CalendarMonthGrid
+    highlight={2007-07-04T18:00:00.000Z}
+    onClickMonth={[Function]}
+    onSetDate={[Function]}
+    value={2007-07-04T18:00:00.000Z}
+  />
+</div>
+`;
+
+exports[`CalendarDate render if disabled rightArrow 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "justifyContent": "space-between",
+      }
+    }
+  />
+  <CalendarMonthGrid
+    highlight={1984-05-03T17:00:00.000Z}
+    onClickMonth={[Function]}
+    onSetDate={[Function]}
+    value={1984-05-03T17:00:00.000Z}
+  />
+</div>
+`;
+
+exports[`CalendarDate render if month table 1`] = `
+<div>
+  <div>
+    <div>
+      <button
+        onClick={[Function]}
+      >
+        <SvgIcon
+          file="arrow-left"
+        />
+      </button>
+      <span
+        onClick={[Function]}
+      >
+        2014
+      </span>
+      <button
+        onClick={[Function]}
+      >
+        <SvgIcon
+          file="arrow-right"
+        />
+      </button>
+    </div>
+    <TableSelect
+      cols={4}
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "name": "Jan",
+            "value": 0,
+          },
+          Object {
+            "name": "Feb",
+            "value": 1,
+          },
+          Object {
+            "name": "Mar",
+            "value": 2,
+          },
+          Object {
+            "name": "Apr",
+            "value": 3,
+          },
+          Object {
+            "name": "May",
+            "value": 4,
+          },
+          Object {
+            "name": "Jun",
+            "value": 5,
+          },
+          Object {
+            "name": "Jul",
+            "value": 6,
+          },
+          Object {
+            "name": "Aug",
+            "value": 7,
+          },
+          Object {
+            "name": "Sep",
+            "value": 8,
+          },
+          Object {
+            "name": "Oct",
+            "value": 9,
+          },
+          Object {
+            "name": "Nov",
+            "value": 10,
+          },
+          Object {
+            "name": "Dec",
+            "value": 11,
+          },
+        ]
+      }
+      value={11}
+    />
+    <Button
+      onClick={[Function]}
+      outline={true}
+      ripple={true}
+      type="button"
+      xs={true}
+    >
+      Назад
+    </Button>
+  </div>
+</div>
+`;
+
+exports[`CalendarDate render if time 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "justifyContent": "space-between",
+      }
+    }
+  />
+  <CalendarMonthGrid
+    highlight={2005-07-06T18:00:00.000Z}
+    onClickMonth={[Function]}
+    onSetDate={[Function]}
+    value={2005-07-06T18:00:00.000Z}
+  />
+  <TimePicker
+    onSetTime={[Function]}
+  />
+</div>
+`;
+
+exports[`CalendarDate render if year table 1`] = `
+<div>
+  <div>
+    <div>
+      <button
+        onClick={[Function]}
+      >
+        <SvgIcon
+          file="arrow-left"
+        />
+      </button>
+      <span
+        onClick={[Function]}
+      >
+        2020 - 2029
+      </span>
+      <button
+        onClick={[Function]}
+      >
+        <SvgIcon
+          file="arrow-right"
+        />
+      </button>
+    </div>
+    <TableSelect
+      cols={4}
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "name": "2020",
+            "value": 2020,
+          },
+          Object {
+            "name": "2021",
+            "value": 2021,
+          },
+          Object {
+            "name": "2022",
+            "value": 2022,
+          },
+          Object {
+            "name": "2023",
+            "value": 2023,
+          },
+          Object {
+            "name": "2024",
+            "value": 2024,
+          },
+          Object {
+            "name": "2025",
+            "value": 2025,
+          },
+          Object {
+            "name": "2026",
+            "value": 2026,
+          },
+          Object {
+            "name": "2027",
+            "value": 2027,
+          },
+          Object {
+            "name": "2028",
+            "value": 2028,
+          },
+          Object {
+            "name": "2029",
+            "value": 2029,
+          },
+        ]
+      }
+      value={2022}
+    />
+    <Button
+      onClick={[Function]}
+      outline={true}
+      ripple={true}
+      type="button"
+      xs={true}
+    >
+      Назад
+    </Button>
+  </div>
+</div>
+`;
