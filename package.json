@@ -94,7 +94,7 @@
     "eslint-plugin-react": "^7.4.0",
     "extract-text-webpack-plugin": "3.0.2",
     "feather-icons": "^4.4.0",
-    "file-loader": "1.1.7",
+    "file-loader": "1.1.8",
     "flow-bin": "^0.66.0",
     "fs-extra": "5.0.0",
     "html-webpack-plugin": "2.30.1",
