@@ -3,7 +3,6 @@
 
 import React from 'react';
 import { addMonths, setHours, setMinutes, setSeconds } from 'date-fns';
-import Button from '../Button/Button';
 import CalendarDateTimePicker from './DateTimePicker/CalendarDateTimePicker';
 import './DateTimePicker/MainCalendar.scss';
 
@@ -18,8 +17,6 @@ type Props = {
   maxDate?: Date,
   singleCalendar?: boolean,
   time?: boolean,
-  hideResetBtn?: boolean,
-  hideSubmitBtn?: boolean,
   onChange?: Function,
   onSubmit?: Function,
   toggleCalendar?: Function,
