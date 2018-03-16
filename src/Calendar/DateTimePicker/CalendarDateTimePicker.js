@@ -4,7 +4,7 @@ import React from 'react';
 import SvgIcon from '../../SvgIcon/SvgIcon';
 import CalendarDate from '../DateTimePicker/CalendarDate';
 import DateMaskInput from '../DateMaskInput';
-import s from './Calendar.scss';
+import './Calendar.scss';
 
 type Props = {
   value: Date,
@@ -102,7 +102,7 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     };
 
     return (
-      <div className={s.container}>
+      <div className="container">
         <DateMaskInput
           style={style}
           visibleDate={visibleDate}
@@ -111,7 +111,7 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
           maxDate={maxDate}
         />
         {icon && (
-          <div className={s.icon}>
+          <div className="icon">
             <SvgIcon file="calendar" />
           </div>
         )}

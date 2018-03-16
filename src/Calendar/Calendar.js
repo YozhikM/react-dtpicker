@@ -5,7 +5,7 @@ import React from 'react';
 import { addMonths, setHours, setMinutes, setSeconds } from 'date-fns';
 import Button from '../Button/Button';
 import CalendarDateTimePicker from './DateTimePicker/CalendarDateTimePicker';
-import s from './DateTimePicker/MainCalendar.scss';
+import './DateTimePicker/MainCalendar.scss';
 
 export type StringValue = { min: string, max: string };
 
@@ -286,7 +286,7 @@ export default class Calendar extends React.Component<Props, State> {
     if (Array.isArray(highlight)) return null;
 
     return (
-      <div className={s.container}>
+      <div className="container">
         <CalendarDateTimePicker
           time={time}
           value={min}
@@ -306,54 +306,47 @@ export default class Calendar extends React.Component<Props, State> {
   };
 
   renderDualCalendar = () => {
-    const { maxDate, minDate, hideResetBtn, hideSubmitBtn } = this.props;
+    const { maxDate, minDate } = this.props;
     const { time, value, highlight, isCalendarShown, firstDate, secondDate } = this.state;
     const { min, max } = value || {};
 
     return (
-      <div>
-        <div className={s.container}>
-          <CalendarDateTimePicker
-            time={time}
-            value={min}
-            highlight={highlight}
-            visibleDate={firstDate}
-            onChange={this.onChangeMin}
-            onSetDate={this.onSetFirstDate}
-            isCalendarShown={isCalendarShown}
-            onSetDateByClick={this.onSetDateByClick}
-            onChangeCalendarVisibility={this.onChangeCalendarVisibility}
-            maxDate={maxDate}
-            minDate={minDate}
-            leftArrow
-          />
-          <CalendarDateTimePicker
-            time={time}
-            value={max}
-            highlight={highlight}
-            visibleDate={secondDate}
-            onChange={this.onChangeMax}
-            onSetDate={this.onSetSecondDate}
-            isCalendarShown={isCalendarShown}
-            onSetDateByClick={this.onSetDateByClick}
-            onChangeCalendarVisibility={this.onChangeCalendarVisibility}
-            maxDate={maxDate}
-            minDate={minDate}
-            rightArrow
-          />
-        </div>
-        <div className={s.calendarBtn}>
-          {!hideResetBtn && (
-            <Button onClick={this.resetState} red xs>
-              Очистить
-            </Button>
-          )}
-          {!hideSubmitBtn && (
-            <Button onClick={this.onSubmit} blue filled xs>
-              Подтвердить
-            </Button>
-          )}
-        </div>
+      <div
+        style={{
+          display: 'flex',
+          width: '50%',
+          margin: '0 auto',
+          justifyContent: 'space-around',
+        }}
+      >
+        <CalendarDateTimePicker
+          time={time}
+          value={min}
+          highlight={highlight}
+          visibleDate={firstDate}
+          onChange={this.onChangeMin}
+          onSetDate={this.onSetFirstDate}
+          isCalendarShown={isCalendarShown}
+          onSetDateByClick={this.onSetDateByClick}
+          onChangeCalendarVisibility={this.onChangeCalendarVisibility}
+          maxDate={maxDate}
+          minDate={minDate}
+          leftArrow
+        />
+        <CalendarDateTimePicker
+          time={time}
+          value={max}
+          highlight={highlight}
+          visibleDate={secondDate}
+          onChange={this.onChangeMax}
+          onSetDate={this.onSetSecondDate}
+          isCalendarShown={isCalendarShown}
+          onSetDateByClick={this.onSetDateByClick}
+          onChangeCalendarVisibility={this.onChangeCalendarVisibility}
+          maxDate={maxDate}
+          minDate={minDate}
+          rightArrow
+        />
       </div>
     );
   };

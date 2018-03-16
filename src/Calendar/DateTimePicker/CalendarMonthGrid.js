@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { startOfMonth, endOfMonth, eachDay, getDay, isSameDay, isWithinRange } from 'date-fns';
-import s from './Calendar.scss';
+import './Calendar.scss';
 import CalendarDay from './CalendarDay';
 import format from './format';
 
@@ -82,9 +82,7 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
 
   getWeekDays(): Array<string> {
     const { weeks } = this.state;
-    return weeks[1].map(weekDay => {
-      return format(weekDay, 'dd');
-    });
+    return weeks[1].map(weekDay => format(weekDay, 'dd'));
   }
 
   setDayStyle = (highlight: Array<Date> | Date, date: Date) => {
@@ -126,34 +124,28 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
     const weekDays = this.getWeekDays();
 
     return (
-      <div className={s.root}>
-        <span className={s.span} onClick={this.onClickMonth}>
+      <div className="root">
+        <span className="span" onClick={this.onClickMonth}>
           {format(value, 'MMMM YYYY')}
         </span>
         <table>
           <thead>
-            <tr>
-              {weekDays.map(weekDay => {
-                return <th key={weekDay}>{weekDay.toUpperCase()}</th>;
-              })}
-            </tr>
+            <tr>{weekDays.map(weekDay => <th key={weekDay}>{weekDay.toUpperCase()}</th>)}</tr>
           </thead>
 
           <tbody>
             {weeks.map(week => (
               <tr key={week[0].toISOString()}>
-                {week.map(date => {
-                  return (
-                    <CalendarDay
-                      key={date.toISOString()}
-                      date={date}
-                      style={highlight ? this.setDayStyle(highlight, date) : {}}
-                      onClick={this.onSetDate}
-                      minDate={minDate}
-                      maxDate={maxDate}
-                    />
-                  );
-                })}
+                {week.map(date => (
+                  <CalendarDay
+                    key={date.toISOString()}
+                    date={date}
+                    style={highlight ? this.setDayStyle(highlight, date) : {}}
+                    onClick={this.onSetDate}
+                    minDate={minDate}
+                    maxDate={maxDate}
+                  />
+                ))}
               </tr>
             ))}
           </tbody>

@@ -5,8 +5,10 @@
   "dependencies": {
     "consolidated-events": "^1.1.1",
     "date-fns": "^1.29.0",
+    "parcel-plugin-inlinesvg": "^0.0.12",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "react-svg-inline": "^2.1.0"
   },
   "scripts": {
     "start": "parcel index.html",

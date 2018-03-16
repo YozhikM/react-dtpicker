@@ -2,12 +2,15 @@
 
 import React from 'react';
 import { setMonth, setYear, addYears, addMonths, getYear, format } from 'date-fns';
+import SVGInline from 'react-svg-inline';
 import Button from '../../Button/Button';
 import SvgIcon from '../../SvgIcon/SvgIcon';
 import TableSelect from '../TableSelect/TableSelect';
 import CalendarMonthGrid from './CalendarMonthGrid';
 import TimePicker from './TimePicker';
-import s from './Calendar.scss';
+import './Calendar.scss';
+import arrowLeft from './arrow-left.svg';
+import arrowRight from './arrow-right.svg';
 
 type Show = 'calendar' | 'mm' | 'yy' | 'yy10';
 
@@ -225,9 +228,9 @@ class CalendarDate extends React.Component<Props, State> {
     if (show === 'yy10') {
       const curYear = getYear(value);
       return (
-        <div className={s.calendar_container}>
-          <div className={s.table}>
-            <span className={s.span}>
+        <div className="calendar_container">
+          <div className="table">
+            <span className="span">
               &nbsp; <br /> &nbsp;
             </span>
             <TableSelect
@@ -246,17 +249,17 @@ class CalendarDate extends React.Component<Props, State> {
 
     if (show === 'yy') {
       return (
-        <div className={s.calendar_container}>
-          <div className={s.table}>
-            <div className={s.c_button_container}>
+        <div className="calendar_container">
+          <div className="table">
+            <div className="c_button_container">
               <button onClick={this.decrement10Years}>
-                <SvgIcon file="arrow-left" />
+                <SVGInline width="24" svg={arrowLeft} />
               </button>
-              <span className={s.span} onClick={this.showDecadeTable}>
+              <span className="span" onClick={this.showDecadeTable}>
                 {this.showDecade()}
               </span>
               <button onClick={this.increment10Years}>
-                <SvgIcon file="arrow-right" />
+                <SVGInline width="24" svg={arrowRight} />
               </button>
             </div>
             <TableSelect
@@ -275,17 +278,17 @@ class CalendarDate extends React.Component<Props, State> {
 
     if (show === 'mm') {
       return (
-        <div className={s.calendar_container}>
-          <div className={s.table}>
-            <div className={s.c_button_container}>
+        <div className="calendar_container">
+          <div className="table">
+            <div className="c_button_container">
               <button onClick={this.decrementYears}>
-                <SvgIcon file="arrow-left" />
+                <SVGInline width="24" svg={arrowLeft} />
               </button>
-              <span className={s.span} onClick={this.showYearTable}>
+              <span className="span" onClick={this.showYearTable}>
                 {getYear(value)}
               </span>
               <button onClick={this.incrementYears}>
-                <SvgIcon file="arrow-right" />
+                <SVGInline width="24" svg={arrowRight} />
               </button>
             </div>
             <TableSelect
@@ -306,24 +309,24 @@ class CalendarDate extends React.Component<Props, State> {
     const isHiddenRight = maxDate && addMonths(value, 1) > maxDate;
 
     return (
-      <div className={s.calendar_container}>
-        <div className={s.btns} style={this.getBtnStyle()}>
+      <div className="calendar_container">
+        <div className="btns" style={this.getBtnStyle()}>
           {leftArrow && (
             <button
-              className={s.left_arrow}
+              className="left_arrow"
               onClick={this.decrementMonth}
               style={isHiddenLeft ? { visibility: 'hidden' } : { cursor: 'pointer' }}
             >
-              <SvgIcon file="arrow-left" />
+              <SVGInline width="24" svg={arrowLeft} />
             </button>
           )}
           {rightArrow && (
             <button
-              className={s.right_arrow}
+              className="right_arrow"
               onClick={this.incrementMonth}
               style={isHiddenRight ? { visibility: 'hidden' } : { cursor: 'pointer' }}
             >
-              <SvgIcon file="arrow-right" />
+              <SVGInline width="24" svg={arrowRight} />
             </button>
           )}
         </div>
