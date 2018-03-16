@@ -22,6 +22,8 @@ export type Props = {|
   rightArrow?: boolean, // show right arrow in header (true by default)
   time?: boolean, // display time picker (hidden by default)
   show?: Show, // display needed view type (calendar by default)
+  minDate?: Date,
+  maxDate?: Date,
 |};
 
 type State = {|
@@ -66,22 +68,34 @@ class CalendarDate extends React.Component<Props, State> {
   };
 
   onChangeMonth = (n: number) => {
+    const { minDate, maxDate } = this.props;
     const { value } = this.state;
     const newDate = setMonth(value, n);
+
+    if ((maxDate && newDate > maxDate) || (minDate && newDate < minDate)) return;
+
     this.setState({ show: 'calendar' });
     this.onChange(newDate);
   };
 
   onChangeYear = (n: number) => {
+    const { minDate, maxDate } = this.props;
     const { value } = this.state;
     const newDate = setYear(value, n);
+
+    if ((maxDate && newDate > maxDate) || (minDate && newDate < minDate)) return;
+
     this.setState({ show: 'mm' });
     this.onChange(newDate);
   };
 
   onChangeDecade = (n: number) => {
+    const { minDate, maxDate } = this.props;
     const { value } = this.state;
     const newDate = setYear(value, n);
+
+    if ((maxDate && newDate > maxDate) || (minDate && newDate < minDate)) return;
+
     this.setState({ show: 'yy' });
     this.onChange(newDate);
   };
@@ -103,41 +117,53 @@ class CalendarDate extends React.Component<Props, State> {
   };
 
   incrementMonth = () => {
+    const { maxDate } = this.props;
     const value = addMonths(this.state.value, 1);
+    if (maxDate && value > maxDate) return;
 
     this.onChange(value);
   };
 
   decrementMonth = () => {
+    const { minDate } = this.props;
     const value = addMonths(this.state.value, -1);
+    if (minDate && value < minDate) return;
 
     this.onChange(value);
   };
 
   increment10Years = () => {
+    const { maxDate } = this.props;
     const { value } = this.state;
     const newDate = addYears(value, 10);
+    if (maxDate && newDate > maxDate) return;
 
     this.onChange(newDate);
   };
 
   decrement10Years = () => {
+    const { minDate } = this.props;
     const { value } = this.state;
     const newDate = addYears(value, -10);
+    if (minDate && newDate < minDate) return;
 
     this.onChange(newDate);
   };
 
   incrementYears = () => {
+    const { maxDate } = this.props;
     const { value } = this.state;
     const newDate = addYears(value, 1);
+    if (maxDate && newDate > maxDate) return;
 
     this.onChange(newDate);
   };
 
   decrementYears = () => {
+    const { minDate } = this.props;
     const { value } = this.state;
     const newDate = addYears(value, -1);
+    if (minDate && newDate < minDate) return;
 
     this.onChange(newDate);
   };
@@ -194,7 +220,7 @@ class CalendarDate extends React.Component<Props, State> {
 
   render() {
     const { show, value, monthsOptions } = this.state;
-    const { time, highlight, visibleTime, leftArrow, rightArrow } = this.props;
+    const { time, highlight, visibleTime, leftArrow, rightArrow, minDate, maxDate } = this.props;
 
     if (show === 'yy10') {
       const curYear = getYear(value);
@@ -276,16 +302,27 @@ class CalendarDate extends React.Component<Props, State> {
       );
     }
 
+    const isHiddenLeft = minDate && addMonths(value, -1) < minDate;
+    const isHiddenRight = maxDate && addMonths(value, 1) > maxDate;
+
     return (
       <div className={s.calendar_container}>
         <div className={s.btns} style={this.getBtnStyle()}>
           {leftArrow && (
-            <button className={s.left_arrow} onClick={this.decrementMonth}>
+            <button
+              className={s.left_arrow}
+              onClick={this.decrementMonth}
+              style={isHiddenLeft ? { visibility: 'hidden' } : { cursor: 'pointer' }}
+            >
               <SvgIcon file="arrow-left" />
             </button>
           )}
           {rightArrow && (
-            <button className={s.right_arrow} onClick={this.incrementMonth}>
+            <button
+              className={s.right_arrow}
+              onClick={this.incrementMonth}
+              style={isHiddenRight ? { visibility: 'hidden' } : { cursor: 'pointer' }}
+            >
               <SvgIcon file="arrow-right" />
             </button>
           )}
@@ -295,6 +332,8 @@ class CalendarDate extends React.Component<Props, State> {
           value={value}
           onClickMonth={this.showMonthTable}
           onSetDate={this.onSetDate}
+          minDate={minDate}
+          maxDate={maxDate}
         />
         {time && <TimePicker date={visibleTime} onSetTime={this.onSetTime} />}
       </div>

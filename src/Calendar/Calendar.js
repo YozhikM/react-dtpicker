@@ -1,20 +1,28 @@
 /* @flow */
+/* eslint-disable no-nested-ternary */
 
 import React from 'react';
 import { addMonths, setHours, setMinutes, setSeconds } from 'date-fns';
+import Button from '../Button/Button';
 import CalendarDateTimePicker from './DateTimePicker/CalendarDateTimePicker';
 import s from './DateTimePicker/MainCalendar.scss';
 
-type StringValue = { min: string, max: string };
+export type StringValue = { min: string, max: string };
 
-type DateValue = { min: Date, max: Date };
+export type DateValue = { min: Date, max: Date };
 
 type Props = {
   value?: StringValue,
+  highlight?: DateValue,
+  minDate?: Date,
+  maxDate?: Date,
   singleCalendar?: boolean,
   time?: boolean,
-  wide?: boolean,
+  hideResetBtn?: boolean,
+  hideSubmitBtn?: boolean,
   onChange?: Function,
+  onSubmit?: Function,
+  toggleCalendar?: Function,
 };
 
 type State = {
@@ -32,34 +40,50 @@ export default class Calendar extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
+    const { firstDate, secondDate } = this.calculateRangeFromProps(props);
+
     this.state = {
-      // eslint-disable-next-line no-nested-ternary
       value: props.value
         ? this.convertValueToDate(props.value)
-        : { min: new Date(), max: addMonths(new Date(), 1) },
-      // eslint-disable-next-line no-nested-ternary
-      highlight: props.value
-        ? this.convertValueToArray(props.value)
-        : props.singleCalendar ? new Date() : [new Date(), new Date()],
+        : props.highlight
+          ? this.convertValueToDate(props.highlight)
+          : { min: addMonths(new Date(), -1), max: new Date() },
+      highlight: props.highlight
+        ? this.convertValueToArray(props.highlight)
+        : props.value
+          ? this.convertValueToArray(props.value)
+          : props.singleCalendar ? new Date() : [new Date(), new Date()],
       time: props.time || false,
       singleCalendar: props.singleCalendar || false,
       isCalendarShown: true,
       isNextClickAwaited: false,
-      firstDate: props.value && props.value.min ? new Date(props.value.min) : new Date(),
-      secondDate: props.value && props.value.max ? new Date(props.value.max) : new Date(),
+      firstDate,
+      secondDate,
     };
   }
 
-  convertValueToDate = (value: StringValue): DateValue => {
+  calculateRangeFromProps = (props: Props): { firstDate: Date, secondDate: Date } => {
+    if (props.value) {
+      const { min, max } = props.value || {};
+      return { firstDate: new Date(min), secondDate: new Date(max) };
+    } else if (props.highlight) {
+      const { min, max } = props.highlight || {};
+      return { firstDate: min, secondDate: max };
+    }
+    return { firstDate: new Date(), secondDate: new Date() };
+  };
+
+  convertValueToDate = (value: StringValue | DateValue): DateValue => {
     const { min } = value || {};
     const date = new Date(min);
+
     return {
       min: date,
       max: addMonths(date, 1),
     };
   };
 
-  convertValueToArray = (value: StringValue): Array<Date> | Date => {
+  convertValueToArray = (value: StringValue | DateValue): Array<Date> | Date => {
     const arrayOfDate = Object.keys(value).map(v => new Date(value[v]));
 
     if (this.props.singleCalendar) return arrayOfDate[0];
@@ -232,7 +256,31 @@ export default class Calendar extends React.Component<Props, State> {
     this.setState({ isCalendarShown: !isCalendarShown });
   };
 
+  resetState = () => {
+    this.setState({
+      firstDate: new Date(),
+      secondDate: new Date(),
+      highlight: [new Date(), new Date()],
+    });
+  };
+
+  onSubmit = () => {
+    const { highlight } = this.state;
+    const { onSubmit, toggleCalendar } = this.props;
+    let stringValue;
+    if (Array.isArray(highlight)) {
+      const [firstDate, secondDate] = highlight;
+      stringValue = this.getValue(firstDate, secondDate);
+    } else {
+      stringValue = this.getValue(highlight, highlight);
+    }
+
+    if (onSubmit) onSubmit({}, stringValue);
+    if (toggleCalendar) toggleCalendar();
+  };
+
   renderSingleCalendar = () => {
+    const { maxDate, minDate } = this.props;
     const { time, value, highlight, isCalendarShown } = this.state;
     const { min } = value || {};
     if (Array.isArray(highlight)) return null;
@@ -248,6 +296,8 @@ export default class Calendar extends React.Component<Props, State> {
           onSetDate={this.onSetDate}
           onChange={this.onChangeSingleCalendar}
           onChangeCalendarVisibility={this.onChangeCalendarVisibility}
+          maxDate={maxDate}
+          minDate={minDate}
           leftArrow
           rightArrow
         />
@@ -256,13 +306,13 @@ export default class Calendar extends React.Component<Props, State> {
   };
 
   renderDualCalendar = () => {
-    const { wide } = this.props;
+    const { maxDate, minDate, hideResetBtn, hideSubmitBtn } = this.props;
     const { time, value, highlight, isCalendarShown, firstDate, secondDate } = this.state;
     const { min, max } = value || {};
 
     return (
       <div>
-        <div className={`${wide ? s.wideContainer : s.container}`}>
+        <div className={s.container}>
           <CalendarDateTimePicker
             time={time}
             value={min}
@@ -273,6 +323,8 @@ export default class Calendar extends React.Component<Props, State> {
             isCalendarShown={isCalendarShown}
             onSetDateByClick={this.onSetDateByClick}
             onChangeCalendarVisibility={this.onChangeCalendarVisibility}
+            maxDate={maxDate}
+            minDate={minDate}
             leftArrow
           />
           <CalendarDateTimePicker
@@ -285,8 +337,22 @@ export default class Calendar extends React.Component<Props, State> {
             isCalendarShown={isCalendarShown}
             onSetDateByClick={this.onSetDateByClick}
             onChangeCalendarVisibility={this.onChangeCalendarVisibility}
+            maxDate={maxDate}
+            minDate={minDate}
             rightArrow
           />
+        </div>
+        <div className={s.calendarBtn}>
+          {!hideResetBtn && (
+            <Button onClick={this.resetState} red xs>
+              Очистить
+            </Button>
+          )}
+          {!hideSubmitBtn && (
+            <Button onClick={this.onSubmit} blue filled xs>
+              Подтвердить
+            </Button>
+          )}
         </div>
       </div>
     );
@@ -298,6 +364,7 @@ export default class Calendar extends React.Component<Props, State> {
     if (singleCalendar && !Array.isArray(highlight)) {
       return this.renderSingleCalendar();
     }
+
     return this.renderDualCalendar();
   }
 }

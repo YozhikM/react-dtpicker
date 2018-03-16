@@ -11,6 +11,8 @@ type Week = Array<Date>;
 export type Props = {|
   value: Date,
   highlight?: Array<Date> | Date,
+  maxDate?: Date,
+  minDate?: Date,
   onSetDate?: (date: Date) => void,
   onClickMonth?: (date: Date) => void,
 |};
@@ -80,15 +82,24 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
 
   getWeekDays(): Array<string> {
     const { weeks } = this.state;
-    return weeks[1].map(weekDay => format(weekDay, 'dd'));
+    return weeks[1].map(weekDay => {
+      return format(weekDay, 'dd');
+    });
   }
 
   setDayStyle = (highlight: Array<Date> | Date, date: Date) => {
+    const { maxDate, minDate } = this.props;
+
     const highlightStyle = { backgroundColor: '#34495e', color: '#fff' };
     const rangeStyle = { backgroundColor: '#8196ab', color: '#fff' };
+    const disabledDateStyle = { color: 'lightgrey' };
 
     if (Array.isArray(highlight)) {
       const [firstDate, secondDate] = highlight;
+
+      if ((maxDate && date > maxDate) || (minDate && date < minDate)) {
+        return disabledDateStyle;
+      }
 
       for (let i = 0; i < highlight.length; i++) {
         if (isSameDay(highlight[i], date)) {
@@ -105,12 +116,13 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
     } else if (isSameDay(highlight, date)) {
       return highlightStyle;
     }
+
     return {};
   };
 
   render() {
     const { weeks } = this.state;
-    const { value, highlight } = this.props;
+    const { value, highlight, minDate, maxDate } = this.props;
     const weekDays = this.getWeekDays();
 
     return (
@@ -121,21 +133,27 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
         <table>
           <thead>
             <tr>
-              {weekDays.map(weekDay => <th key={weekDay}>{weekDay.toUpperCase()}</th>)}
+              {weekDays.map(weekDay => {
+                return <th key={weekDay}>{weekDay.toUpperCase()}</th>;
+              })}
             </tr>
           </thead>
 
           <tbody>
             {weeks.map(week => (
               <tr key={week[0].toISOString()}>
-                {week.map(date => (
-                  <CalendarDay
-                    key={date.toISOString()}
-                    date={date}
-                    style={highlight ? this.setDayStyle(highlight, date) : {}}
-                    onClick={this.onSetDate}
-                  />
-                  ))}
+                {week.map(date => {
+                  return (
+                    <CalendarDay
+                      key={date.toISOString()}
+                      date={date}
+                      style={highlight ? this.setDayStyle(highlight, date) : {}}
+                      onClick={this.onSetDate}
+                      minDate={minDate}
+                      maxDate={maxDate}
+                    />
+                  );
+                })}
               </tr>
             ))}
           </tbody>

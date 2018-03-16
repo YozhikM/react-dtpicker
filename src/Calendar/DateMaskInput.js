@@ -6,6 +6,8 @@ import Input from '../Input/Input';
 
 type Props = {|
   visibleDate: ?Date,
+  minDate?: Date,
+  maxDate?: Date,
   onChange?: Function,
   onFocus?: Function,
   onKeyPress?: Function,
@@ -57,7 +59,7 @@ export default class DateMaskInput extends React.Component<Props, State> {
   }
 
   onChangeInputValue = (e: SyntheticInputEvent<>, value: string) => {
-    const { onChange } = this.props;
+    const { onChange, minDate, maxDate } = this.props;
 
     let userDate;
     if (value.length > 10) {
@@ -74,7 +76,19 @@ export default class DateMaskInput extends React.Component<Props, State> {
 
       userDate = new Date(YY, MM, DD);
 
-      this.setState({ inputValue: this.formatWithoutTime(userDate) });
+      if (maxDate && minDate) {
+        if (userDate < minDate) {
+          this.setState({ inputValue: this.formatWithoutTime(minDate) });
+          return;
+        } else if (userDate > maxDate) {
+          this.setState({ inputValue: this.formatWithoutTime(maxDate) });
+          return;
+        }
+      }
+
+      if (!maxDate && !minDate) {
+        this.setState({ inputValue: this.formatWithoutTime(userDate) });
+      }
     } else if (replacedValue.length === 8) {
       const YY = Number(replacedValue.substr(4, 4));
       const MM = Number(replacedValue.substr(2, 2)) - 1;
@@ -82,11 +96,31 @@ export default class DateMaskInput extends React.Component<Props, State> {
 
       userDate = new Date(YY, MM, DD);
 
-      this.setState({ inputValue: this.formatWithoutTime(userDate) });
+      if (maxDate && minDate) {
+        if (userDate < minDate) {
+          this.setState({ inputValue: this.formatWithoutTime(minDate) });
+          return;
+        } else if (userDate > maxDate) {
+          this.setState({ inputValue: this.formatWithoutTime(maxDate) });
+          return;
+        }
+      }
+
+      if (!maxDate && !minDate) {
+        this.setState({ inputValue: this.formatWithoutTime(userDate) });
+      }
     }
 
     if (userDate && onChange) {
-      onChange(userDate);
+      if ((maxDate && userDate <= maxDate) || (minDate && userDate >= minDate)) {
+        onChange(userDate);
+      } else if (maxDate && userDate > maxDate) {
+        onChange(maxDate);
+      } else if (minDate && userDate < minDate) {
+        onChange(minDate);
+      } else if (!maxDate && !minDate) {
+        onChange(userDate);
+      }
     }
   };
 

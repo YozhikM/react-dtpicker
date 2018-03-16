@@ -10,10 +10,10 @@ type Props = {|
   cols: number,
   options: Options,
   value: Value,
-  onChange?: (value: Value) => void
+  onChange?: (value: Value) => void,
 |};
 type State = {|
-  value: Value
+  value: Value,
 |};
 
 class TableSelect extends React.Component<Props, State> {
@@ -21,7 +21,7 @@ class TableSelect extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      value: this.props.value
+      value: this.props.value,
     };
   }
 
@@ -47,22 +47,24 @@ class TableSelect extends React.Component<Props, State> {
       <div className={s.root}>
         <ul
           style={{
-            width: `${cols * 50}px`
+            width: `${cols * 50}px`,
           }}
         >
-          {options.map(option => (
-            <li
-              onClick={e => {
-                this.clickItem(e, option.value);
-              }}
-              key={option.name}
-              style={{
-                fontWeight: option.value === value ? 'bold' : 'normal'
-              }}
-            >
-              {option.name}
-            </li>
-          ))}
+          {options.map((option, i) => {
+            return (
+              <li
+                onClick={e => {
+                  this.clickItem(e, option.value);
+                }}
+                key={i}
+                style={{
+                  fontWeight: option.value === value ? 'bold' : 'normal',
+                }}
+              >
+                {option.name}
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
