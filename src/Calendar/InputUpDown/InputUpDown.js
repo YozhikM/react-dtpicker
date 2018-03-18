@@ -2,7 +2,7 @@
 
 import React from 'react';
 import SvgIcon from '../../SvgIcon/SvgIcon';
-import s from './InputUpDown.scss';
+import './InputUpDown.scss';
 
 type Props = {|
   value?: number,
@@ -85,7 +85,7 @@ class InputUpDown extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className={s.InputUpDown}>
+      <div className="InputUpDown">
         <button
           onClick={this.increment}
           onMouseDown={() => this.onHoldStart(this.increment)}

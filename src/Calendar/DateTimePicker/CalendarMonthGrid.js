@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { startOfMonth, endOfMonth, eachDay, getDay, isSameDay, isWithinRange } from 'date-fns';
-import s from './Calendar.scss';
+import './Calendar.scss';
 import CalendarDay from './CalendarDay';
 import format from './format';
 
@@ -11,6 +11,8 @@ type Week = Array<Date>;
 export type Props = {|
   value: Date,
   highlight?: Array<Date> | Date,
+  maxDate?: Date,
+  minDate?: Date,
   onSetDate?: (date: Date) => void,
   onClickMonth?: (date: Date) => void,
 |};
@@ -84,11 +86,18 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
   }
 
   setDayStyle = (highlight: Array<Date> | Date, date: Date) => {
+    const { maxDate, minDate } = this.props;
+
     const highlightStyle = { backgroundColor: '#34495e', color: '#fff' };
     const rangeStyle = { backgroundColor: '#8196ab', color: '#fff' };
+    const disabledDateStyle = { color: 'lightgrey' };
 
     if (Array.isArray(highlight)) {
       const [firstDate, secondDate] = highlight;
+
+      if ((maxDate && date > maxDate) || (minDate && date < minDate)) {
+        return disabledDateStyle;
+      }
 
       for (let i = 0; i < highlight.length; i++) {
         if (isSameDay(highlight[i], date)) {
@@ -105,24 +114,23 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
     } else if (isSameDay(highlight, date)) {
       return highlightStyle;
     }
+
     return {};
   };
 
   render() {
     const { weeks } = this.state;
-    const { value, highlight } = this.props;
+    const { value, highlight, minDate, maxDate } = this.props;
     const weekDays = this.getWeekDays();
 
     return (
-      <div className={s.root}>
-        <span className={s.span} onClick={this.onClickMonth}>
+      <div className="root">
+        <span className="span" onClick={this.onClickMonth}>
           {format(value, 'MMMM YYYY')}
         </span>
         <table>
           <thead>
-            <tr>
-              {weekDays.map(weekDay => <th key={weekDay}>{weekDay.toUpperCase()}</th>)}
-            </tr>
+            <tr>{weekDays.map(weekDay => <th key={weekDay}>{weekDay.toUpperCase()}</th>)}</tr>
           </thead>
 
           <tbody>
@@ -134,8 +142,10 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
                     date={date}
                     style={highlight ? this.setDayStyle(highlight, date) : {}}
                     onClick={this.onSetDate}
+                    minDate={minDate}
+                    maxDate={maxDate}
                   />
-                  ))}
+                ))}
               </tr>
             ))}
           </tbody>

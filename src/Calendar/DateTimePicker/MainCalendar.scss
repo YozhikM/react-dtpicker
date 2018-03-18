@@ -23,9 +23,21 @@
   z-index: 3;
 }
 
-.resetBtn {
+.calendarBtn {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   margin: 5px 0;
   height: 100%;
+}
+.icon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  padding: 1%;
+  margin-top: 2%;
+  cursor: pointer;
+  border-radius: 50%;
 }
