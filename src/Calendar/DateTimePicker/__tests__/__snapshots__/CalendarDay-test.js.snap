@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`CalendarDay render() basic 1`] = `
-<td
-  onClick={[Function]}
->
-  9
-</td>
-`;

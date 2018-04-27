@@ -4,12 +4,14 @@ import React from 'react';
 import SvgIcon from '../../SvgIcon/SvgIcon';
 import CalendarDate from '../DateTimePicker/CalendarDate';
 import DateMaskInput from '../DateMaskInput';
-import s from './Calendar.scss';
+import './Calendar.scss';
 
 type Props = {
   value: Date,
   visibleDate?: Date,
   highlight: Array<Date> | Date,
+  minDate?: Date,
+  maxDate?: Date,
   onChange?: Date => void,
   onSetDate?: Date => void,
   onSetDateByClick?: Date => void,
@@ -91,6 +93,8 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
       time,
       isCalendarShown,
       visibleDate,
+      maxDate,
+      minDate,
     } = this.props;
     const { value } = this.state;
     const style = {
@@ -98,10 +102,16 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     };
 
     return (
-      <div className={s.container}>
-        <DateMaskInput style={style} visibleDate={visibleDate} onChange={this.onChangeInputValue} />
+      <div className="container">
+        <DateMaskInput
+          style={style}
+          visibleDate={visibleDate}
+          onChange={this.onChangeInputValue}
+          minDate={minDate}
+          maxDate={maxDate}
+        />
         {icon && (
-          <div className={s.icon}>
+          <div className="icon">
             <SvgIcon file="calendar" />
           </div>
         )}
@@ -115,6 +125,8 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
             onChange={this.onChange}
             leftArrow={leftArrow}
             rightArrow={rightArrow}
+            maxDate={maxDate}
+            minDate={minDate}
             time={time}
           />
         )}

@@ -4,7 +4,7 @@ import React from 'react';
 import SvgIcon from '../../SvgIcon/SvgIcon';
 import InputUpDown from '../InputUpDown/InputUpDown';
 import TableSelect, { type Options } from '../TableSelect/TableSelect';
-import s from './TimeSelect.scss';
+import './TimeSelect.scss';
 
 type Value = Date;
 
@@ -145,7 +145,7 @@ class TimeSelect extends React.Component<Props, State> {
     }
 
     return (
-      <div className={s.hs}>
+      <div className="hs">
         <InputUpDown
           value={hh}
           min={0}

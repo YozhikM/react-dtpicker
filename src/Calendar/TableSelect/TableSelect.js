@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import s from './TableSelect.scss';
+import './TableSelect.scss';
 
 export type Value = number;
 export type Options = Array<{ value: Value, name: string }>;
@@ -10,10 +10,10 @@ type Props = {|
   cols: number,
   options: Options,
   value: Value,
-  onChange?: (value: Value) => void
+  onChange?: (value: Value) => void,
 |};
 type State = {|
-  value: Value
+  value: Value,
 |};
 
 class TableSelect extends React.Component<Props, State> {
@@ -21,7 +21,7 @@ class TableSelect extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      value: this.props.value
+      value: this.props.value,
     };
   }
 
@@ -44,20 +44,20 @@ class TableSelect extends React.Component<Props, State> {
     const { value } = this.state;
 
     return (
-      <div className={s.root}>
+      <div className="root">
         <ul
           style={{
-            width: `${cols * 50}px`
+            width: `${cols * 50}px`,
           }}
         >
-          {options.map(option => (
+          {options.map((option, i) => (
             <li
               onClick={e => {
                 this.clickItem(e, option.value);
               }}
-              key={option.name}
+              key={i}
               style={{
-                fontWeight: option.value === value ? 'bold' : 'normal'
+                fontWeight: option.value === value ? 'bold' : 'normal',
               }}
             >
               {option.name}
