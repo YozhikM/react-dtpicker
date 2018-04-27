@@ -195,7 +195,6 @@ exports[`CalendarDate render if decade table 1`] = `
     <Button
       onClick={[Function]}
       outline={true}
-      ripple={true}
       type="button"
       xs={true}
     >
@@ -325,7 +324,6 @@ exports[`CalendarDate render if month table 1`] = `
     <Button
       onClick={[Function]}
       outline={true}
-      ripple={true}
       type="button"
       xs={true}
     >
@@ -432,7 +430,6 @@ exports[`CalendarDate render if year table 1`] = `
     <Button
       onClick={[Function]}
       outline={true}
-      ripple={true}
       type="button"
       xs={true}
     >

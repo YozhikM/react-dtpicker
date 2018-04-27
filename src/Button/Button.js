@@ -2,8 +2,6 @@
 
 import * as React from 'react';
 
-type CursorPosT = { x: number, y: number };
-
 export type Props = {
   type?: string,
   style?: Object,
@@ -19,7 +17,6 @@ export type Props = {
 
   icon?: boolean,
   maxWidth?: boolean,
-  ripple?: boolean,
 
   outline?: boolean,
   filled?: boolean,
@@ -43,17 +40,9 @@ export type Props = {
   mRight?: string | boolean,
   mBottom?: string | boolean,
   mLeft?: string | boolean,
-
-  rippleAnimation?: boolean,
 };
 
-type State = {
-  rippleSize: number,
-  rippleCoords: CursorPosT,
-  rippleAnimation: boolean,
-};
-
-export default class Button extends React.Component<Props, State> {
+export default class Button extends React.Component<Props, void> {
   state: State;
   onClick: Function;
   onMouseUp: Function;
@@ -65,17 +54,10 @@ export default class Button extends React.Component<Props, State> {
   static defaultProps = {
     type: 'button',
     outline: true,
-    ripple: true,
   };
 
   constructor(props: $Exact<Props>) {
     super(props);
-
-    this.state = {
-      rippleSize: 0,
-      rippleCoords: { x: 0, y: 0 },
-      rippleAnimation: props.rippleAnimation || false,
-    };
 
     this.onClick = this._onClick.bind(this);
     this.onMouseUp = this._onMouseUp.bind(this);
@@ -129,48 +111,7 @@ export default class Button extends React.Component<Props, State> {
     }
   }
 
-  // Ripple effect
-  _onMouseUp(e: MouseEvent) {
-    if (!this.props.ripple) return;
-
-    const cursorPos = {
-      x: e.pageX,
-      y: e.pageY,
-    };
-
-    if (this.state.rippleAnimation) {
-      this.setState({ rippleAnimation: false }, () => {
-        this.rippleCalc(cursorPos);
-      });
-    } else {
-      this.rippleCalc(cursorPos);
-    }
-  }
-
-  rippleCalc(cursorPos: CursorPosT) {
-    const { _rippleContainerRef } = this;
-    if (!_rippleContainerRef) return;
-
-    // size
-    const containerWidth = _rippleContainerRef.offsetWidth;
-    const containerHeight = _rippleContainerRef.offsetHeight;
-    const rippleSize = Math.max(containerWidth, containerHeight);
-
-    // position
-    const container = _rippleContainerRef.getBoundingClientRect();
-
-    this.setState({
-      rippleSize,
-      rippleCoords: {
-        x: cursorPos.x - container.left - rippleSize / 2,
-        y: cursorPos.y - container.top - rippleSize / 2,
-      },
-      rippleAnimation: true,
-    });
-  }
-
   render() {
-    let { ripple } = this.props;
     let style = Object.assign({}, this.props.style);
 
     const {
@@ -178,18 +119,12 @@ export default class Button extends React.Component<Props, State> {
       leftIcon,
       rightIcon,
       disabled,
-      link,
       maxWidth,
       mTop,
       mRight,
       mBottom,
       mLeft,
     } = this.props;
-    const { rippleSize, rippleCoords } = this.state;
-
-    if (ripple && link) {
-      ripple = false;
-    }
 
     if (disabled) {
       if (!style) style = {};
@@ -241,16 +176,6 @@ export default class Button extends React.Component<Props, State> {
           <span onClick={this.onClickRightIcon}>
             {rightIcon}
           </span>
-        )}
-        {ripple && (
-          <span
-            style={{
-              top: `${rippleCoords.y}px`,
-              left: `${rippleCoords.x}px`,
-              width: `${rippleSize}px`,
-              height: `${rippleSize}px`,
-            }}
-          />
         )}
       </button>
     );
