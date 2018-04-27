@@ -39,11 +39,10 @@ export type Props = {
   mTop?: string | boolean,
   mRight?: string | boolean,
   mBottom?: string | boolean,
-  mLeft?: string | boolean,
+  mLeft?: string | boolean
 };
 
-export default class Button extends React.Component<Props, void> {
-  state: State;
+export default class Button extends React.Component<Props> {
   onClick: Function;
   onMouseUp: Function;
   onClickRightIcon: Function;
@@ -53,14 +52,13 @@ export default class Button extends React.Component<Props, void> {
 
   static defaultProps = {
     type: 'button',
-    outline: true,
+    outline: true
   };
 
   constructor(props: $Exact<Props>) {
     super(props);
 
     this.onClick = this._onClick.bind(this);
-    this.onMouseUp = this._onMouseUp.bind(this);
     this.onClickRightIcon = this.onClickRightIcon.bind(this);
     this.onClickLeftIcon = this.onClickLeftIcon.bind(this);
     this.onMouseDown = this._onMouseDown.bind(this);
@@ -123,7 +121,7 @@ export default class Button extends React.Component<Props, void> {
       mTop,
       mRight,
       mBottom,
-      mLeft,
+      mLeft
     } = this.props;
 
     if (disabled) {
@@ -166,17 +164,9 @@ export default class Button extends React.Component<Props, void> {
         onMouseUp={this.onMouseUp}
         onTouchEnd={this.onMouseUp}
       >
-        {leftIcon && (
-          <span onClick={this.onClickLeftIcon}>
-            {leftIcon}
-          </span>
-        )}
+        {leftIcon && <span onClick={this.onClickLeftIcon}>{leftIcon}</span>}
         <span>{this.props.children}</span>
-        {rightIcon && (
-          <span onClick={this.onClickRightIcon}>
-            {rightIcon}
-          </span>
-        )}
+        {rightIcon && <span onClick={this.onClickRightIcon}>{rightIcon}</span>}
       </button>
     );
   }

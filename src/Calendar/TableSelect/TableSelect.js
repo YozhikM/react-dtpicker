@@ -1,17 +1,19 @@
 /* @flow */
 
 import React from 'react';
-import './TableSelect.scss';
+import s from './TableSelect.scss';
 
 export type Value = number;
-export type Options = Array<{ value: Value, name: string }>;
+export type Option = { value: Value, name: string };
 
 type Props = {|
   cols: number,
-  options: Options,
+  options: Option[],
   value: Value,
+  disabled?: ?(number[]),
   onChange?: (value: Value) => void,
 |};
+
 type State = {|
   value: Value,
 |};
@@ -32,8 +34,10 @@ class TableSelect extends React.Component<Props, State> {
   }
 
   clickItem(e: Event, value: Value) {
+    const { onChange, disabled } = this.props;
+    if (disabled && disabled.indexOf(value) >= 0) return;
+
     this.setState({ value });
-    const { onChange } = this.props;
     if (onChange) {
       onChange(value);
     }
@@ -44,25 +48,27 @@ class TableSelect extends React.Component<Props, State> {
     const { value } = this.state;
 
     return (
-      <div className="root">
+      <div className={s.root}>
         <ul
           style={{
             width: `${cols * 50}px`,
           }}
         >
-          {options.map((option, i) => (
-            <li
-              onClick={e => {
-                this.clickItem(e, option.value);
-              }}
-              key={i}
-              style={{
-                fontWeight: option.value === value ? 'bold' : 'normal',
-              }}
-            >
-              {option.name}
-            </li>
-          ))}
+          {options.map(option => {
+            return (
+              <li
+                onClick={e => {
+                  this.clickItem(e, option.value);
+                }}
+                key={option.name}
+                style={{
+                  fontWeight: option.value === value ? 'bold' : 'normal',
+                }}
+              >
+                {option.name}
+              </li>
+            );
+          })}
         </ul>
       </div>
     );

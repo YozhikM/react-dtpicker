@@ -3,19 +3,20 @@
 import * as React from 'react';
 import { format } from 'date-fns';
 import Input from '../Input/Input';
+import type { Highlight } from './helpers';
 
 type Props = {|
-  visibleDate: ?Date,
+  visibleDate: ?Highlight,
   minDate?: Date,
   maxDate?: Date,
   onChange?: Function,
   onFocus?: Function,
   onKeyPress?: Function,
-  style?: Object,
+  style?: Object
 |};
 
 type State = {
-  inputValue: string,
+  inputValue: string
 };
 
 export default class DateMaskInput extends React.Component<Props, State> {
@@ -23,17 +24,24 @@ export default class DateMaskInput extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      inputValue: this.formatWithoutTime(props.visibleDate),
+      inputValue: this.formatPropsToState(props.visibleDate)
     };
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.visibleDate) {
       this.setState({
-        inputValue: this.formatWithoutTime(nextProps.visibleDate),
+        inputValue: this.formatPropsToState(nextProps.visibleDate)
       });
     }
   }
+
+  formatPropsToState = (value: ?Highlight) => {
+    if (!value) return '';
+
+    const date = new Date(Date.UTC(value.year, value.month, value.day));
+    return this.formatWithoutTime(date);
+  };
 
   formatWithTime(date: ?Date): string {
     return format(date, 'DD/MM/YYYY HH:mm');
@@ -74,7 +82,7 @@ export default class DateMaskInput extends React.Component<Props, State> {
       const MM = Number(value.substr(3, 2)) - 1;
       const DD = Number(value.substr(0, 2));
 
-      userDate = new Date(YY, MM, DD);
+      userDate = new Date(Date.UTC(YY, MM, DD));
 
       if (maxDate && minDate) {
         if (userDate < minDate) {
@@ -94,7 +102,7 @@ export default class DateMaskInput extends React.Component<Props, State> {
       const MM = Number(replacedValue.substr(2, 2)) - 1;
       const DD = Number(replacedValue.substr(0, 2));
 
-      userDate = new Date(YY, MM, DD);
+      userDate = new Date(Date.UTC(YY, MM, DD));
 
       if (maxDate && minDate) {
         if (userDate < minDate) {

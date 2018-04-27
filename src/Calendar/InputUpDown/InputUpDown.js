@@ -2,7 +2,7 @@
 
 import React from 'react';
 import SvgIcon from '../../SvgIcon/SvgIcon';
-import './InputUpDown.scss';
+import s from './InputUpDown.scss';
 
 type Props = {|
   value?: number,
@@ -10,12 +10,12 @@ type Props = {|
   max?: number,
   circular?: boolean,
   onChange?: (value: number) => void,
-  onClickNumber?: (value: number) => void,
+  onClickNumber?: (value: number) => void
 |};
 
 type State = {|
   value: number,
-  isBtnHold: boolean,
+  isBtnHold: boolean
 |};
 
 class InputUpDown extends React.Component<Props, State> {
@@ -26,7 +26,7 @@ class InputUpDown extends React.Component<Props, State> {
     super(props);
     this.state = {
       value: this.props.value || 0,
-      isBtnHold: false,
+      isBtnHold: false
     };
   }
 
@@ -85,7 +85,7 @@ class InputUpDown extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="InputUpDown">
+      <div className={s.InputUpDown}>
         <button
           onClick={this.increment}
           onMouseDown={() => this.onHoldStart(this.increment)}

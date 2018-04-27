@@ -3,29 +3,28 @@
 import React from 'react';
 import SvgIcon from '../../SvgIcon/SvgIcon';
 import InputUpDown from '../InputUpDown/InputUpDown';
-import TableSelect, { type Options } from '../TableSelect/TableSelect';
-import './TimeSelect.scss';
-
-type Value = Date;
+import TableSelect, { type Option } from '../TableSelect/TableSelect';
+import s from './TimeSelect.scss';
+import { getValueFromDate, type Highlight } from '../helpers';
 
 type ShowEnum = 'main' | 'hh' | 'mm' | 'ss';
 
 type HHMMSS = {
   hh: number,
   mm: number,
-  ss: number,
+  ss: number
 };
 
 type Props = {|
-  value?: ?Value,
-  onSetTime?: (value: Value) => void,
-  onSubmit?: (value: Value) => void,
+  value?: ?Highlight,
+  onSetTime?: (value: Highlight) => void,
+  onSubmit?: (value: Highlight) => void,
   showSeconds?: boolean,
-  show?: ShowEnum,
+  show?: ShowEnum
 |};
 
 type State = HHMMSS & {
-  show: ShowEnum,
+  show: ShowEnum
 };
 
 class TimeSelect extends React.Component<Props, State> {
@@ -34,7 +33,7 @@ class TimeSelect extends React.Component<Props, State> {
 
     this.state = {
       ...this.parseTime(this.props.value),
-      show: this.props.show || 'main',
+      show: this.props.show || 'main'
     };
   }
 
@@ -44,24 +43,23 @@ class TimeSelect extends React.Component<Props, State> {
     }
   }
 
-  genTableOpts = (from: number, till: number, step: number = 1): Options => {
-    const res: Options = [];
+  genTableOpts = (from: number, till: number, step: number = 1): Option[] => {
+    const res: Option[] = [];
     for (let i = from; i <= till; i += step) {
       res.push({ value: i, name: i < 10 ? `0${i}` : `${i}` });
     }
     return res;
   };
 
-  parseTime(value: ?Date): HHMMSS {
+  parseTime(value: ?Highlight): HHMMSS {
     if (!value) return { hh: 0, mm: 0, ss: 0 };
-    return { hh: value.getHours(), mm: value.getMinutes(), ss: value.getSeconds() };
+    return { hh: value.hour, mm: value.minute, ss: value.second };
   }
 
-  getValue = (): Value => {
+  getValue = (): Highlight => {
     const { hh, mm, ss } = this.state;
     const { value } = this.props;
-    const newDate = value ? new Date(value.getTime()) : new Date();
-    newDate.setHours(hh, mm, ss);
+    const newDate = value ? { ...value, hour: hh, minute: mm, second: ss } : getValueFromDate();
     return newDate;
   };
 
@@ -145,7 +143,7 @@ class TimeSelect extends React.Component<Props, State> {
     }
 
     return (
-      <div className="hs">
+      <div className={s.hs}>
         <InputUpDown
           value={hh}
           min={0}

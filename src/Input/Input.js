@@ -84,7 +84,7 @@ export default class Input extends React.Component<Props, State> {
     }
   }
 
-  onKeyPress(e: Event) {
+  onKeyPress(e: SyntheticKeyboardEvent<>) {
     const { onSubmit } = this.props;
     if (onSubmit && e.key === 'Enter') {
       onSubmit(e, this.state.value);

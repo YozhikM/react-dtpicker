@@ -4,29 +4,31 @@ import React from 'react';
 import SvgIcon from '../../SvgIcon/SvgIcon';
 import CalendarDate from '../DateTimePicker/CalendarDate';
 import DateMaskInput from '../DateMaskInput';
-import './Calendar.scss';
+import s from './Calendar.scss';
+import { getValueFromDate, type Highlight } from '../helpers';
+
+type Value = { year: number, month: number, day?: number };
 
 type Props = {
-  value: Date,
-  visibleDate?: Date,
-  highlight: Array<Date> | Date,
+  value: Value,
+  visibleDate?: Highlight,
+  highlight: Highlight[] | Highlight,
   minDate?: Date,
   maxDate?: Date,
-  onChange?: Date => void,
-  onSetDate?: Date => void,
-  onSetDateByClick?: Date => void,
+  onChange?: Value => void,
+  onSetDate?: Value => void,
+  onSetDateByClick?: Value => void,
   time?: boolean,
   icon?: boolean,
   leftArrow?: boolean,
   rightArrow?: boolean,
-  isCalendarShown?: boolean,
+  isCalendarShown?: boolean
 };
 
 type State = {
-  highlight?: Array<Date> | Date,
-  value: Date,
-  visibleDate: Date,
-  isCalendarShown: boolean,
+  value: Value,
+  visibleDate: Highlight,
+  isCalendarShown: boolean
 };
 
 class CalendarDateTimePicker extends React.Component<Props, State> {
@@ -34,9 +36,9 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      visibleDate: this.props.visibleDate || new Date(),
+      visibleDate: this.props.visibleDate || getValueFromDate(new Date()),
       value: this.props.value,
-      isCalendarShown: !!this.props.isCalendarShown,
+      isCalendarShown: !!this.props.isCalendarShown
     };
   }
 
@@ -57,14 +59,14 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     const { onChange, onSetDate } = this.props;
 
     if (date && onSetDate) {
-      onSetDate(date);
+      onSetDate({ year: date.getUTCFullYear(), month: date.getUTCMonth(), day: date.getUTCDate() });
     }
     if (date && onChange) {
-      onChange(date);
+      onChange({ year: date.getUTCFullYear(), month: date.getUTCMonth(), day: date.getUTCDate() });
     }
   };
 
-  onChange = (value: Date) => {
+  onChange = (value: Value) => {
     const { onChange } = this.props;
 
     if (onChange) {
@@ -72,16 +74,15 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     }
   };
 
-  onSetDate = (date: Date) => {
+  onSetDate = (day: number) => {
     const { onSetDateByClick } = this.props;
+    const { value } = this.state;
 
-    if (onSetDateByClick) onSetDateByClick(date);
+    if (onSetDateByClick) onSetDateByClick({ year: value.year, month: value.month, day });
   };
 
-  onSetTime = (time: Date) => {
-    this.setState({
-      visibleDate: time,
-    });
+  onSetTime = (visibleDate: Highlight) => {
+    this.setState({ visibleDate });
   };
 
   render() {
@@ -94,15 +95,15 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
       isCalendarShown,
       visibleDate,
       maxDate,
-      minDate,
+      minDate
     } = this.props;
     const { value } = this.state;
     const style = {
-      width: '80%',
+      width: '80%'
     };
 
     return (
-      <div className="container">
+      <div className={s.container}>
         <DateMaskInput
           style={style}
           visibleDate={visibleDate}
@@ -111,7 +112,7 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
           maxDate={maxDate}
         />
         {icon && (
-          <div className="icon">
+          <div className={s.icon}>
             <SvgIcon file="calendar" />
           </div>
         )}

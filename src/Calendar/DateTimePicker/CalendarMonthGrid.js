@@ -1,34 +1,47 @@
 /* @flow */
 
 import React from 'react';
-import { startOfMonth, endOfMonth, eachDay, getDay, isSameDay, isWithinRange } from 'date-fns';
-import './Calendar.scss';
+import {
+  startOfMonth,
+  endOfMonth,
+  eachDay,
+  getDay,
+  isSameDay,
+  isWithinRange,
+  getDate,
+} from 'date-fns';
+import s from './Calendar.scss';
 import CalendarDay from './CalendarDay';
 import format from './format';
+import { convertToUTCNewDate, getDateFromValue, type Highlight } from '../helpers';
 
-type Week = Array<Date>;
+type Value = {
+  year: number,
+  month: number,
+};
+
+type Week = number[];
 
 export type Props = {|
-  value: Date,
-  highlight?: Array<Date> | Date,
+  value: Value,
+  highlight?: Highlight[] | Highlight,
   maxDate?: Date,
   minDate?: Date,
-  onSetDate?: (date: Date) => void,
-  onClickMonth?: (date: Date) => void,
+  onSetDate?: (day: number) => void,
+  onClickMonth?: (month: Value) => void,
 |};
 
 type State = {
-  weeks: Array<Week>,
+  weeks: Week[],
 };
 
 export default class CalendarMonthGrid extends React.Component<Props, State> {
-  state: State = {
-    weeks: [],
-  };
+  constructor(props: Props) {
+    super(props);
 
-  componentWillMount() {
-    const { value } = this.props;
-    this.setState({ weeks: this.createMonth(value) });
+    this.state = {
+      weeks: this.createMonth(props.value) || [],
+    };
   }
 
   componentWillReceiveProps(nextProps: Props) {
@@ -37,12 +50,15 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
     }
   }
 
-  createMonth(date: Date): Array<Week> {
-    const newDate = new Date(date);
-    const startDateOfMonth = startOfMonth(newDate);
-    const endDateOfMonth = endOfMonth(newDate);
-    const currentMonth = eachDay(startDateOfMonth, endDateOfMonth);
-    const firstOfMonthDay = getDay(startDateOfMonth);
+  createMonth(date: Value): Week[] {
+    const MONTH = new Date(date.year, date.month);
+    const startDateOfMonth = startOfMonth(MONTH);
+    const endDateOfMonth = endOfMonth(MONTH);
+    const currentMonth: number[] = eachDay(startDateOfMonth, endDateOfMonth).map(day =>
+      getDate(convertToUTCNewDate(day))
+    );
+
+    const firstOfMonthDay: number = getDay(startDateOfMonth);
     let beginOfMonth;
     if (firstOfMonthDay === 0) {
       beginOfMonth = 1;
@@ -55,7 +71,7 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
     const fourthWeek = currentMonth.slice(beginOfMonth + 14, beginOfMonth + 21);
     const fiveWeek = currentMonth.slice(beginOfMonth + 21, beginOfMonth + 28);
     const tailWeek = currentMonth.slice(beginOfMonth + 28);
-    const weeks: Array<Array<Date>> = [firstWeek, secondWeek, thirdWeek, fourthWeek];
+    const weeks: Week[] = [firstWeek, secondWeek, thirdWeek, fourthWeek];
     // check for february starting on monday, out of 28 days
     if (fiveWeek.length > 0) {
       weeks.push(fiveWeek);
@@ -66,10 +82,14 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
     return weeks;
   }
 
-  onSetDate = (date: Date) => {
-    const { onSetDate } = this.props;
+  onSetDate = (day: number) => {
+    const { maxDate, minDate, onSetDate, value } = this.props;
+    const date = new Date(value.year, value.month, day);
+
+    if ((maxDate && date > maxDate) || (minDate && date < minDate)) return;
+
     if (onSetDate) {
-      onSetDate(date);
+      onSetDate(day);
     }
   };
 
@@ -80,27 +100,35 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
     }
   };
 
-  getWeekDays(): Array<string> {
+  getWeekDays(): string[] {
+    const { value } = this.props;
     const { weeks } = this.state;
-    return weeks[1].map(weekDay => format(weekDay, 'dd'));
+
+    return weeks[1].map(weekDay => {
+      const date = new Date(value.year, value.month, weekDay);
+      return format(date, 'dd');
+    });
   }
 
-  setDayStyle = (highlight: Array<Date> | Date, date: Date) => {
-    const { maxDate, minDate } = this.props;
+  setDayStyle = (highlight: Highlight[] | Highlight, day: number) => {
+    const { maxDate, minDate, value } = this.props;
+    const date = new Date(value.year, value.month, day);
 
     const highlightStyle = { backgroundColor: '#34495e', color: '#fff' };
     const rangeStyle = { backgroundColor: '#8196ab', color: '#fff' };
     const disabledDateStyle = { color: 'lightgrey' };
 
     if (Array.isArray(highlight)) {
-      const [firstDate, secondDate] = highlight;
+      const [first, second] = highlight;
+      const firstDate = getDateFromValue(first);
+      const secondDate = getDateFromValue(second);
 
       if ((maxDate && date > maxDate) || (minDate && date < minDate)) {
         return disabledDateStyle;
       }
 
       for (let i = 0; i < highlight.length; i++) {
-        if (isSameDay(highlight[i], date)) {
+        if (isSameDay(getDateFromValue(highlight[i]), date)) {
           return highlightStyle;
         }
       }
@@ -111,7 +139,7 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
       } else if (isWithinRange(date, secondDate, firstDate)) {
         return rangeStyle;
       }
-    } else if (isSameDay(highlight, date)) {
+    } else if (isSameDay(getDateFromValue(highlight), date)) {
       return highlightStyle;
     }
 
@@ -120,32 +148,37 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
 
   render() {
     const { weeks } = this.state;
-    const { value, highlight, minDate, maxDate } = this.props;
+    const { value, highlight } = this.props;
     const weekDays = this.getWeekDays();
+    const month = new Date(value.year, value.month);
 
     return (
-      <div className="root">
-        <span className="span" onClick={this.onClickMonth}>
-          {format(value, 'MMMM YYYY')}
+      <div className={s.root}>
+        <span className={s.span} onClick={this.onClickMonth}>
+          {format(month, 'MMMM YYYY')}
         </span>
         <table>
           <thead>
-            <tr>{weekDays.map(weekDay => <th key={weekDay}>{weekDay.toUpperCase()}</th>)}</tr>
+            <tr>
+              {weekDays.map(weekDay => {
+                return <th key={weekDay}>{weekDay.toUpperCase()}</th>;
+              })}
+            </tr>
           </thead>
 
           <tbody>
             {weeks.map(week => (
-              <tr key={week[0].toISOString()}>
-                {week.map(date => (
-                  <CalendarDay
-                    key={date.toISOString()}
-                    date={date}
-                    style={highlight ? this.setDayStyle(highlight, date) : {}}
-                    onClick={this.onSetDate}
-                    minDate={minDate}
-                    maxDate={maxDate}
-                  />
-                ))}
+              <tr key={week[0]}>
+                {week.map(day => {
+                  return (
+                    <CalendarDay
+                      key={day}
+                      day={day}
+                      style={highlight ? this.setDayStyle(highlight, day) : {}}
+                      onClick={this.onSetDate}
+                    />
+                  );
+                })}
               </tr>
             ))}
           </tbody>
