@@ -9,32 +9,72 @@ The date can be changed in the input.
 
 ![DateTimePicker](http://mysolaris.xyz/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202017-10-16%20%D0%B2%204.26.32%20%D0%9F%D0%9F.png)
 
-
 ## Usage
 
-1. `git clone https://github.com/YozhikM/dtpicker.git`
-2. `npm install`
-3. `npm start` *or* `yarn start`
-4. `npm test` *or* `yarn test`
-
-To use static typing, make sure [that you have installed Flow](https://flow.org/en/docs/install).
+1.  `git clone https://github.com/YozhikM/dtpicker.git`
+2.  `npm install`
+3.  `npm start` _or_ `yarn start`
+4.  `npm test` _or_ `yarn test`
 
 ## API
 
-#### `highlight`
-Highlights the days. By default is `new Date()`. It can be a single date or an array of dates
+### `highlight`
 
-#### `value`
-Displayed months on the calendar. By default is `new Date()`
+Highlights the days.
 
-#### `time`
-When the value is set to `true`, the time in hours and minutes will be displayed, as well as the ability to change it. By default is `false`
+```js
+highlight?: { min: Date, max: Date }
+```
 
-#### `isSingleCalendar`
-When set to `true`, a single calendar will be displayed without the ability to select a date range. By default is `false`
+### `value`
+
+Displayed months on the calendar.
+
+```js
+value?: { min: string, max: string }
+```
+
+### `time`
+
+When the value is set to `true`, the time in hours and minutes will be displayed, as well as the ability to change it. By default is `false`.
+
+```js
+time?: boolean
+```
+
+### `minDate` && `maxDate`
+
+The latest dates for the calendar. All events, like clicking, navigating through the interface, will be unavailable.
+
+```js
+minDate?: Date,
+maxDate?: Date
+```
+
+### `singleCalendar`
+
+When set to `true`, a single calendar will be displayed without the ability to select a date range. By default is `false`.
+
+```js
+singleCalendar?: boolean
+```
+
+### `onChange()`
+
+```js
+onChange?: (Event, { min: string, max: string }) => void;
+```
+
+### `onSubmit()`
+
+```js
+onSubmit?: (Event, { min: string, max: string }) => void;
+```
+
+### `toggleCalendar()`
+
+```js
+toggleCalendar?: () => void;
+```
 
 ![DateTimePicker](http://mysolaris.xyz/single.png)
-
-## Locales
-
-To work with dates, use the library [date-fns](https://date-fns.org). Localization can be changed in a file `src/components/Calendar/format.js`
