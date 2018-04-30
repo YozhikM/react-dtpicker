@@ -10,7 +10,7 @@ import {
   isWithinRange,
   getDate,
 } from 'date-fns';
-import s from './Calendar.scss';
+import './MainCalendar.scss';
 import CalendarDay from './CalendarDay';
 import format from './format';
 import { convertToUTCNewDate, getDateFromValue, type Highlight } from '../helpers';
@@ -65,8 +65,16 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
     } else {
       beginOfMonth = 8 - firstOfMonthDay;
     }
-    const firstWeek = currentMonth.slice(0, beginOfMonth);
-    const secondWeek = currentMonth.slice(beginOfMonth, 7 + firstWeek.length);
+
+    const firstWeek = [];
+    if (beginOfMonth < 7) {
+      for (let i = 0; i < 7 - beginOfMonth; i++) {
+        firstWeek.push(0);
+      }
+    }
+
+    firstWeek.push(...currentMonth.slice(0, beginOfMonth));
+    const secondWeek = currentMonth.slice(beginOfMonth, 7 + beginOfMonth);
     const thirdWeek = currentMonth.slice(beginOfMonth + 7, beginOfMonth + 14);
     const fourthWeek = currentMonth.slice(beginOfMonth + 14, beginOfMonth + 21);
     const fiveWeek = currentMonth.slice(beginOfMonth + 21, beginOfMonth + 28);
@@ -86,7 +94,7 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
     const { maxDate, minDate, onSetDate, value } = this.props;
     const date = new Date(value.year, value.month, day);
 
-    if ((maxDate && date > maxDate) || (minDate && date < minDate)) return;
+    if ((maxDate && date > maxDate) || (minDate && date < minDate) || !day) return;
 
     if (onSetDate) {
       onSetDate(day);
@@ -104,19 +112,23 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
     const { value } = this.props;
     const { weeks } = this.state;
 
-    return weeks[1].map(weekDay => {
+    return weeks[1].map((weekDay: number) => {
       const date = new Date(value.year, value.month, weekDay);
       return format(date, 'dd');
     });
   }
 
-  setDayStyle = (highlight: Highlight[] | Highlight, day: number) => {
+  setDayStyle = (highlight: Highlight[] | Highlight, day: number | string) => {
     const { maxDate, minDate, value } = this.props;
-    const date = new Date(value.year, value.month, day);
 
     const highlightStyle = { backgroundColor: '#34495e', color: '#fff' };
     const rangeStyle = { backgroundColor: '#8196ab', color: '#fff' };
     const disabledDateStyle = { color: 'lightgrey' };
+
+    if (!day) {
+      return disabledDateStyle;
+    }
+    const date = new Date(value.year, value.month, day);
 
     if (Array.isArray(highlight)) {
       const [first, second] = highlight;
@@ -153,8 +165,8 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
     const month = new Date(value.year, value.month);
 
     return (
-      <div className={s.root}>
-        <span className={s.span} onClick={this.onClickMonth}>
+      <div className="root">
+        <span className="span" onClick={this.onClickMonth}>
           {format(month, 'MMMM YYYY')}
         </span>
         <table>
@@ -169,10 +181,10 @@ export default class CalendarMonthGrid extends React.Component<Props, State> {
           <tbody>
             {weeks.map(week => (
               <tr key={week[0]}>
-                {week.map(day => {
+                {week.map((day, i) => {
                   return (
                     <CalendarDay
-                      key={day}
+                      key={`${day}${i}`}
                       day={day}
                       style={highlight ? this.setDayStyle(highlight, day) : {}}
                       onClick={this.onSetDate}

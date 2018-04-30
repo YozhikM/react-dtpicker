@@ -2,6 +2,8 @@
 
 import React from 'react';
 import SvgIcon from '../../SvgIcon/SvgIcon';
+import chevronUp from '../../SvgIcon/svg-icons/chevron-up.svg';
+import chevronDown from '../../SvgIcon/svg-icons/chevron-down.svg';
 import s from './InputUpDown.scss';
 
 type Props = {|
@@ -10,12 +12,12 @@ type Props = {|
   max?: number,
   circular?: boolean,
   onChange?: (value: number) => void,
-  onClickNumber?: (value: number) => void
+  onClickNumber?: (value: number) => void,
 |};
 
 type State = {|
   value: number,
-  isBtnHold: boolean
+  isBtnHold: boolean,
 |};
 
 class InputUpDown extends React.Component<Props, State> {
@@ -26,7 +28,7 @@ class InputUpDown extends React.Component<Props, State> {
     super(props);
     this.state = {
       value: this.props.value || 0,
-      isBtnHold: false
+      isBtnHold: false,
     };
   }
 
@@ -85,7 +87,7 @@ class InputUpDown extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className={s.InputUpDown}>
+      <div className="InputUpDown">
         <button
           onClick={this.increment}
           onMouseDown={() => this.onHoldStart(this.increment)}
@@ -93,7 +95,7 @@ class InputUpDown extends React.Component<Props, State> {
           onMouseUp={this.onHoldEnd}
           onTouchEnd={this.onHoldEnd}
         >
-          <SvgIcon file="chevron-up" />
+          <SvgIcon file={chevronUp} />
         </button>
         <p onClick={this.onClickNumber}>{this.state.value}</p>
         <button
@@ -103,7 +105,7 @@ class InputUpDown extends React.Component<Props, State> {
           onMouseUp={this.onHoldEnd}
           onTouchEnd={this.onHoldEnd}
         >
-          <SvgIcon file="chevron-down" />
+          <SvgIcon file={chevronDown} />
         </button>
       </div>
     );

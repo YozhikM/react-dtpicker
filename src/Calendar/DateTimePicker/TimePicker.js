@@ -2,8 +2,9 @@
 
 import React from 'react';
 import SvgIcon from '../../SvgIcon/SvgIcon';
+import clock from '../../SvgIcon/svg-icons/clock.svg';
 import TimeSelect from './TimeSelect';
-import s from './Calendar.scss';
+import s from './MainCalendar.scss';
 import type { Highlight } from '../helpers';
 
 type Show = 'button' | 'timeSelect';
@@ -11,18 +12,18 @@ type Show = 'button' | 'timeSelect';
 type Props = {|
   show?: Show,
   date?: Highlight,
-  onSetTime?: (time: Highlight) => void
+  onSetTime?: (time: Highlight) => void,
 |};
 
 type State = {|
-  show: 'button' | 'timeSelect'
+  show: 'button' | 'timeSelect',
 |};
 
 class TimePicker extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      show: this.props.show || 'button'
+      show: this.props.show || 'button',
     };
   }
 
@@ -45,9 +46,9 @@ class TimePicker extends React.Component<Props, State> {
     }
 
     return (
-      <div className={s.time_picker}>
+      <div className="time_picker">
         <button onClick={this.onClickClock}>
-          <SvgIcon file="clock" />
+          <SvgIcon file={clock} />
         </button>
       </div>
     );

@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint-disable no-nested-ternary */
 
-import React from 'react';
+import * as React from 'react';
 import {
   startOfMonth,
   endOfMonth,
@@ -9,11 +9,11 @@ import {
   setHours,
   setMinutes,
   setSeconds,
-  format
+  format,
 } from 'date-fns';
 import Button from '../Button/Button';
 import CalendarDateTimePicker from './DateTimePicker/CalendarDateTimePicker';
-import s from './DateTimePicker/MainCalendar.scss';
+import './DateTimePicker/MainCalendar.scss';
 import { getValueFromDate, type Highlight } from './helpers';
 
 export type StringValue = { min: string, max: string };
@@ -33,7 +33,7 @@ type Props = {
   hideSubmitBtn?: boolean,
   onChange?: Function,
   onSubmit?: Function,
-  toggleCalendar?: Function
+  toggleCalendar?: Function,
 };
 
 type State = {
@@ -44,7 +44,7 @@ type State = {
   isCalendarShown: boolean,
   isNextClickAwaited: boolean,
   firstDate: Highlight,
-  secondDate: Highlight
+  secondDate: Highlight,
 };
 
 export default class Calendar extends React.Component<Props, State> {
@@ -62,7 +62,7 @@ export default class Calendar extends React.Component<Props, State> {
           ? this.convertValueToStateValue(props.highlight)
           : {
               min: this.combineStateValue(prevCurrentMonthValue),
-              max: this.combineStateValue(currentMonthValue)
+              max: this.combineStateValue(currentMonthValue),
             },
       highlight: props.highlight
         ? this.convertValueToArray(props.highlight)
@@ -74,7 +74,7 @@ export default class Calendar extends React.Component<Props, State> {
       isCalendarShown: true,
       isNextClickAwaited: false,
       firstDate,
-      secondDate
+      secondDate,
     };
   }
 
@@ -166,7 +166,7 @@ export default class Calendar extends React.Component<Props, State> {
     if (maxDate && nextMonth > maxDate) {
       return {
         min: this.combineStateValue(prevMonthValue),
-        max: this.combineStateValue(minValue)
+        max: this.combineStateValue(minValue),
       };
     }
 
@@ -174,7 +174,7 @@ export default class Calendar extends React.Component<Props, State> {
       if (maxDateValue > maxDate && nextMonth > maxDate) {
         return {
           min: this.combineStateValue(prevMonthMaxValue),
-          max: this.combineStateValue(maxValue)
+          max: this.combineStateValue(maxValue),
         };
       }
     }
@@ -183,14 +183,14 @@ export default class Calendar extends React.Component<Props, State> {
       if (minDateValue < minDate && prevMonth < minDate) {
         return {
           min: this.combineStateValue(minValue),
-          max: this.combineStateValue(nextMonthMaxValue)
+          max: this.combineStateValue(nextMonthMaxValue),
         };
       }
     }
 
     return {
       min: this.combineStateValue(minValue),
-      max: this.combineStateValue(nextMonthValue)
+      max: this.combineStateValue(nextMonthValue),
     };
   };
 
@@ -224,12 +224,12 @@ export default class Calendar extends React.Component<Props, State> {
     if (firstDate < secondDate) {
       value = {
         min: format(firstDate),
-        max: format(this.convertToEndOfDay(secondDate))
+        max: format(this.convertToEndOfDay(secondDate)),
       };
     } else {
       value = {
         min: format(secondDate),
-        max: format(this.convertToEndOfDay(firstDate))
+        max: format(this.convertToEndOfDay(firstDate)),
       };
     }
     return value;
@@ -251,7 +251,7 @@ export default class Calendar extends React.Component<Props, State> {
       {
         firstDate,
         secondDate,
-        highlight
+        highlight,
       },
       () => {
         if (onChange) {
@@ -278,7 +278,7 @@ export default class Calendar extends React.Component<Props, State> {
       {
         firstDate,
         secondDate,
-        highlight
+        highlight,
       },
       () => {
         if (onChange) {
@@ -320,7 +320,7 @@ export default class Calendar extends React.Component<Props, State> {
           isNextClickAwaited: true,
           firstDate,
           secondDate,
-          highlight
+          highlight,
         },
         () => {
           if (onChange) {
@@ -338,7 +338,7 @@ export default class Calendar extends React.Component<Props, State> {
           isNextClickAwaited: false,
           firstDate,
           secondDate,
-          highlight
+          highlight,
         },
         () => {
           if (onChange) {
@@ -385,7 +385,7 @@ export default class Calendar extends React.Component<Props, State> {
     this.setState({
       firstDate: dateNow,
       secondDate: dateNow,
-      highlight: [dateNow, dateNow]
+      highlight: [dateNow, dateNow],
     });
   };
 
@@ -408,13 +408,13 @@ export default class Calendar extends React.Component<Props, State> {
     const { maxDate, minDate } = this.props;
     const { time, value, highlight, isCalendarShown } = this.state;
     const { min } = value || {};
-    if (Array.isArray(highlight)) return null;
+    if (Array.isArray(highlight)) return this.renderDualCalendar();
 
     return (
-      <div className={s.container}>
+      <div className="container">
         <CalendarDateTimePicker
           time={time}
-          value={{ year: min.year, month: min.month, day: min.day }}
+          value={min}
           highlight={highlight}
           visibleDate={highlight}
           isCalendarShown={isCalendarShown}
@@ -436,11 +436,11 @@ export default class Calendar extends React.Component<Props, State> {
     const { min, max } = value || {};
 
     return (
-      <div>
-        <div className={s.container}>
+      <React.Fragment>
+        <div className="wrapper">
           <CalendarDateTimePicker
             time={time}
-            value={{ year: min.year, month: min.month, day: min.day }}
+            value={min}
             highlight={highlight}
             visibleDate={firstDate}
             onChange={this.onChangeMin}
@@ -452,9 +452,10 @@ export default class Calendar extends React.Component<Props, State> {
             minDate={minDate}
             leftArrow
           />
+
           <CalendarDateTimePicker
             time={time}
-            value={{ year: max.year, month: max.month, day: max.day }}
+            value={max}
             highlight={highlight}
             visibleDate={secondDate}
             onChange={this.onChangeMax}
@@ -467,19 +468,21 @@ export default class Calendar extends React.Component<Props, State> {
             rightArrow
           />
         </div>
-        <div className={s.calendarBtn}>
+
+        <div className="calendarBtn">
           {!hideResetBtn && (
             <Button onClick={this.resetState} red xs>
               Очистить
             </Button>
           )}
+
           {!hideSubmitBtn && (
             <Button onClick={this.onSubmit} blue filled xs>
               Подтвердить
             </Button>
           )}
         </div>
-      </div>
+      </React.Fragment>
     );
   };
 

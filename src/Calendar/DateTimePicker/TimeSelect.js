@@ -2,6 +2,7 @@
 
 import React from 'react';
 import SvgIcon from '../../SvgIcon/SvgIcon';
+import check from '../../SvgIcon/svg-icons/check.svg';
 import InputUpDown from '../InputUpDown/InputUpDown';
 import TableSelect, { type Option } from '../TableSelect/TableSelect';
 import s from './TimeSelect.scss';
@@ -12,7 +13,7 @@ type ShowEnum = 'main' | 'hh' | 'mm' | 'ss';
 type HHMMSS = {
   hh: number,
   mm: number,
-  ss: number
+  ss: number,
 };
 
 type Props = {|
@@ -20,11 +21,11 @@ type Props = {|
   onSetTime?: (value: Highlight) => void,
   onSubmit?: (value: Highlight) => void,
   showSeconds?: boolean,
-  show?: ShowEnum
+  show?: ShowEnum,
 |};
 
 type State = HHMMSS & {
-  show: ShowEnum
+  show: ShowEnum,
 };
 
 class TimeSelect extends React.Component<Props, State> {
@@ -33,7 +34,7 @@ class TimeSelect extends React.Component<Props, State> {
 
     this.state = {
       ...this.parseTime(this.props.value),
-      show: this.props.show || 'main'
+      show: this.props.show || 'main',
     };
   }
 
@@ -171,7 +172,7 @@ class TimeSelect extends React.Component<Props, State> {
           />
         )}
         <button onClick={this.onSubmit}>
-          <SvgIcon file="check" />
+          <SvgIcon file={check} />
         </button>
       </div>
     );

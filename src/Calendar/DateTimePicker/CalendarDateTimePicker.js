@@ -4,7 +4,8 @@ import React from 'react';
 import SvgIcon from '../../SvgIcon/SvgIcon';
 import CalendarDate from '../DateTimePicker/CalendarDate';
 import DateMaskInput from '../DateMaskInput';
-import s from './Calendar.scss';
+import s from './MainCalendar.scss';
+import calendar from '../../SvgIcon/svg-icons/calendar.svg';
 import { getValueFromDate, type Highlight } from '../helpers';
 
 type Value = { year: number, month: number, day?: number };
@@ -22,13 +23,13 @@ type Props = {
   icon?: boolean,
   leftArrow?: boolean,
   rightArrow?: boolean,
-  isCalendarShown?: boolean
+  isCalendarShown?: boolean,
 };
 
 type State = {
   value: Value,
   visibleDate: Highlight,
-  isCalendarShown: boolean
+  isCalendarShown: boolean,
 };
 
 class CalendarDateTimePicker extends React.Component<Props, State> {
@@ -38,7 +39,7 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
     this.state = {
       visibleDate: this.props.visibleDate || getValueFromDate(new Date()),
       value: this.props.value,
-      isCalendarShown: !!this.props.isCalendarShown
+      isCalendarShown: !!this.props.isCalendarShown,
     };
   }
 
@@ -95,15 +96,15 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
       isCalendarShown,
       visibleDate,
       maxDate,
-      minDate
+      minDate,
     } = this.props;
     const { value } = this.state;
     const style = {
-      width: '80%'
+      width: '80%',
     };
 
     return (
-      <div className={s.container}>
+      <div className="container">
         <DateMaskInput
           style={style}
           visibleDate={visibleDate}
@@ -112,8 +113,8 @@ class CalendarDateTimePicker extends React.Component<Props, State> {
           maxDate={maxDate}
         />
         {icon && (
-          <div className={s.icon}>
-            <SvgIcon file="calendar" />
+          <div className="icon">
+            <SvgIcon file={calendar} />
           </div>
         )}
         {isCalendarShown && (

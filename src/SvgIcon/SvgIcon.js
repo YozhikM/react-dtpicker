@@ -2,6 +2,7 @@
 /* eslint-disable react/no-danger, global-require, import/no-dynamic-require */
 
 import * as React from 'react';
+import SVGInline from 'react-svg-inline';
 
 type Props = {
   file: string,
@@ -15,24 +16,9 @@ type Props = {
 
 class SvgIcon extends React.Component<Props, void> {
   render() {
-    const { file, wh = '24px', width, height } = this.props;
+    const { file, wh = '24', width, height } = this.props;
 
-    return (
-      <div
-        className={this.props.className}
-        style={{
-          width: width || wh,
-          height: height || wh,
-          fill: this.props.color,
-          display: 'inline-block',
-          ...this.props.style,
-        }}
-        dangerouslySetInnerHTML={{
-          // $FlowFixMe
-          __html: require(`./svg-icons/${file}.svg`),
-        }}
-      />
-    );
+    return <SVGInline width={width || wh || '24'} height={height || wh || '24'} svg={file} />;
   }
 }
 

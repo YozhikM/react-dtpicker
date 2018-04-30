@@ -1,19 +1,17 @@
 /* @flow */
 
 import * as React from 'react';
+import './Input.scss';
 
 export type Value = string | number;
 export type InputType = 'text' | 'hidden' | 'email' | 'password' | 'search' | 'tel';
 
 type Props = {
   type?: InputType,
-  placeholder?: string,
   onChange?: Function,
   onSubmit?: Function,
   onFocus?: Function,
   onBlur?: Function,
-  rightIcon?: ?React.Node,
-  leftIcon?: ?React.Node,
   onClickRightIcon?: Function,
   onClickLeftIcon?: Function,
   value?: ?Value,
@@ -21,11 +19,11 @@ type Props = {
   maxLength?: number,
   required?: Object,
   disabled?: boolean,
-  controlled?: boolean
+  controlled?: boolean,
 };
 
 type State = {
-  value: ?Value
+  value: ?Value,
 };
 
 export default class Input extends React.Component<Props, State> {
@@ -47,7 +45,7 @@ export default class Input extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      value: props.value || props.defaultValue || ''
+      value: props.value || props.defaultValue || '',
     };
 
     this.onChange = this.onChange.bind(this);
@@ -61,7 +59,7 @@ export default class Input extends React.Component<Props, State> {
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.value !== this.state.value) {
       this.setState({
-        value: nextProps.value || ''
+        value: nextProps.value || '',
       });
     }
   }
@@ -119,36 +117,24 @@ export default class Input extends React.Component<Props, State> {
   }
 
   render() {
-    const {
-      placeholder,
-      type = 'text',
-      rightIcon,
-      leftIcon,
-      maxLength,
-      required,
-      disabled
-    } = this.props;
+    const { type = 'text', maxLength, required, disabled } = this.props;
     const { value } = this.state;
 
     return (
-      <div>
-        {leftIcon && <span onClick={this.onClickLeftIcon}>{leftIcon}</span>}
-        <input
-          ref={ref => (this.$input = ref)} // eslint-disable-line
-          type={type}
-          onChange={this.onChange}
-          onKeyPress={this.onKeyPress}
-          onBlur={this.onBlur}
-          onFocus={this.onFocus}
-          value={value}
-          maxLength={maxLength}
-          required={required}
-          disabled={disabled}
-          style={{ textAlign: 'center' }}
-        />
-        {rightIcon && <span onClick={this.onClickRightIcon}>{rightIcon}</span>}
-        {placeholder && <div style={value ? { display: 'none' } : {}}>{placeholder}</div>}
-      </div>
+      <input
+        className="input"
+        ref={ref => (this.$input = ref)} // eslint-disable-line
+        type={type}
+        onChange={this.onChange}
+        onKeyPress={this.onKeyPress}
+        onBlur={this.onBlur}
+        onFocus={this.onFocus}
+        value={value}
+        maxLength={maxLength}
+        required={required}
+        disabled={disabled}
+        style={{ textAlign: 'center' }}
+      />
     );
   }
 }

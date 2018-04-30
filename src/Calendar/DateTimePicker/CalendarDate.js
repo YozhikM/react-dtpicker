@@ -4,21 +4,23 @@ import React from 'react';
 import { startOfMonth, endOfMonth, format } from 'date-fns';
 import Button from '../../Button/Button';
 import SvgIcon from '../../SvgIcon/SvgIcon';
+import arrowLeft from '../../SvgIcon/svg-icons/arrow-left.svg';
+import arrowRight from '../../SvgIcon/svg-icons/arrow-right.svg';
 import TableSelect from '../TableSelect/TableSelect';
 import CalendarMonthGrid from './CalendarMonthGrid';
 import TimePicker from './TimePicker';
-import s from './Calendar.scss';
+import s from './MainCalendar.scss';
 import type { Highlight } from '../helpers';
 
 type Value = {
   year: number,
   month: number,
-  day?: number
+  day?: number,
 };
 
 type Option = {
   value: number,
-  name: string
+  name: string,
 };
 
 type Show = 'calendar' | 'mm' | 'yy' | 'yy10';
@@ -35,7 +37,7 @@ export type Props = {|
   time?: boolean, // display time picker (hidden by default)
   show?: Show, // display needed view type (calendar by default)
   minDate?: Date,
-  maxDate?: Date
+  maxDate?: Date,
 |};
 
 type State = {|
@@ -43,7 +45,7 @@ type State = {|
   value: Value,
   monthsOptions: { value: number, name: string }[],
   disabledMonths: ?(number[]),
-  disabledYears: ?(number[])
+  disabledYears: ?(number[]),
 |};
 
 class CalendarDate extends React.Component<Props, State> {
@@ -57,14 +59,14 @@ class CalendarDate extends React.Component<Props, State> {
       value: props.value,
       monthsOptions: this.getMonthOptions(),
       disabledMonths,
-      disabledYears
+      disabledYears,
     };
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (this.props.value !== nextProps.value) {
       this.setState({
-        value: nextProps.value
+        value: nextProps.value,
       });
     }
   }
@@ -101,7 +103,8 @@ class CalendarDate extends React.Component<Props, State> {
     return { disabledMonths, disabledYears };
   };
 
-  initializeArray = (length: number, start: number): number[] => Array.from({ length: Math.ceil(length + 1 - start) }).map((v, i) => i + 1 * start);
+  initializeArray = (length: number, start: number): number[] =>
+    Array.from({ length: Math.ceil(length + 1 - start) }).map((v, i) => i + 1 * start);
 
   onSetDate = (day: number) => {
     const { onSetDate } = this.props;
@@ -120,7 +123,7 @@ class CalendarDate extends React.Component<Props, State> {
       {
         value: { year: newDate.getUTCFullYear(), month: newDate.getUTCMonth() },
         disabledMonths,
-        disabledYears
+        disabledYears,
       },
       () => {
         const { onChange } = this.props;
@@ -213,7 +216,7 @@ class CalendarDate extends React.Component<Props, State> {
     const { minDate } = this.props;
     const { value } = this.state;
 
-    let year = value.year;
+    let { year } = value;
     let month = value.month - 1;
     if (month < 0) {
       month = 11;
@@ -286,7 +289,7 @@ class CalendarDate extends React.Component<Props, State> {
   getMonthOptions(): Option[] {
     return [...Array(12)].map((v, i) => ({
       value: i,
-      name: format(new Date(2000, i, 1), 'MMM')
+      name: format(new Date(2000, i, 1), 'MMM'),
     }));
   }
 
@@ -296,7 +299,7 @@ class CalendarDate extends React.Component<Props, State> {
 
     return [...Array(10)].map((v, i) => ({
       value: startYear + i,
-      name: `${startYear + i}`
+      name: `${startYear + i}`,
     }));
   }
 
@@ -309,7 +312,7 @@ class CalendarDate extends React.Component<Props, State> {
       const year = startYear + i * 10;
       return {
         value: year,
-        name: `${year} ${year + 9}`
+        name: `${year} ${year + 9}`,
       };
     });
   }
@@ -317,9 +320,9 @@ class CalendarDate extends React.Component<Props, State> {
   getBtnStyle() {
     const { leftArrow, rightArrow } = this.props;
     if (leftArrow && !rightArrow) {
-      return { justifyContent: 'flex-start' };
+      return { left: 0 };
     } else if (!leftArrow && rightArrow) {
-      return { justifyContent: 'flex-end' };
+      return { right: 0 };
     }
     return { justifyContent: 'space-between' };
   }
@@ -331,9 +334,9 @@ class CalendarDate extends React.Component<Props, State> {
     if (show === 'yy10') {
       const curYear = value.year;
       return (
-        <div className={s.calendar_container}>
-          <div className={s.table}>
-            <span className={s.span}>
+        <div className="calendar_container">
+          <div className="table">
+            <span className="span">
               &nbsp; <br /> &nbsp;
             </span>
             <TableSelect
@@ -352,17 +355,17 @@ class CalendarDate extends React.Component<Props, State> {
 
     if (show === 'yy') {
       return (
-        <div className={s.calendar_container}>
-          <div className={s.table}>
-            <div className={s.c_button_container}>
+        <div className="calendar_container">
+          <div className="table">
+            <div className="c_button_container">
               <button onClick={this.decrement10Years}>
-                <SvgIcon file="arrow-left" />
+                <SvgIcon file={arrowLeft} />
               </button>
-              <span className={s.span} onClick={this.showDecadeTable}>
+              <span className="span" onClick={this.showDecadeTable}>
                 {this.showDecade()}
               </span>
               <button onClick={this.increment10Years}>
-                <SvgIcon file="arrow-right" />
+                <SvgIcon file={arrowRight} />
               </button>
             </div>
             <TableSelect
@@ -382,17 +385,19 @@ class CalendarDate extends React.Component<Props, State> {
 
     if (show === 'mm') {
       return (
-        <div className={s.calendar_container}>
-          <div className={s.table}>
-            <div className={s.c_button_container}>
+        <div className="calendar_container">
+          <div className="table">
+            <div className="c_button_container">
               <button onClick={this.decrementYears}>
-                <SvgIcon file="arrow-left" />
+                <SvgIcon file={arrowLeft} />
               </button>
-              <span className={s.span} onClick={this.showYearTable}>
+
+              <span className="span" onClick={this.showYearTable}>
                 {value.year}
               </span>
+
               <button onClick={this.incrementYears}>
-                <SvgIcon file="arrow-right" />
+                <SvgIcon file={arrowRight} />
               </button>
             </div>
             <TableSelect
@@ -421,24 +426,24 @@ class CalendarDate extends React.Component<Props, State> {
     }
 
     return (
-      <div className={s.calendar_container}>
-        <div className={s.btns} style={this.getBtnStyle()}>
+      <div className="calendar_container">
+        <div className="btns" style={this.getBtnStyle()}>
           {leftArrow && (
             <button
-              className={s.left_arrow}
+              className="left_arrow"
               onClick={this.decrementMonth}
               style={isHiddenLeft ? { visibility: 'hidden' } : { cursor: 'pointer' }}
             >
-              <SvgIcon file="arrow-left" />
+              <SvgIcon file={arrowLeft} />
             </button>
           )}
           {rightArrow && (
             <button
-              className={s.right_arrow}
+              className="right_arrow"
               onClick={this.incrementMonth}
               style={isHiddenRight ? { visibility: 'hidden' } : { cursor: 'pointer' }}
             >
-              <SvgIcon file="arrow-right" />
+              <SvgIcon file={arrowRight} />
             </button>
           )}
         </div>

@@ -1,8 +1,61 @@
-.container {
-  margin-top: 5px;
+.wrapper {
   display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.container {
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.calendar_container {
+  position: relative;
+}
+
+.c_button_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table {
+  text-align: center;
+}
+
+.btns {
+  position: absolute;
+  display: flex;
+}
+
+.root {
+  text-align: center;
+  width: 15em;
+  padding: 2px;
+}
+
+.span {
+  font-family: 'Roboto';
+  font-size: 1.225em;
+  font-weight: bold;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  font-family: 'Roboto';
+  text-align: center;
+  padding: 5px;
+  cursor: pointer;
 }
 
 .wideContainer {
@@ -15,6 +68,12 @@
   .container {
     width: 100%;
   }
+}
+
+button {
+  background: transparent;
+  border: none;
+  outline: none;
 }
 
 .arrow {

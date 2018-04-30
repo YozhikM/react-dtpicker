@@ -22,7 +22,7 @@ export default class CalendarDay extends React.Component<Props, void> {
 
     return (
       <td style={style} onClick={this.onClick}>
-        {day}
+        {!!day && day}
       </td>
     );
   }

@@ -48,7 +48,7 @@ class TableSelect extends React.Component<Props, State> {
     const { value } = this.state;
 
     return (
-      <div className={s.root}>
+      <div className="root">
         <ul
           style={{
             width: `${cols * 50}px`,
