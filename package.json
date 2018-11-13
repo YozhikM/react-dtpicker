@@ -7,7 +7,7 @@
     "date-fns": "^1.29.0",
     "parcel-plugin-inlinesvg": "^1.0.0",
     "react": "^16.6.3",
-    "react-dom": "^16.3.2",
+    "react-dom": "^16.6.3",
     "react-svg-inline": "^2.1.0"
   },
   "scripts": {
